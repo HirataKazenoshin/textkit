@@ -1,1 +1,163 @@
-<h1>TextKit</h1> 
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TextKit – 無料テキスト変換ツール集 | スネークケース・Base64・文字数カウント</title>
+  <meta name="description" content="TextKitはスネーク↔キャメルケース変換、全角↔半角変換、文字数カウント、Base64エンコード、URLエンコードなど便利なテキスト変換ツールを無料で提供します。サーバー送信なし・完全ブラウザ完結。">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://hiratakazenoshin.github.io/textkit/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="TextKit – 無料テキスト変換ツール集">
+  <meta property="og:description" content="スネーク↔キャメルケース変換、全角↔半角変換、文字数カウント、Base64エンコードなど。サーバー送信なし・完全ブラウザ完結の無料ツール集。">
+  <meta property="og:url" content="https://hiratakazenoshin.github.io/textkit/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ja_JP">
+
+  <!-- Structured Data: WebSite -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "TextKit",
+    "url": "https://hiratakazenoshin.github.io/textkit/",
+    "description": "無料テキスト変換ツール集。ケース変換・全半角変換・文字数カウント・Base64・URLエンコードをブラウザ上で安全に処理。",
+    "inLanguage": "ja"
+  }
+  </script>
+
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/tool.css">
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header class="site-header">
+  <div class="container">
+    <a href="https://hiratakazenoshin.github.io/textkit/" class="site-logo" aria-label="TextKit ホーム">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="4 7 4 4 20 4 20 7"></polyline>
+        <line x1="9" y1="20" x2="15" y2="20"></line>
+        <line x1="12" y1="4" x2="12" y2="20"></line>
+      </svg>
+      TextKit
+    </a>
+    <nav class="site-nav" aria-label="メインナビゲーション">
+      <a href="#tools">ツール一覧</a>
+      <a href="#about">サイトについて</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== Main ===== -->
+<main>
+
+  <!-- Hero -->
+  <section class="index-hero">
+    <div class="container">
+      <div class="hero-badge" aria-hidden="true">&#x1F510; 完全クライアントサイド処理</div>
+      <h1>テキスト変換ツール集<br><span style="color:var(--color-primary)">TextKit</span></h1>
+      <p class="lead mt-sm">
+        ケース変換・全半角変換・文字数カウント・Base64・URLエンコードなど、開発・執筆・デザインに役立つテキストツールを無料で提供。<strong>入力したテキストはサーバーに送信されません。</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- Tools Grid -->
+  <section class="tools-section" id="tools">
+    <div class="container">
+      <h2>ツール一覧</h2>
+      <div class="tools-grid" role="list">
+
+        <a href="tools/snake-camel/" class="tool-card" role="listitem">
+          <div class="tool-card-icon" aria-hidden="true">🔤</div>
+          <div class="tool-card-title">スネーク↔キャメルケース変換</div>
+          <p class="tool-card-desc">
+            <code>snake_case</code> と <code>camelCase</code>、<code>PascalCase</code>、<code>kebab-case</code> を相互変換。プログラミングの命名規則変換に最適。
+          </p>
+          <span class="tool-card-tag">命名変換</span>
+        </a>
+
+        <a href="tools/zen-han/" class="tool-card" role="listitem">
+          <div class="tool-card-icon" aria-hidden="true">Ａ</div>
+          <div class="tool-card-title">全角↔半角変換</div>
+          <p class="tool-card-desc">
+            英数字・記号・カタカナの全角・半角を相互変換。フォームのバリデーション前処理やデータ正規化に。
+          </p>
+          <span class="tool-card-tag">文字変換</span>
+        </a>
+
+        <a href="tools/char-count/" class="tool-card" role="listitem">
+          <div class="tool-card-icon" aria-hidden="true">📊</div>
+          <div class="tool-card-title">文字数カウント</div>
+          <p class="tool-card-desc">
+            文字数・語数・行数・バイト数・漢字・ひらがな・カタカナ数など詳細な統計をリアルタイム表示。
+          </p>
+          <span class="tool-card-tag">テキスト分析</span>
+        </a>
+
+        <a href="tools/base64/" class="tool-card" role="listitem">
+          <div class="tool-card-icon" aria-hidden="true">🔐</div>
+          <div class="tool-card-title">Base64 エンコード / デコード</div>
+          <p class="tool-card-desc">
+            テキストを Base64 形式にエンコード・デコード。URLセーフ Base64 にも対応。日本語（UTF-8）完全サポート。
+          </p>
+          <span class="tool-card-tag">エンコード</span>
+        </a>
+
+        <a href="tools/url-encode/" class="tool-card" role="listitem">
+          <div class="tool-card-icon" aria-hidden="true">🔗</div>
+          <div class="tool-card-title">URL エンコード / デコード</div>
+          <p class="tool-card-desc">
+            <code>encodeURIComponent</code> 形式でテキストを URL エンコード・デコード。クエリパラメータの処理に。
+          </p>
+          <span class="tool-card-tag">エンコード</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" style="padding-block: var(--sp-xl) 0;">
+    <div class="container">
+      <div class="tool-article">
+        <h2>TextKit について</h2>
+        <p>
+          TextKit は、エンジニア・デザイナー・ライターが日常的に使うテキスト変換・加工ツールを一か所にまとめた無料サービスです。
+        </p>
+        <h3>プライバシーと安全性</h3>
+        <p>
+          入力したテキストは<strong>一切サーバーに送信されません</strong>。すべての処理はお使いのブラウザ上で完結します。機密情報を含むテキストも安全にお使いいただけます。
+        </p>
+        <h3>技術仕様</h3>
+        <p>
+          外部フレームワーク・CDN を一切使用しない Vanilla HTML / CSS / JavaScript で構築されています。高速な読み込みと優れたプライバシーを両立しています。
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <strong>TextKit</strong> &copy; 2025 – 無料テキスト変換ツール集
+      </div>
+      <nav class="footer-links" aria-label="フッターナビゲーション">
+        <a href="tools/snake-camel/">ケース変換</a>
+        <a href="tools/zen-han/">全角半角</a>
+        <a href="tools/char-count/">文字数カウント</a>
+        <a href="tools/base64/">Base64</a>
+        <a href="tools/url-encode/">URLエンコード</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

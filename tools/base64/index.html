@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Base64 エンコード / デコードツール – 日本語対応・URLセーフ対応 | TextKit</title>
+  <meta name="description" content="テキストをBase64形式にエンコード・デコードする無料オンラインツール。日本語（UTF-8）完全対応・URLセーフBase64対応・サーバー送信なし・リアルタイム変換。">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://hiratakazenoshin.github.io/textkit/tools/base64/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Base64 エンコード / デコードツール | TextKit">
+  <meta property="og:description" content="テキストをBase64形式にエンコード・デコード。日本語・UTF-8完全対応、URLセーフBase64対応、サーバー送信なし。">
+  <meta property="og:url" content="https://hiratakazenoshin.github.io/textkit/tools/base64/">
+  <meta property="og:type" content="website">
+
+  <!-- Structured Data: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "TextKit", "item": "https://hiratakazenoshin.github.io/textkit/" },
+      { "@type": "ListItem", "position": 2, "name": "Base64エンコード/デコード", "item": "https://hiratakazenoshin.github.io/textkit/tools/base64/" }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Base64 エンコード / デコードツール",
+    "url": "https://hiratakazenoshin.github.io/textkit/tools/base64/",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web",
+    "description": "テキストをBase64形式にエンコード・デコードするオンラインツール。日本語・URLセーフBase64対応",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" }
+  }
+  </script>
+
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/tool.css">
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header class="site-header">
+  <div class="container">
+    <a href="../../" class="site-logo" aria-label="TextKit ホーム">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="4 7 4 4 20 4 20 7"></polyline>
+        <line x1="9" y1="20" x2="15" y2="20"></line>
+        <line x1="12" y1="4" x2="12" y2="20"></line>
+      </svg>
+      TextKit
+    </a>
+    <nav class="site-nav" aria-label="メインナビゲーション">
+      <a href="../../#tools">ツール一覧</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== Main ===== -->
+<main>
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="パンくずリスト">
+      <ol>
+        <li><a href="../../">TextKit</a></li>
+        <li><span aria-current="page">Base64 エンコード / デコード</span></li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <div class="tool-hero">
+      <h1>Base64 エンコード / デコード</h1>
+      <p class="lead">
+        テキストを Base64 形式にエンコード、または Base64 文字列をテキストにデコード。日本語（UTF-8）完全対応、URLセーフ Base64 にも対応。
+      </p>
+    </div>
+
+    <!-- Mode Tabs -->
+    <div class="mode-tabs" role="tablist" aria-label="動作モード">
+      <button class="mode-tab active" role="tab" aria-selected="true"  data-mode="encode"     id="tab-encode">エンコード</button>
+      <button class="mode-tab"        role="tab" aria-selected="false" data-mode="decode"     id="tab-decode">デコード</button>
+      <button class="mode-tab"        role="tab" aria-selected="false" data-mode="url-encode" id="tab-url-encode">URLセーフ エンコード</button>
+      <button class="mode-tab"        role="tab" aria-selected="false" data-mode="url-decode" id="tab-url-decode">URLセーフ デコード</button>
+    </div>
+
+    <!-- Error Banner -->
+    <div id="error-banner" role="alert" style="
+      display:none;
+      background:#fef2f2;
+      border:1px solid #fca5a5;
+      border-radius:var(--radius-sm);
+      padding:var(--sp-sm) var(--sp-md);
+      font-size:var(--text-sm);
+      color:#dc2626;
+      margin-bottom:var(--sp-md);
+    "></div>
+
+    <!-- Editor -->
+    <div class="tool-editor" aria-live="polite">
+
+      <!-- Input Panel -->
+      <div class="editor-panel">
+        <div class="panel-header">
+          <span class="panel-label" id="input-label">テキスト</span>
+          <div class="panel-actions">
+            <button class="btn-icon" id="btn-clear" title="クリア" aria-label="入力をクリア">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <textarea class="panel-textarea" id="input"
+          placeholder="エンコードするテキストを入力&#10;例：Hello World&#10;日本語も対応しています"
+          aria-label="入力テキスト" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+      </div>
+
+      <!-- Arrow -->
+      <div class="editor-arrow" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </div>
+
+      <!-- Output Panel -->
+      <div class="editor-panel">
+        <div class="panel-header">
+          <span class="panel-label" id="output-label">Base64</span>
+          <div class="panel-actions">
+            <button class="btn-icon btn-copy" id="btn-copy" title="コピー" aria-label="変換結果をコピー">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <textarea class="panel-textarea" id="output" readonly
+          aria-label="変換結果" aria-live="polite"></textarea>
+      </div>
+
+    </div><!-- .tool-editor -->
+
+    <!-- AdSense Placeholder -->
+    <div class="adsense-placeholder" aria-hidden="true">
+      <span>広告スペース (728×90)</span>
+      <!-- Google AdSense コードをここに挿入 -->
+    </div>
+
+    <!-- Article / Info -->
+    <article class="tool-article">
+      <h2>Base64 エンコードとは</h2>
+      <p>
+        Base64 は、バイナリデータを ASCII テキストとして表現するためのエンコード方式です。64 種類の印刷可能な ASCII 文字（A–Z、a–z、0–9、+、/）を使ってデータを表現します。
+      </p>
+      <h3>主な用途</h3>
+      <p>
+        メール添付ファイルのエンコード（MIME）、CSS の Data URI、JWT（JSON Web Token）のペイロード、HTTP Basic 認証ヘッダー、API レスポンスのバイナリデータ転送などで使われます。
+      </p>
+      <h3>URLセーフ Base64 とは</h3>
+      <p>
+        標準 Base64 の <code>+</code> を <code>-</code> に、<code>/</code> を <code>_</code> に置き換え、末尾の <code>=</code> パディングを除去した形式（RFC 4648 §5）。URL やファイル名に安全に使用できます。JWT でも使われています。
+      </p>
+      <h3>日本語について</h3>
+      <p>
+        このツールは UTF-8 エンコーディングを使用して日本語を正しく Base64 に変換します。Python の <code>base64.b64encode(text.encode('utf-8'))</code> と同等の結果が得られます。
+      </p>
+    </article>
+
+    <!-- Related Tools -->
+    <section class="related-tools">
+      <h2>関連ツール</h2>
+      <div class="related-grid">
+        <a href="../url-encode/" class="related-card"><span class="tool-icon">🔗</span>URLエンコード</a>
+        <a href="../snake-camel/" class="related-card"><span class="tool-icon">🔤</span>ケース変換</a>
+        <a href="../zen-han/" class="related-card"><span class="tool-icon">Ａ</span>全角半角変換</a>
+        <a href="../char-count/" class="related-card"><span class="tool-icon">📊</span>文字数カウント</a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-inner">
+      <div><strong>TextKit</strong> &copy; 2025 – 無料テキスト変換ツール集</div>
+      <nav class="footer-links" aria-label="フッターナビゲーション">
+        <a href="../../">ホーム</a>
+        <a href="../snake-camel/">ケース変換</a>
+        <a href="../zen-han/">全角半角</a>
+        <a href="../char-count/">文字数カウント</a>
+        <a href="../url-encode/">URLエンコード</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="../../assets/js/tools/encode.js"></script>
+<script src="../../assets/js/ui.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  const { base64Encode, base64Decode, base64UrlEncode, base64UrlDecode } = window.TextKitEncode;
+  const { initCopyButton, initClearButton } = window.TextKitUI;
+
+  const inputEl     = document.getElementById('input');
+  const outputEl    = document.getElementById('output');
+  const inputLabel  = document.getElementById('input-label');
+  const outputLabel = document.getElementById('output-label');
+  const errorBanner = document.getElementById('error-banner');
+  const tabs        = document.querySelectorAll('.mode-tab');
+
+  const MODES = {
+    'encode':     { fn: base64Encode,    inputHint: 'テキスト',    outputHint: 'Base64',         ph: 'エンコードするテキストを入力\n例：Hello World\n日本語も対応しています' },
+    'decode':     { fn: base64Decode,    inputHint: 'Base64文字列', outputHint: 'デコードされたテキスト', ph: 'デコードするBase64文字列を入力\n例：SGVsbG8gV29ybGQ=' },
+    'url-encode': { fn: base64UrlEncode, inputHint: 'テキスト',    outputHint: 'URLセーフBase64',  ph: 'エンコードするテキストを入力\n（+→- / →_ パディングなし）' },
+    'url-decode': { fn: base64UrlDecode, inputHint: 'URLセーフBase64', outputHint: 'デコードされたテキスト', ph: 'URLセーフBase64文字列を入力\n例：SGVsbG8gV29ybGQ' },
+  };
+
+  let currentMode = 'encode';
+
+  function convert() {
+    const text = inputEl.value;
+    errorBanner.style.display = 'none';
+
+    if (!text) { outputEl.value = ''; return; }
+
+    const { fn } = MODES[currentMode];
+    const { result, error } = fn(text);
+
+    if (error) {
+      outputEl.value = '';
+      errorBanner.textContent = error;
+      errorBanner.style.display = 'block';
+    } else {
+      outputEl.value = result;
+    }
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      currentMode = tab.dataset.mode;
+      const m = MODES[currentMode];
+      inputLabel.textContent  = m.inputHint;
+      outputLabel.textContent = m.outputHint;
+      inputEl.placeholder = m.ph;
+      convert();
+    });
+  });
+
+  inputEl.addEventListener('input', convert);
+
+  initCopyButton(document.getElementById('btn-copy'), outputEl);
+  initClearButton(document.getElementById('btn-clear'), [inputEl, outputEl], () => {
+    errorBanner.style.display = 'none';
+  });
+})();
+</script>
+</body>
+</html>

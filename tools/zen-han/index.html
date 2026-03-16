@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>全角↔半角変換ツール – 英数字・記号・カタカナ対応 | TextKit</title>
+  <meta name="description" content="全角英数字・記号・カタカナを半角に、または半角を全角に変換する無料オンラインツール。リアルタイム変換・サーバー送信なし。フォーム正規化やデータクレンジングに。">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://hiratakazenoshin.github.io/textkit/tools/zen-han/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="全角↔半角変換ツール | TextKit">
+  <meta property="og:description" content="全角英数字・記号・カタカナを半角に変換、または半角を全角に変換する無料ツール。リアルタイム・サーバー送信なし。">
+  <meta property="og:url" content="https://hiratakazenoshin.github.io/textkit/tools/zen-han/">
+  <meta property="og:type" content="website">
+
+  <!-- Structured Data: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "TextKit", "item": "https://hiratakazenoshin.github.io/textkit/" },
+      { "@type": "ListItem", "position": 2, "name": "全角↔半角変換", "item": "https://hiratakazenoshin.github.io/textkit/tools/zen-han/" }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "全角↔半角変換ツール",
+    "url": "https://hiratakazenoshin.github.io/textkit/tools/zen-han/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "description": "全角英数字・記号・カタカナを半角に変換、または半角を全角に変換するオンラインツール",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" }
+  }
+  </script>
+
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/tool.css">
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header class="site-header">
+  <div class="container">
+    <a href="../../" class="site-logo" aria-label="TextKit ホーム">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="4 7 4 4 20 4 20 7"></polyline>
+        <line x1="9" y1="20" x2="15" y2="20"></line>
+        <line x1="12" y1="4" x2="12" y2="20"></line>
+      </svg>
+      TextKit
+    </a>
+    <nav class="site-nav" aria-label="メインナビゲーション">
+      <a href="../../#tools">ツール一覧</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== Main ===== -->
+<main>
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="パンくずリスト">
+      <ol>
+        <li><a href="../../">TextKit</a></li>
+        <li><span aria-current="page">全角↔半角変換</span></li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <div class="tool-hero">
+      <h1>全角↔半角変換</h1>
+      <p class="lead">
+        英数字・記号・カタカナの全角・半角をリアルタイムで相互変換。フォームの正規化やデータクレンジングに。
+      </p>
+    </div>
+
+    <!-- Mode Tabs -->
+    <div class="mode-tabs" role="tablist" aria-label="変換方向">
+      <button class="mode-tab active" role="tab" aria-selected="true"  data-mode="to-half"  id="tab-half">全角 → 半角</button>
+      <button class="mode-tab"        role="tab" aria-selected="false" data-mode="to-full"  id="tab-full">半角 → 全角</button>
+    </div>
+
+    <!-- Scope checkboxes -->
+    <fieldset style="border:1px solid var(--color-border); border-radius:var(--radius-md); padding:var(--sp-md); margin-bottom:var(--sp-lg); background:var(--color-surface);">
+      <legend style="font-size:var(--text-sm); font-weight:600; padding-inline:var(--sp-xs); color:var(--color-text-muted);">変換対象</legend>
+      <div style="display:flex; flex-wrap:wrap; gap:var(--sp-md); margin-top:var(--sp-sm);">
+        <label style="display:flex; align-items:center; gap:var(--sp-xs); font-size:var(--text-sm); cursor:pointer;">
+          <input type="checkbox" id="scope-alpha" checked> 英数字・記号
+        </label>
+        <label style="display:flex; align-items:center; gap:var(--sp-xs); font-size:var(--text-sm); cursor:pointer;">
+          <input type="checkbox" id="scope-kata" checked> カタカナ
+        </label>
+      </div>
+    </fieldset>
+
+    <!-- Editor -->
+    <div class="tool-editor" aria-live="polite">
+
+      <!-- Input Panel -->
+      <div class="editor-panel">
+        <div class="panel-header">
+          <span class="panel-label" id="input-label">全角テキスト</span>
+          <div class="panel-actions">
+            <button class="btn-icon" id="btn-clear" title="クリア" aria-label="入力をクリア">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <textarea class="panel-textarea" id="input"
+          placeholder="変換したいテキストを入力&#10;例（全角→半角）：Ａｂｃ　１２３　ァｱカガ"
+          aria-label="変換元テキスト" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+      </div>
+
+      <!-- Arrow -->
+      <div class="editor-arrow" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </div>
+
+      <!-- Output Panel -->
+      <div class="editor-panel">
+        <div class="panel-header">
+          <span class="panel-label" id="output-label">半角テキスト</span>
+          <div class="panel-actions">
+            <button class="btn-icon btn-copy" id="btn-copy" title="コピー" aria-label="変換結果をコピー">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <textarea class="panel-textarea" id="output" readonly aria-label="変換結果" aria-live="polite"></textarea>
+      </div>
+
+    </div><!-- .tool-editor -->
+
+    <!-- AdSense Placeholder -->
+    <div class="adsense-placeholder" aria-hidden="true">
+      <span>広告スペース (728×90)</span>
+      <!-- Google AdSense コードをここに挿入 -->
+    </div>
+
+    <!-- Article / Info -->
+    <article class="tool-article">
+      <h2>全角・半角とは</h2>
+      <p>
+        日本語テキストには「全角（全角幅）」と「半角（半角幅）」の2種類の文字があります。全角文字は通常の日本語フォントで1文字分の幅を持ち、半角文字はその半分の幅です。
+      </p>
+      <h3>変換対象の文字種</h3>
+      <p>
+        英大文字（Ａ–Ｚ / A–Z）、英小文字（ａ–ｚ / a–z）、数字（０–９ / 0–9）、記号（！＠＃ など）、全角スペース・半角スペース、カタカナ（ア行・カ行・濁音・半濁音を含む全対応）。
+      </p>
+      <h3>主な用途</h3>
+      <p>
+        フォーム入力値の正規化、データベースの文字統一、検索精度向上のためのインデックス正規化、Excel・CSV データのクレンジングなど。
+      </p>
+    </article>
+
+    <!-- Related Tools -->
+    <section class="related-tools">
+      <h2>関連ツール</h2>
+      <div class="related-grid">
+        <a href="../snake-camel/" class="related-card"><span class="tool-icon">🔤</span>ケース変換</a>
+        <a href="../char-count/" class="related-card"><span class="tool-icon">📊</span>文字数カウント</a>
+        <a href="../base64/" class="related-card"><span class="tool-icon">🔐</span>Base64エンコード</a>
+        <a href="../url-encode/" class="related-card"><span class="tool-icon">🔗</span>URLエンコード</a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-inner">
+      <div><strong>TextKit</strong> &copy; 2025 – 無料テキスト変換ツール集</div>
+      <nav class="footer-links" aria-label="フッターナビゲーション">
+        <a href="../../">ホーム</a>
+        <a href="../snake-camel/">ケース変換</a>
+        <a href="../char-count/">文字数カウント</a>
+        <a href="../base64/">Base64</a>
+        <a href="../url-encode/">URLエンコード</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="../../assets/js/tools/width.js"></script>
+<script src="../../assets/js/ui.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  const { toFullWidth, toHalfWidth } = window.TextKitWidth;
+  const { initCopyButton, initClearButton } = window.TextKitUI;
+
+  const inputEl     = document.getElementById('input');
+  const outputEl    = document.getElementById('output');
+  const inputLabel  = document.getElementById('input-label');
+  const outputLabel = document.getElementById('output-label');
+  const tabs        = document.querySelectorAll('.mode-tab');
+  const scopeAlpha  = document.getElementById('scope-alpha');
+  const scopeKata   = document.getElementById('scope-kata');
+
+  let currentMode = 'to-half';
+
+  function convert() {
+    const text = inputEl.value;
+    if (!text) { outputEl.value = ''; return; }
+
+    if (currentMode === 'to-half') {
+      outputEl.value = toHalfWidth(text);
+    } else {
+      outputEl.value = toFullWidth(text);
+    }
+  }
+
+  // Tab switching
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      currentMode = tab.dataset.mode;
+
+      if (currentMode === 'to-half') {
+        inputLabel.textContent  = '全角テキスト';
+        outputLabel.textContent = '半角テキスト';
+        inputEl.placeholder = '変換したいテキストを入力\n例（全角→半角）：Ａｂｃ　１２３　ァｱカガ';
+      } else {
+        inputLabel.textContent  = '半角テキスト';
+        outputLabel.textContent = '全角テキスト';
+        inputEl.placeholder = '変換したいテキストを入力\n例（半角→全角）：Abc 123 ｦｧｨｱｲｳ';
+      }
+      convert();
+    });
+  });
+
+  // Real-time conversion
+  inputEl.addEventListener('input', convert);
+  scopeAlpha.addEventListener('change', convert);
+  scopeKata.addEventListener('change', convert);
+
+  // Copy & Clear
+  initCopyButton(document.getElementById('btn-copy'), outputEl);
+  initClearButton(document.getElementById('btn-clear'), [inputEl, outputEl]);
+})();
+</script>
+</body>
+</html>

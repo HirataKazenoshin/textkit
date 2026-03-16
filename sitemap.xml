@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Top page -->
+  <url>
+    <loc>https://hiratakazenoshin.github.io/textkit/</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Snake ↔ Camel case tool -->
+  <url>
+    <loc>https://hiratakazenoshin.github.io/textkit/tools/snake-camel/</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Full-width ↔ Half-width tool -->
+  <url>
+    <loc>https://hiratakazenoshin.github.io/textkit/tools/zen-han/</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Character count tool -->
+  <url>
+    <loc>https://hiratakazenoshin.github.io/textkit/tools/char-count/</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Base64 encode/decode tool -->
+  <url>
+    <loc>https://hiratakazenoshin.github.io/textkit/tools/base64/</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- URL encode/decode tool -->
+  <url>
+    <loc>https://hiratakazenoshin.github.io/textkit/tools/url-encode/</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>
