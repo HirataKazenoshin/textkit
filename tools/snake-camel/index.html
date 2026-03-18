@@ -5,15 +5,15 @@
      crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>スネークケース↔キャメルケース変換ツール | TextKit</title>
+  <title>スネークケース↔キャメルケース変換ツール | TxConv</title>
   <meta name="description" content="snake_caseとcamelCase、PascalCase、kebab-caseを無料でオンライン変換。リアルタイム・サーバー送信なし。プログラミングの命名規則変換に最適な無料ツール。">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://hiratakazenoshin.github.io/textkit/tools/snake-camel/">
+  <link rel="canonical" href="https://txconv.com/tools/snake-camel/">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="スネークケース↔キャメルケース変換ツール | TextKit">
+  <meta property="og:title" content="スネークケース↔キャメルケース変換ツール | TxConv">
   <meta property="og:description" content="snake_case・camelCase・PascalCase・kebab-caseを相互変換。無料・リアルタイム・サーバー送信なし。">
-  <meta property="og:url" content="https://hiratakazenoshin.github.io/textkit/tools/snake-camel/">
+  <meta property="og:url" content="https://txconv.com/tools/snake-camel/">
   <meta property="og:type" content="website">
 
   <!-- Structured Data: BreadcrumbList -->
@@ -22,8 +22,8 @@
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "TextKit", "item": "https://hiratakazenoshin.github.io/textkit/" },
-      { "@type": "ListItem", "position": 2, "name": "スネーク↔キャメルケース変換", "item": "https://hiratakazenoshin.github.io/textkit/tools/snake-camel/" }
+      { "@type": "ListItem", "position": 1, "name": "TxConv", "item": "https://txconv.com/" },
+      { "@type": "ListItem", "position": 2, "name": "スネーク↔キャメルケース変換", "item": "https://txconv.com/tools/snake-camel/" }
     ]
   }
   </script>
@@ -34,7 +34,7 @@
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "スネーク↔キャメルケース変換ツール",
-    "url": "https://hiratakazenoshin.github.io/textkit/tools/snake-camel/",
+    "url": "https://txconv.com/tools/snake-camel/",
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "Web",
     "description": "snake_caseとcamelCase、PascalCase、kebab-caseを相互変換するオンラインツール",
@@ -50,13 +50,13 @@
 <!-- ===== Header ===== -->
 <header class="site-header">
   <div class="container">
-    <a href="../../" class="site-logo" aria-label="TextKit ホーム">
+    <a href="../../" class="site-logo" aria-label="TxConv ホーム">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <polyline points="4 7 4 4 20 4 20 7"></polyline>
         <line x1="9" y1="20" x2="15" y2="20"></line>
         <line x1="12" y1="4" x2="12" y2="20"></line>
       </svg>
-      TextKit
+      TxConv
     </a>
     <nav class="site-nav" aria-label="メインナビゲーション">
       <a href="../../#tools">ツール一覧</a>
@@ -71,7 +71,7 @@
     <!-- Breadcrumb -->
     <nav class="breadcrumb" aria-label="パンくずリスト">
       <ol>
-        <li><a href="../../">TextKit</a></li>
+        <li><a href="../../">TxConv</a></li>
         <li><span aria-current="page">スネーク↔キャメルケース変換</span></li>
       </ol>
     </nav>
@@ -178,7 +178,7 @@
 <footer class="site-footer" role="contentinfo">
   <div class="container">
     <div class="footer-inner">
-      <div><strong>TextKit</strong> &copy; 2025 – 無料テキスト変換ツール集</div>
+      <div><strong>TxConv</strong> &copy; 2025 – 無料テキスト変換ツール集</div>
       <nav class="footer-links" aria-label="フッターナビゲーション">
         <a href="../../">ホーム</a>
         <a href="../zen-han/">全角半角</a>
@@ -197,8 +197,8 @@
 (function () {
   'use strict';
 
-  const { toCamelCase, toPascalCase, toSnakeCase, toScreamingSnakeCase, toKebabCase, convertLines } = window.TextKitCase;
-  const { initCopyButton, initClearButton } = window.TextKitUI;
+  const { toCamelCase, toPascalCase, toSnakeCase, toScreamingSnakeCase, toKebabCase, convertLines } = window.TxConvCase;
+  const { initCopyButton, initClearButton } = window.TxConvUI;
 
   const inputEl     = document.getElementById('input');
   const outputEl    = document.getElementById('output');

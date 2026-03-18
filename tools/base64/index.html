@@ -5,15 +5,15 @@
      crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Base64 エンコード / デコードツール – 日本語対応・URLセーフ対応 | TextKit</title>
+  <title>Base64 エンコード / デコードツール – 日本語対応・URLセーフ対応 | TxConv</title>
   <meta name="description" content="テキストをBase64形式にエンコード・デコードする無料オンラインツール。日本語（UTF-8）完全対応・URLセーフBase64対応・サーバー送信なし・リアルタイム変換。">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://hiratakazenoshin.github.io/textkit/tools/base64/">
+  <link rel="canonical" href="https://txconv.com/tools/base64/">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Base64 エンコード / デコードツール | TextKit">
+  <meta property="og:title" content="Base64 エンコード / デコードツール | TxConv">
   <meta property="og:description" content="テキストをBase64形式にエンコード・デコード。日本語・UTF-8完全対応、URLセーフBase64対応、サーバー送信なし。">
-  <meta property="og:url" content="https://hiratakazenoshin.github.io/textkit/tools/base64/">
+  <meta property="og:url" content="https://txconv.com/tools/base64/">
   <meta property="og:type" content="website">
 
   <!-- Structured Data: BreadcrumbList -->
@@ -22,8 +22,8 @@
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "TextKit", "item": "https://hiratakazenoshin.github.io/textkit/" },
-      { "@type": "ListItem", "position": 2, "name": "Base64エンコード/デコード", "item": "https://hiratakazenoshin.github.io/textkit/tools/base64/" }
+      { "@type": "ListItem", "position": 1, "name": "TxConv", "item": "https://txconv.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Base64エンコード/デコード", "item": "https://txconv.com/tools/base64/" }
     ]
   }
   </script>
@@ -33,7 +33,7 @@
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Base64 エンコード / デコードツール",
-    "url": "https://hiratakazenoshin.github.io/textkit/tools/base64/",
+    "url": "https://txconv.com/tools/base64/",
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "Web",
     "description": "テキストをBase64形式にエンコード・デコードするオンラインツール。日本語・URLセーフBase64対応",
@@ -49,13 +49,13 @@
 <!-- ===== Header ===== -->
 <header class="site-header">
   <div class="container">
-    <a href="../../" class="site-logo" aria-label="TextKit ホーム">
+    <a href="../../" class="site-logo" aria-label="TxConv ホーム">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <polyline points="4 7 4 4 20 4 20 7"></polyline>
         <line x1="9" y1="20" x2="15" y2="20"></line>
         <line x1="12" y1="4" x2="12" y2="20"></line>
       </svg>
-      TextKit
+      TxConv
     </a>
     <nav class="site-nav" aria-label="メインナビゲーション">
       <a href="../../#tools">ツール一覧</a>
@@ -70,7 +70,7 @@
     <!-- Breadcrumb -->
     <nav class="breadcrumb" aria-label="パンくずリスト">
       <ol>
-        <li><a href="../../">TextKit</a></li>
+        <li><a href="../../">TxConv</a></li>
         <li><span aria-current="page">Base64 エンコード / デコード</span></li>
       </ol>
     </nav>
@@ -194,7 +194,7 @@
 <footer class="site-footer" role="contentinfo">
   <div class="container">
     <div class="footer-inner">
-      <div><strong>TextKit</strong> &copy; 2025 – 無料テキスト変換ツール集</div>
+      <div><strong>TxConv</strong> &copy; 2025 – 無料テキスト変換ツール集</div>
       <nav class="footer-links" aria-label="フッターナビゲーション">
         <a href="../../">ホーム</a>
         <a href="../snake-camel/">ケース変換</a>
@@ -213,8 +213,8 @@
 (function () {
   'use strict';
 
-  const { base64Encode, base64Decode, base64UrlEncode, base64UrlDecode } = window.TextKitEncode;
-  const { initCopyButton, initClearButton } = window.TextKitUI;
+  const { base64Encode, base64Decode, base64UrlEncode, base64UrlDecode } = window.TxConvEncode;
+  const { initCopyButton, initClearButton } = window.TxConvUI;
 
   const inputEl     = document.getElementById('input');
   const outputEl    = document.getElementById('output');

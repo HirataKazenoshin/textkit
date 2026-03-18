@@ -4,7 +4,7 @@
 
   <!-- Top page -->
   <url>
-    <loc>https://hiratakazenoshin.github.io/textkit/</loc>
+    <loc>https://txconv.com/</loc>
     <lastmod>2025-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
@@ -12,7 +12,7 @@
 
   <!-- Snake ↔ Camel case tool -->
   <url>
-    <loc>https://hiratakazenoshin.github.io/textkit/tools/snake-camel/</loc>
+    <loc>https://txconv.com/tools/snake-camel/</loc>
     <lastmod>2025-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -20,7 +20,7 @@
 
   <!-- Full-width ↔ Half-width tool -->
   <url>
-    <loc>https://hiratakazenoshin.github.io/textkit/tools/zen-han/</loc>
+    <loc>https://txconv.com/tools/zen-han/</loc>
     <lastmod>2025-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -28,7 +28,7 @@
 
   <!-- Character count tool -->
   <url>
-    <loc>https://hiratakazenoshin.github.io/textkit/tools/char-count/</loc>
+    <loc>https://txconv.com/tools/char-count/</loc>
     <lastmod>2025-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -36,7 +36,7 @@
 
   <!-- Base64 encode/decode tool -->
   <url>
-    <loc>https://hiratakazenoshin.github.io/textkit/tools/base64/</loc>
+    <loc>https://txconv.com/tools/base64/</loc>
     <lastmod>2025-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -44,7 +44,7 @@
 
   <!-- URL encode/decode tool -->
   <url>
-    <loc>https://hiratakazenoshin.github.io/textkit/tools/url-encode/</loc>
+    <loc>https://txconv.com/tools/url-encode/</loc>
     <lastmod>2025-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
