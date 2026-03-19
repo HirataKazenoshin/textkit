@@ -122,6 +122,20 @@
       },
       "relatedTools": ["snake-camel", "zen-han", "char-count", "base64"],
       "lastModified": "2025-03-20"
+    },
+    {
+      "id": "diff",
+      "title": "テキスト差分チェック",
+      "shortTitle": "差分チェック",
+      "description": "2つのテキストを比較して差分（追加・削除・変更行）をリアルタイムに可視化し、HTMLレポートとしてダウンロードできるオンラインツール",
+      "url": "https://txconv.com/tools/diff/",
+      "path": "tools/diff/",
+      "icon": "📝",
+      "tag": "テキスト比較",
+      "tags": ["差分", "diff", "テキスト比較", "追加", "削除", "変更", "LCS", "HTMLダウンロード"],
+      "jsFiles": ["assets/js/tools/diff.js"],
+      "relatedTools": ["char-count", "snake-camel", "zen-han", "base64"],
+      "lastModified": "2026-03-20"
     }
   ]
 }
