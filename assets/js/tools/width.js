@@ -147,7 +147,7 @@ function toHalfWidthAlphaNum(str) {
 }
 
 // Export
-window.TextKitWidth = {
+window.TxConvWidth = {
   toFullWidth,
   toHalfWidth,
   toFullWidthAlphaNum,

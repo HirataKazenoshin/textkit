@@ -102,6 +102,26 @@
       ],
       "relatedTools": ["base64", "snake-camel", "zen-han", "char-count"],
       "lastModified": "2025-01-01"
+    },
+    {
+      "id": "salesforce-api",
+      "title": "Salesforce API名生成",
+      "shortTitle": "SF API名生成",
+      "description": "日本語テキストをAIで英語翻訳し、Salesforceのカスタム項目・オブジェクトAPIに使えるAPI名を自動生成するオンラインツール",
+      "url": "https://txconv.com/tools/salesforce-api/",
+      "path": "tools/salesforce-api/",
+      "icon": "☁️",
+      "tag": "AI変換",
+      "tags": ["Salesforce", "API名", "カスタム項目", "__c", "__mdt", "日英翻訳", "AI", "ONNX", "Transformers.js"],
+      "jsFiles": ["assets/js/libs/transformers.min.js", "assets/js/tools/salesforce.js"],
+      "aiModel": {
+        "name": "Xenova/opus-mt-ja-en",
+        "type": "translation",
+        "format": "ONNX quantized",
+        "localPath": "assets/models/Xenova/opus-mt-ja-en/"
+      },
+      "relatedTools": ["snake-camel", "zen-han", "char-count", "base64"],
+      "lastModified": "2025-03-20"
     }
   ]
 }

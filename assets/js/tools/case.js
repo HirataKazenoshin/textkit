@@ -110,7 +110,7 @@ function convertLines(text, converter) {
 }
 
 // Export for use in HTML via global scope
-window.TextKitCase = {
+window.TxConvCase = {
   toCamelCase,
   toPascalCase,
   toSnakeCase,

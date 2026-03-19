@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -B 2 \"const { toFullWidth, toHalfWidth }\" /c/Users/Noshin/workspace/textkit/tools/zen-han/index.html)",
+      "WebSearch",
+      "WebFetch(domain:www.npmjs.com)",
+      "WebFetch(domain:bundlephobia.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:cdn.jsdelivr.net)",
+      "WebFetch(domain:onnxruntime.ai)",
+      "Bash(curl -L --progress-bar \"https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.5.2/dist/transformers.min.js\" -o assets/js/libs/transformers.min.js)",
+      "Bash(curl -L --progress-bar \"https://cdn.jsdelivr.net/npm/onnxruntime-web@1.21.0/dist/ort-wasm-simd-threaded.jsep.wasm\" -o assets/wasm/ort-wasm-simd-threaded.jsep.wasm)",
+      "Bash(curl -L --progress-bar \"https://cdn.jsdelivr.net/npm/onnxruntime-web@1.21.0/dist/ort-wasm-simd-threaded.jsep.mjs\" -o assets/wasm/ort-wasm-simd-threaded.jsep.mjs)",
+      "Bash(BASE=\"https://huggingface.co/Xenova/opus-mt-ja-en/resolve/main/onnx\")",
+      "Bash(DEST=\"assets/models/Xenova/opus-mt-ja-en/onnx\")",
+      "Bash(for f:*)",
+      "Bash(do echo:*)",
+      "Bash(ls \"C:\\\\Users\\\\Noshin\\\\workspace\\\\textkit\\\\assets\\\\models\\\\Xenova\\\\opus-mt-ja-en\"\" 2>/dev/null && echo \"---onnx---\" && ls \"C:UsersNoshinworkspacetextkitassetsmodelsXenovaopus-mt-ja-enonnx\"\")",
+      "Bash(curl -L -o config.json \"https://huggingface.co/Xenova/opus-mt-ja-en/resolve/main/config.json\")",
+      "Bash(curl -L -o tokenizer.json \"https://huggingface.co/Xenova/opus-mt-ja-en/resolve/main/tokenizer.json\")",
+      "Bash(curl -L -o tokenizer_config.json \"https://huggingface.co/Xenova/opus-mt-ja-en/resolve/main/tokenizer_config.json\")",
+      "Bash(curl -L --progress-bar -o encoder_model_quantized.onnx \"https://huggingface.co/Xenova/opus-mt-ja-en/resolve/main/onnx/encoder_model_quantized.onnx\")",
+      "Bash(curl -L --progress-bar -o decoder_model_merged_quantized.onnx \"https://huggingface.co/Xenova/opus-mt-ja-en/resolve/main/onnx/decoder_model_merged_quantized.onnx\")",
+      "Bash(ls \"C:\\\\Users\\\\Noshin\\\\workspace\\\\textkit\\\\assets\\\\wasm\"\" 2>/dev/null || echo \"wasm dir empty or missing \")"
+    ]
+  }
+}

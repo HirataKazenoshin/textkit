@@ -152,7 +152,7 @@ function analyzeText(str) {
 }
 
 // Export
-window.TextKitCount = {
+window.TxConvCount = {
   analyzeText,
   countBytes,
   countLines,

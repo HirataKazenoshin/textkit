@@ -197,7 +197,7 @@ function liveCharCount(ta, badge) {
 /* -------------------------------------------------------
    Expose to global
 ------------------------------------------------------- */
-window.TextKitUI = {
+window.TxConvUI = {
   showToast,
   copyToClipboard,
   initCopyButton,

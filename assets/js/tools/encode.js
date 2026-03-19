@@ -136,7 +136,7 @@ function urlDecodeSafe(str) {
 }
 
 // Export
-window.TextKitEncode = {
+window.TxConvEncode = {
   base64Encode,
   base64Decode,
   base64UrlEncode,
