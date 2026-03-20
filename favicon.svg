@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <title>TxConv</title>
+  <!-- Background -->
+  <rect width="32" height="32" rx="6" fill="#18181b"/>
+  <!-- Left T (white) -->
+  <rect x="1.5" y="10" width="10" height="3" fill="#ffffff"/>
+  <rect x="5"   y="13" width="3"  height="9" fill="#ffffff"/>
+  <!-- Arrow → (purple) -->
+  <polygon points="13,11 13,21 21,16" fill="#a78bfa"/>
+  <!-- Right T (purple) -->
+  <rect x="21"   y="10" width="9.5" height="3" fill="#a78bfa"/>
+  <rect x="24.5" y="13" width="3"   height="9" fill="#a78bfa"/>
+</svg>
