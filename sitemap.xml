@@ -74,9 +74,25 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- Encoding convert tool -->
+  <!-- JSON format tool -->
   <url>
-    <loc>https://txconv.com/tools/encoding-convert/</loc>
+    <loc>https://txconv.com/tools/json-format/</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Hira-kana conversion tool -->
+  <url>
+    <loc>https://txconv.com/tools/hira-kana/</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Password generator tool -->
+  <url>
+    <loc>https://txconv.com/tools/password-gen/</loc>
     <lastmod>2026-03-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

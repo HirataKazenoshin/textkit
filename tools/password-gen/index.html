@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5821634466384854"
+     crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>パスワード生成ツール【無料・安全・ブラウザ完結】強度チェック付き | TxConv</title>
+  <meta name="description" content="安全なランダムパスワードをブラウザ内で生成。入力データはサーバーに一切送信されません。文字種・長さを自由に指定できる無料ツール。">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://txconv.com/tools/password-gen/">
+
+  <meta property="og:title" content="パスワード生成ツール | TxConv">
+  <meta property="og:description" content="安全なランダムパスワードをブラウザ内で生成。文字種・長さを自由に指定。完全ブラウザ完結・無料。">
+  <meta property="og:url" content="https://txconv.com/tools/password-gen/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:image" content="https://txconv.com/assets/og-image.svg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://txconv.com/assets/og-image.svg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "TxConv", "item": "https://txconv.com/" },
+      { "@type": "ListItem", "position": 2, "name": "パスワード生成ツール", "item": "https://txconv.com/tools/password-gen/" }
+    ]
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/tool.css">
+  <style>
+    /* ── Settings card ── */
+    .pw-settings {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-lg);
+      margin-bottom: var(--sp-md);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-md);
+    }
+
+    /* Slider row */
+    .pw-slider-row {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-md);
+      flex-wrap: wrap;
+    }
+    .pw-slider-label {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      min-width: 120px;
+      color: var(--color-text-muted);
+    }
+    .pw-slider {
+      flex: 1;
+      min-width: 160px;
+      accent-color: var(--color-primary);
+      height: 6px;
+      cursor: pointer;
+    }
+    .pw-slider-val {
+      font-size: var(--text-lg);
+      font-weight: 700;
+      color: var(--color-primary);
+      min-width: 3ch;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Checkboxes */
+    .pw-checks {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-sm);
+    }
+    .pw-check-label {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-sm);
+      font-size: var(--text-sm);
+      cursor: pointer;
+      color: var(--color-text);
+    }
+    .pw-check-label input[type="checkbox"] {
+      width: 16px; height: 16px;
+      accent-color: var(--color-primary);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .pw-check-example {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+    }
+    .pw-custom-input {
+      margin-left: 24px;
+      margin-top: var(--sp-xs);
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      padding: 4px 8px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: var(--color-bg);
+      color: var(--color-text);
+      width: 200px;
+    }
+    .pw-custom-input:focus { outline: none; border-color: var(--color-border-focus); }
+
+    /* Count row */
+    .pw-count-row {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-md);
+      flex-wrap: wrap;
+    }
+
+    /* Generate button */
+    .btn-generate {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-sm);
+      padding: var(--sp-sm) var(--sp-lg);
+      background: var(--color-primary);
+      color: #fff;
+      border-radius: var(--radius-sm);
+      font-size: var(--text-base);
+      font-weight: 600;
+      transition: all var(--transition);
+    }
+    .btn-generate:hover { background: var(--color-primary-hover); transform: translateY(-1px); }
+    .btn-generate:active { transform: translateY(0); }
+
+    /* Security notice */
+    .pw-notice {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-xs);
+      font-size: var(--text-xs);
+      color: #15803d;
+      background: #dcfce7;
+      border-radius: 99px;
+      padding: 3px 12px;
+      font-weight: 600;
+    }
+    @media (prefers-color-scheme: dark) {
+      .pw-notice { background: #052e16; color: #4ade80; }
+    }
+
+    /* Password list */
+    .pw-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-sm);
+      margin-bottom: var(--sp-xl);
+    }
+    .pw-item {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-sm);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--sp-sm) var(--sp-md);
+      box-shadow: var(--shadow-sm);
+    }
+    .pw-value {
+      flex: 1;
+      font-family: var(--font-mono);
+      font-size: var(--text-base);
+      color: var(--color-text);
+      word-break: break-all;
+      user-select: all;
+    }
+
+    /* Strength indicator */
+    .pw-strength {
+      margin-bottom: var(--sp-md);
+    }
+    .strength-bar-wrap {
+      height: 6px;
+      background: var(--color-border);
+      border-radius: 99px;
+      overflow: hidden;
+      margin-bottom: 4px;
+    }
+    .strength-bar {
+      height: 100%;
+      border-radius: 99px;
+      transition: width 0.3s, background 0.3s;
+    }
+    .strength-label {
+      font-size: var(--text-xs);
+      font-weight: 600;
+    }
+    .strength-weak    .strength-bar { background: #ef4444; width: 25%; }
+    .strength-normal  .strength-bar { background: #f59e0b; width: 50%; }
+    .strength-strong  .strength-bar { background: #22c55e; width: 75%; }
+    .strength-vstrong .strength-bar { background: #6366f1; width: 100%; }
+    .strength-weak    .strength-label { color: #ef4444; }
+    .strength-normal  .strength-label { color: #f59e0b; }
+    .strength-strong  .strength-label { color: #22c55e; }
+    .strength-vstrong .strength-label { color: #6366f1; }
+
+    /* Error */
+    .pw-error {
+      display: none;
+      background: #fef2f2;
+      border: 1px solid #fca5a5;
+      border-radius: var(--radius-sm);
+      padding: var(--sp-sm) var(--sp-md);
+      font-size: var(--text-sm);
+      color: #dc2626;
+      margin-bottom: var(--sp-md);
+    }
+    @media (prefers-color-scheme: dark) {
+      .pw-error { background: #450a0a; border-color: #7f1d1d; color: #fca5a5; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../../" class="site-logo" aria-label="TxConv ホーム">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="4 7 4 4 20 4 20 7"></polyline>
+        <line x1="9" y1="20" x2="15" y2="20"></line>
+        <line x1="12" y1="4" x2="12" y2="20"></line>
+      </svg>
+      TxConv
+    </a>
+    <nav class="site-nav" aria-label="メインナビゲーション">
+      <a href="../../#tools">ツール一覧</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <nav class="breadcrumb" aria-label="パンくずリスト">
+      <ol>
+        <li><a href="../../">TxConv</a></li>
+        <li><span aria-current="page">パスワード生成ツール</span></li>
+      </ol>
+    </nav>
+
+    <div class="tool-hero">
+      <h1>パスワード生成ツール（安全・無料）</h1>
+      <p class="lead">
+        <span class="pw-notice">🔒 サーバーに送信しない・ブラウザ内で生成</span>
+      </p>
+      <p class="lead" style="margin-top:var(--sp-sm)">
+        <code>crypto.getRandomValues()</code> を使った暗号学的に安全なランダムパスワードを即時生成。完全ブラウザ完結。
+      </p>
+    </div>
+
+    <!-- Settings -->
+    <div class="pw-settings" role="form" aria-label="パスワード設定">
+
+      <!-- Length -->
+      <div class="pw-slider-row">
+        <span class="pw-slider-label">パスワード長：</span>
+        <input type="range" id="pw-length" class="pw-slider" min="8" max="64" value="16" aria-label="パスワード長">
+        <span class="pw-slider-val" id="pw-length-val">16</span>
+        <span style="font-size:var(--text-xs);color:var(--color-text-muted)">文字</span>
+      </div>
+
+      <!-- Character types -->
+      <div class="pw-checks" role="group" aria-label="使用する文字種">
+        <label class="pw-check-label">
+          <input type="checkbox" id="use-upper" checked>
+          大文字英字 <span class="pw-check-example">A–Z</span>
+        </label>
+        <label class="pw-check-label">
+          <input type="checkbox" id="use-lower" checked>
+          小文字英字 <span class="pw-check-example">a–z</span>
+        </label>
+        <label class="pw-check-label">
+          <input type="checkbox" id="use-digit" checked>
+          数字 <span class="pw-check-example">0–9</span>
+        </label>
+        <label class="pw-check-label">
+          <input type="checkbox" id="use-symbol" checked>
+          記号 <span class="pw-check-example">!@#$%^&amp;*</span>
+        </label>
+        <label class="pw-check-label">
+          <input type="checkbox" id="use-custom">
+          カスタム記号
+        </label>
+        <input type="text" id="custom-symbols" class="pw-custom-input"
+          placeholder="例：-_=+[]{}|;':" aria-label="カスタム記号">
+      </div>
+
+      <!-- Count -->
+      <div class="pw-count-row">
+        <span class="pw-slider-label">生成本数：</span>
+        <input type="range" id="pw-count" class="pw-slider" min="1" max="10" value="5" aria-label="生成本数" style="max-width:200px">
+        <span class="pw-slider-val" id="pw-count-val">5</span>
+        <span style="font-size:var(--text-xs);color:var(--color-text-muted)">本</span>
+      </div>
+
+      <!-- Generate button -->
+      <div>
+        <button id="btn-generate" class="btn-generate" aria-label="パスワードを生成する">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+          </svg>
+          パスワードを生成する
+        </button>
+      </div>
+    </div>
+
+    <!-- Error -->
+    <div id="pw-error" class="pw-error" role="alert" aria-live="assertive"></div>
+
+    <!-- Strength indicator -->
+    <div id="pw-strength" class="pw-strength" style="display:none" aria-live="polite">
+      <div class="strength-bar-wrap"><div class="strength-bar" id="strength-bar"></div></div>
+      <span class="strength-label" id="strength-label"></span>
+      <span style="font-size:var(--text-xs);color:var(--color-text-muted);margin-left:var(--sp-sm)" id="strength-entropy"></span>
+    </div>
+
+    <!-- Password list -->
+    <div id="pw-list" class="pw-list" role="list" aria-label="生成されたパスワード" aria-live="polite"></div>
+
+    <!-- AdSense Placeholder -->
+    <div class="adsense-placeholder" aria-hidden="true">
+      <span>広告スペース (728×90)</span>
+    </div>
+
+    <!-- Article -->
+    <article class="tool-article">
+      <h2>使い方</h2>
+      <p>
+        スライダーでパスワードの長さ（8〜64文字）を設定し、使用する文字種（大文字・小文字・数字・記号）をチェックボックスで選択します。「生成する」ボタンを押すと、指定した本数のパスワードが即座に生成されます。各パスワードの右にあるコピーボタンでクリップボードにコピーできます。
+      </p>
+
+      <h2>安全性について</h2>
+      <p>
+        このツールはWebブラウザの標準API <code>crypto.getRandomValues()</code> を使用してパスワードを生成します。これは暗号学的に安全な擬似乱数生成器（CSPRNG）であり、<code>Math.random()</code> とは異なり予測が事実上不可能です。OS提供のエントロピープールを利用しており、セキュリティ要件の高いパスワード生成に適しています。
+      </p>
+      <p>
+        <strong>生成されたパスワードはサーバーに一切送信されません。</strong>すべての処理はお使いのブラウザ（クライアントサイド）で完結するため、生成したパスワードが外部に漏れることはありません。
+      </p>
+
+      <h2>強いパスワードとは</h2>
+      <p>
+        パスワードの強さはエントロピー（ビット数）で測られます。エントロピー = パスワード長 × log₂（文字種の数）で計算されます。例えば、大文字・小文字・数字・記号を含む95種類の文字セットで16文字のパスワードを生成すると、エントロピーは約105ビットになり、現代のコンピュータでブルートフォース攻撃するには天文学的な時間がかかります。
+      </p>
+      <ul style="list-style:disc;padding-left:1.5em;color:var(--color-text-muted);line-height:2">
+        <li>弱（〜40ビット）：辞書攻撃や短時間のブルートフォースで解読される可能性があります。</li>
+        <li>普通（40〜60ビット）：一般的な個人利用には十分ですが、重要なアカウントには不十分な場合があります。</li>
+        <li>強（60〜80ビット）：ほとんどの用途で安全です。</li>
+        <li>非常に強（80ビット以上）：現代の技術では解読が事実上不可能です。</li>
+      </ul>
+
+      <h2>よくある質問（FAQ）</h2>
+
+      <h3>Q. 生成したパスワードは安全ですか？</h3>
+      <p>
+        はい。<code>crypto.getRandomValues()</code> はOSのエントロピーソースを使用した暗号学的に安全な乱数生成器です。生成されたパスワードはネットワークに送信されないため、傍受される心配もありません。
+      </p>
+
+      <h3>Q. 同じパスワードが生成されることはありますか？</h3>
+      <p>
+        理論上ゼロではありませんが、実用上無視できます。例えば16文字・95種類の文字セットでは、同じパスワードが生成される確率は1/95¹⁶ ≈ 1/10⁳¹ 程度です。
+      </p>
+
+      <h3>Q. 記号を使うとログインできないサービスがあります。</h3>
+      <p>
+        サービスによっては使用できる記号が制限されている場合があります。「記号」のチェックを外し、「カスタム記号」に許可された記号のみを入力することで対応できます。記号を一切使わない英数字のみのパスワードも生成できます。
+      </p>
+
+      <h3>Q. 何文字のパスワードが推奨されますか？</h3>
+      <p>
+        NIST（米国国立標準技術研究所）のガイドライン SP800-63B では、記憶するパスワードには最低8文字、重要なシステムには16文字以上を推奨しています。パスワードマネージャーを使用する場合は24文字以上の完全ランダムなパスワードが理想的です。
+      </p>
+
+      <h3>Q. パスワードマネージャーと組み合わせて使えますか？</h3>
+      <p>
+        はい。このツールで生成したパスワードをコピーし、1Password・Bitwarden・KeePassXCなどのパスワードマネージャーに保存してご利用ください。各パスワードのコピーボタンで簡単にクリップボードに保存できます。
+      </p>
+    </article>
+
+    <section class="related-tools">
+      <h2>関連ツール</h2>
+      <div class="related-grid">
+        <a href="../base64/" class="related-card"><span class="tool-icon">🔐</span>Base64エンコード</a>
+        <a href="../url-encode/" class="related-card"><span class="tool-icon">🔗</span>URLエンコード</a>
+        <a href="../char-count/" class="related-card"><span class="tool-icon">📊</span>文字数カウント</a>
+        <a href="../json-format/" class="related-card"><span class="tool-icon">{ }</span>JSON整形</a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-inner">
+      <div><strong>TxConv</strong> &copy; 2025 – 無料テキスト変換ツール集</div>
+      <nav class="footer-links" aria-label="フッターナビゲーション">
+        <a href="../../">ホーム</a>
+        <a href="../base64/">Base64</a>
+        <a href="../url-encode/">URLエンコード</a>
+        <a href="../json-format/">JSON整形</a>
+        <a href="../char-count/">文字数カウント</a>
+        <a href="../../privacy/">プライバシーポリシー</a>
+        <a href="../../contact/">お問い合わせ</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  const lengthSlider  = document.getElementById('pw-length');
+  const lengthVal     = document.getElementById('pw-length-val');
+  const countSlider   = document.getElementById('pw-count');
+  const countVal      = document.getElementById('pw-count-val');
+  const useUpper      = document.getElementById('use-upper');
+  const useLower      = document.getElementById('use-lower');
+  const useDigit      = document.getElementById('use-digit');
+  const useSymbol     = document.getElementById('use-symbol');
+  const useCustom     = document.getElementById('use-custom');
+  const customInput   = document.getElementById('custom-symbols');
+  const generateBtn   = document.getElementById('btn-generate');
+  const pwList        = document.getElementById('pw-list');
+  const errorEl       = document.getElementById('pw-error');
+  const strengthWrap  = document.getElementById('pw-strength');
+  const strengthBar   = document.getElementById('strength-bar');
+  const strengthLabel = document.getElementById('strength-label');
+  const strengthEnt   = document.getElementById('strength-entropy');
+
+  const UPPER   = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const LOWER   = 'abcdefghijklmnopqrstuvwxyz';
+  const DIGITS  = '0123456789';
+  const SYMBOLS = '!@#$%^&*';
+
+  // ── Sliders ──
+  lengthSlider.addEventListener('input', () => { lengthVal.textContent = lengthSlider.value; });
+  countSlider.addEventListener('input',  () => { countVal.textContent  = countSlider.value; });
+
+  // ── Charset builder ──
+  function buildCharset() {
+    let cs = '';
+    if (useUpper.checked)  cs += UPPER;
+    if (useLower.checked)  cs += LOWER;
+    if (useDigit.checked)  cs += DIGITS;
+    if (useSymbol.checked) cs += SYMBOLS;
+    if (useCustom.checked && customInput.value.trim()) {
+      // Deduplicate custom symbols
+      const custom = [...new Set(customInput.value)].join('');
+      cs += custom.split('').filter(c => !cs.includes(c)).join('');
+    }
+    return cs;
+  }
+
+  // ── Entropy & strength ──
+  function calcStrength(len, csSize) {
+    const bits = len * Math.log2(csSize);
+    let cls, text;
+    if (bits < 40)      { cls = 'strength-weak';    text = '弱'; }
+    else if (bits < 60) { cls = 'strength-normal';  text = '普通'; }
+    else if (bits < 80) { cls = 'strength-strong';  text = '強'; }
+    else                { cls = 'strength-vstrong';  text = '非常に強い'; }
+    return { bits: bits.toFixed(1), cls, text };
+  }
+
+  // ── Secure random password ──
+  function generatePassword(len, charset) {
+    const arr = new Uint32Array(len);
+    crypto.getRandomValues(arr);
+    let pw = '';
+    for (let i = 0; i < len; i++) {
+      pw += charset[arr[i] % charset.length];
+    }
+    return pw;
+  }
+
+  // ── Copy button ──
+  function makeCopyBtn(password) {
+    const btn = document.createElement('button');
+    btn.className = 'btn-icon btn-copy';
+    btn.title = 'コピー';
+    btn.setAttribute('aria-label', 'パスワードをコピー');
+    btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(password).then(() => {
+        btn.classList.add('copied');
+        setTimeout(() => btn.classList.remove('copied'), 1500);
+      });
+    });
+    return btn;
+  }
+
+  // ── Generate ──
+  function generate() {
+    errorEl.style.display = 'none';
+    pwList.innerHTML = '';
+    strengthWrap.style.display = 'none';
+
+    const charset = buildCharset();
+    if (!charset) {
+      errorEl.textContent = '⚠ 少なくとも1種類の文字を選択してください。';
+      errorEl.style.display = 'block';
+      return;
+    }
+
+    const len   = parseInt(lengthSlider.value);
+    const count = parseInt(countSlider.value);
+
+    // Strength
+    const { bits, cls, text } = calcStrength(len, charset.length);
+    strengthWrap.className = 'pw-strength ' + cls;
+    strengthWrap.style.display = 'block';
+    strengthLabel.textContent = text;
+    strengthEnt.textContent = `エントロピー: 約${bits}ビット / 文字種: ${charset.length}種`;
+
+    // Generate passwords
+    for (let i = 0; i < count; i++) {
+      const pw = generatePassword(len, charset);
+      const item = document.createElement('div');
+      item.className = 'pw-item';
+      item.setAttribute('role', 'listitem');
+
+      const valEl = document.createElement('span');
+      valEl.className = 'pw-value';
+      valEl.textContent = pw;
+
+      item.appendChild(valEl);
+      item.appendChild(makeCopyBtn(pw));
+      pwList.appendChild(item);
+    }
+  }
+
+  generateBtn.addEventListener('click', generate);
+
+  // Generate on load
+  generate();
+
+})();
+</script>
+</body>
+</html>

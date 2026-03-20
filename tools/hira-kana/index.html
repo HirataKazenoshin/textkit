@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5821634466384854"
+     crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ひらがな↔カタカナ変換ツール【無料・リアルタイム】半角カナ対応 | TxConv</title>
+  <meta name="description" content="ひらがなをカタカナに、カタカナをひらがなに即変換。半角カタカナの全角変換にも対応。入力データはサーバーに送信されません。">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://txconv.com/tools/hira-kana/">
+
+  <meta property="og:title" content="ひらがな↔カタカナ変換ツール | TxConv">
+  <meta property="og:description" content="ひらがなをカタカナに、カタカナをひらがなに即変換。半角カタカナの全角変換にも対応。完全ブラウザ完結・無料。">
+  <meta property="og:url" content="https://txconv.com/tools/hira-kana/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:image" content="https://txconv.com/assets/og-image.svg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://txconv.com/assets/og-image.svg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "TxConv", "item": "https://txconv.com/" },
+      { "@type": "ListItem", "position": 2, "name": "ひらがな↔カタカナ変換", "item": "https://txconv.com/tools/hira-kana/" }
+    ]
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/tool.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../../" class="site-logo" aria-label="TxConv ホーム">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="4 7 4 4 20 4 20 7"></polyline>
+        <line x1="9" y1="20" x2="15" y2="20"></line>
+        <line x1="12" y1="4" x2="12" y2="20"></line>
+      </svg>
+      TxConv
+    </a>
+    <nav class="site-nav" aria-label="メインナビゲーション">
+      <a href="../../#tools">ツール一覧</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <nav class="breadcrumb" aria-label="パンくずリスト">
+      <ol>
+        <li><a href="../../">TxConv</a></li>
+        <li><span aria-current="page">ひらがな↔カタカナ変換</span></li>
+      </ol>
+    </nav>
+
+    <div class="tool-hero">
+      <h1>ひらがな↔カタカナ変換ツール</h1>
+      <p class="lead">ひらがな・カタカナをリアルタイムに相互変換。半角カタカナの全角変換も対応。<strong>サーバー送信なし・完全ブラウザ完結。</strong></p>
+    </div>
+
+    <!-- Mode tabs -->
+    <div class="mode-tabs" role="tablist" aria-label="変換モード">
+      <button class="mode-tab active" role="tab" aria-selected="true" data-mode="hira2kata" id="tab-h2k">ひら → カタ</button>
+      <button class="mode-tab" role="tab" aria-selected="false" data-mode="kata2hira" id="tab-k2h">カタ → ひら</button>
+      <button class="mode-tab" role="tab" aria-selected="false" data-mode="both" id="tab-both">両方向（統一）</button>
+      <button class="mode-tab" role="tab" aria-selected="false" data-mode="han2zen" id="tab-han">半角カナ → 全角</button>
+    </div>
+
+    <!-- Editor -->
+    <div class="tool-editor" aria-live="polite">
+      <!-- Input -->
+      <div class="editor-panel">
+        <div class="panel-header">
+          <span class="panel-label">入力テキスト</span>
+          <div class="panel-actions">
+            <span id="in-count" style="font-size:var(--text-xs);color:var(--color-text-muted)">0 文字</span>
+            <button class="btn-icon" id="btn-clear" title="クリア" aria-label="入力をクリア">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <textarea id="hk-input" class="panel-textarea"
+          placeholder="ここにテキストを入力してください&#10;例：こんにちは、テクノロジー"
+          spellcheck="false" autocomplete="off" aria-label="入力テキスト"></textarea>
+      </div>
+
+      <!-- Arrow -->
+      <div class="editor-arrow" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </div>
+
+      <!-- Output -->
+      <div class="editor-panel">
+        <div class="panel-header">
+          <span class="panel-label">変換結果</span>
+          <div class="panel-actions">
+            <span id="out-count" style="font-size:var(--text-xs);color:var(--color-text-muted)">0 文字</span>
+            <button class="btn-icon btn-copy" id="btn-copy" title="コピー" aria-label="変換結果をコピー">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <textarea id="hk-output" class="panel-textarea" readonly
+          aria-label="変換結果" aria-live="polite"
+          placeholder="変換結果がここに表示されます"></textarea>
+      </div>
+    </div>
+
+    <!-- AdSense Placeholder -->
+    <div class="adsense-placeholder" aria-hidden="true">
+      <span>広告スペース (728×90)</span>
+    </div>
+
+    <!-- Article -->
+    <article class="tool-article">
+      <h2>使い方</h2>
+      <p>
+        左のテキストエリアにひらがな・カタカナが混じったテキストを貼り付けると、選択した変換モードに従って即座に変換されます。変換結果は「コピー」ボタンでクリップボードにコピーできます。入力したテキストはサーバーに送信されず、ブラウザ内だけで処理されます。
+      </p>
+      <h3>変換モードの説明</h3>
+      <ul style="list-style:disc;padding-left:1.5em;color:var(--color-text-muted);line-height:2">
+        <li><strong>ひら→カタ</strong>：ひらがなをすべてカタカナに変換します。カタカナや漢字はそのまま保持されます。</li>
+        <li><strong>カタ→ひら</strong>：全角カタカナをすべてひらがなに変換します。ひらがなや漢字はそのまま保持されます。</li>
+        <li><strong>両方向（統一）</strong>：「ひら→カタ」と「カタ→ひら」が混在するテキストを、どちらか一方に統一したい場合に使います。デフォルトでは全テキストをカタカナに統一します。</li>
+        <li><strong>半角カナ→全角</strong>：半角カタカナ（ｱｲｳｴｵ等）を全角カタカナ（アイウエオ等）に変換します。濁点・半濁点の結合（ｶﾞ→ガ）にも対応しています。</li>
+      </ul>
+
+      <h2>ひらがな・カタカナとは</h2>
+      <p>
+        日本語には3種類の文字体系があります。ひらがな・カタカナは音節文字（表音文字）で、それぞれ46の基本文字と濁音・半濁音・拗音を合わせて約100文字で構成されます。漢字は表意文字です。
+      </p>
+      <p>
+        ひらがな（平仮名）はUnicode範囲U+3041〜U+3096に配置されており、主に日本語の文法要素（助詞・助動詞）や和語の表記に使われます。一方、カタカナ（片仮名）はU+30A1〜U+30F6に配置されており、外来語・外国の地名・人名、強調、オノマトペなどに使われます。
+      </p>
+      <p>
+        半角カタカナ（U+FF65〜U+FF9F）はJIS X 0201に由来し、かつてのコンピュータシステムやガラケー・レガシーデータベースで広く使われました。現代のシステムでは全角カタカナへの統一が推奨されています。このツールの「半角カナ→全角」モードは、そのような変換に対応しています。
+      </p>
+
+      <h2>よくある質問（FAQ）</h2>
+
+      <h3>Q. 長音符（ー）や促音（っ/ッ）は正しく変換されますか？</h3>
+      <p>
+        はい。「ひら→カタ」モードでは「っ」→「ッ」、「カタ→ひら」モードでは「ッ」→「っ」のように小文字も正しく変換されます。長音符「ー」はカタカナにのみ存在するため、「カタ→ひら」でもそのまま保持されます。
+      </p>
+
+      <h3>Q. 漢字や英数字はどうなりますか？</h3>
+      <p>
+        漢字・英数字・記号・句読点などはそのまま保持されます。ひらがな・カタカナ（または半角カナ）のみが変換の対象です。
+      </p>
+
+      <h3>Q. 「両方向（統一）」モードはどのように動作しますか？</h3>
+      <p>
+        テキスト中のひらがなとカタカナを全てカタカナに統一します。「こんにちは コンニチハ」→「コンニチハ コンニチハ」のように変換されます。データ正規化やCSVのクレンジング作業に便利です。
+      </p>
+
+      <h3>Q. 半角カナの濁点（ﾞ）・半濁点（ﾟ）は正しく変換されますか？</h3>
+      <p>
+        はい。「ｶﾞ」→「ガ」、「ﾊﾟ」→「パ」のように、基本文字と後続する濁点・半濁点を1文字に結合して変換します。結合できない組み合わせは個別に全角化されます。
+      </p>
+
+      <h3>Q. スマートフォンでも使えますか？</h3>
+      <p>
+        はい。レスポンシブデザインに対応しており、スマートフォン・タブレットでも快適にお使いいただけます。変換はリアルタイムで行われます。
+      </p>
+    </article>
+
+    <section class="related-tools">
+      <h2>関連ツール</h2>
+      <div class="related-grid">
+        <a href="../zen-han/" class="related-card"><span class="tool-icon">Ａ</span>全角↔半角変換</a>
+        <a href="../char-count/" class="related-card"><span class="tool-icon">📊</span>文字数カウント</a>
+        <a href="../snake-camel/" class="related-card"><span class="tool-icon">🔤</span>ケース変換</a>
+        <a href="../diff/" class="related-card"><span class="tool-icon">📝</span>テキスト差分チェック</a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-inner">
+      <div><strong>TxConv</strong> &copy; 2025 – 無料テキスト変換ツール集</div>
+      <nav class="footer-links" aria-label="フッターナビゲーション">
+        <a href="../../">ホーム</a>
+        <a href="../zen-han/">全角半角</a>
+        <a href="../char-count/">文字数カウント</a>
+        <a href="../snake-camel/">ケース変換</a>
+        <a href="../json-format/">JSON整形</a>
+        <a href="../../privacy/">プライバシーポリシー</a>
+        <a href="../../contact/">お問い合わせ</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  const inputTA  = document.getElementById('hk-input');
+  const outputTA = document.getElementById('hk-output');
+  const copyBtn  = document.getElementById('btn-copy');
+  const clearBtn = document.getElementById('btn-clear');
+  const tabs     = document.querySelectorAll('.mode-tab');
+  const inCountEl  = document.getElementById('in-count');
+  const outCountEl = document.getElementById('out-count');
+
+  let currentMode = 'hira2kata';
+
+  // ── Half-width kana → full-width mapping ──
+  const HAN2ZEN_MAP = {
+    'ｦ':'ヲ','ｧ':'ァ','ｨ':'ィ','ｩ':'ゥ','ｪ':'ェ','ｫ':'ォ','ｬ':'ャ','ｭ':'ュ','ｮ':'ョ',
+    'ｯ':'ッ','ｰ':'ー','ｱ':'ア','ｲ':'イ','ｳ':'ウ','ｴ':'エ','ｵ':'オ',
+    'ｶ':'カ','ｷ':'キ','ｸ':'ク','ｹ':'ケ','ｺ':'コ',
+    'ｻ':'サ','ｼ':'シ','ｽ':'ス','ｾ':'セ','ｿ':'ソ',
+    'ﾀ':'タ','ﾁ':'チ','ﾂ':'ツ','ﾃ':'テ','ﾄ':'ト',
+    'ﾅ':'ナ','ﾆ':'ニ','ﾇ':'ヌ','ﾈ':'ネ','ﾉ':'ノ',
+    'ﾊ':'ハ','ﾋ':'ヒ','ﾌ':'フ','ﾍ':'ヘ','ﾎ':'ホ',
+    'ﾏ':'マ','ﾐ':'ミ','ﾑ':'ム','ﾒ':'メ','ﾓ':'モ',
+    'ﾔ':'ヤ','ﾕ':'ユ','ﾖ':'ヨ',
+    'ﾗ':'ラ','ﾘ':'リ','ﾙ':'ル','ﾚ':'レ','ﾛ':'ロ',
+    'ﾜ':'ワ','ﾝ':'ン','ﾞ':'゛','ﾟ':'゜',
+    '｡':'。','｢':'「','｣':'」','､':'、','･':'・',
+  };
+
+  // Voiced/semi-voiced combinations
+  const DAKUTEN_MAP = {
+    'カ':'ガ','キ':'ギ','ク':'グ','ケ':'ゲ','コ':'ゴ',
+    'サ':'ザ','シ':'ジ','ス':'ズ','セ':'ゼ','ソ':'ゾ',
+    'タ':'ダ','チ':'ヂ','ツ':'ヅ','テ':'デ','ト':'ド',
+    'ハ':'バ','ヒ':'ビ','フ':'ブ','ヘ':'ベ','ホ':'ボ',
+    'ウ':'ヴ',
+  };
+  const HANDAKUTEN_MAP = {
+    'ハ':'パ','ヒ':'ピ','フ':'プ','ヘ':'ペ','ホ':'ポ',
+  };
+
+  function han2zen(text) {
+    let result = '';
+    for (let i = 0; i < text.length; i++) {
+      const ch = text[i];
+      const next = text[i + 1];
+      const base = HAN2ZEN_MAP[ch] || ch;
+
+      if (next === 'ﾞ' && DAKUTEN_MAP[base]) {
+        result += DAKUTEN_MAP[base];
+        i++;
+      } else if (next === 'ﾟ' && HANDAKUTEN_MAP[base]) {
+        result += HANDAKUTEN_MAP[base];
+        i++;
+      } else {
+        result += base;
+      }
+    }
+    return result;
+  }
+
+  function hira2kata(text) {
+    return text.replace(/[\u3041-\u3096]/g, ch => String.fromCharCode(ch.charCodeAt(0) + 0x60));
+  }
+
+  function kata2hira(text) {
+    return text.replace(/[\u30A1-\u30F6]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0x60));
+  }
+
+  function convert() {
+    const text = inputTA.value;
+    inCountEl.textContent = text.length.toLocaleString() + ' 文字';
+
+    let result = '';
+    switch (currentMode) {
+      case 'hira2kata': result = hira2kata(text); break;
+      case 'kata2hira': result = kata2hira(text); break;
+      case 'both':      result = hira2kata(text); break;  // unify to katakana
+      case 'han2zen':   result = han2zen(text); break;
+    }
+
+    outputTA.value = result;
+    outCountEl.textContent = result.length.toLocaleString() + ' 文字';
+  }
+
+  // ── Mode tabs ──
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      currentMode = tab.dataset.mode;
+      convert();
+    });
+  });
+
+  // ── Copy ──
+  copyBtn.addEventListener('click', () => {
+    if (!outputTA.value) return;
+    navigator.clipboard.writeText(outputTA.value).then(() => {
+      copyBtn.classList.add('copied');
+      setTimeout(() => copyBtn.classList.remove('copied'), 1500);
+    });
+  });
+
+  // ── Clear ──
+  clearBtn.addEventListener('click', () => {
+    inputTA.value = '';
+    outputTA.value = '';
+    inCountEl.textContent = '0 文字';
+    outCountEl.textContent = '0 文字';
+    inputTA.focus();
+  });
+
+  inputTA.addEventListener('input', convert);
+
+})();
+</script>
+</body>
+</html>
