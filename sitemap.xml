@@ -66,4 +66,20 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Markdown preview tool -->
+  <url>
+    <loc>https://txconv.com/tools/markdown-preview/</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Encoding convert tool -->
+  <url>
+    <loc>https://txconv.com/tools/encoding-convert/</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>

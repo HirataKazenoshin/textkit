@@ -136,6 +136,36 @@
       "jsFiles": ["assets/js/tools/diff.js"],
       "relatedTools": ["char-count", "snake-camel", "zen-han", "base64"],
       "lastModified": "2026-03-20"
+    },
+    {
+      "id": "markdown-preview",
+      "title": "Markdownプレビュー（Mermaid対応）",
+      "shortTitle": "Markdownプレビュー",
+      "description": "MarkdownをリアルタイムでプレビューできるオンラインツールMermaidダイアグラムに対応。ローカルファイルの読み込み・HTML出力も可能。",
+      "url": "https://txconv.com/tools/markdown-preview/",
+      "path": "tools/markdown-preview/",
+      "icon": "📄",
+      "tag": "Markdown",
+      "tags": ["Markdown", "プレビュー", "Mermaid", "ダイアグラム", "フローチャート", "HTMLダウンロード", "ファイル読み込み"],
+      "jsFiles": [],
+      "externalLibs": ["marked.js", "mermaid@11"],
+      "relatedTools": ["char-count", "diff", "encoding-convert", "base64"],
+      "lastModified": "2026-03-20"
+    },
+    {
+      "id": "encoding-convert",
+      "title": "文字コード変換",
+      "shortTitle": "文字コード変換",
+      "description": "テキストや文字コードを自動判別してShift-JIS・UTF-8・EUC-JP・JISに変換。文字化け解消ツール。ファイルのダウンロードにも対応。",
+      "url": "https://txconv.com/tools/encoding-convert/",
+      "path": "tools/encoding-convert/",
+      "icon": "🔠",
+      "tag": "文字コード",
+      "tags": ["文字コード", "Shift-JIS", "UTF-8", "EUC-JP", "JIS", "文字化け", "エンコーディング変換", "CP932"],
+      "jsFiles": [],
+      "externalLibs": ["encoding-japanese@2.0.0"],
+      "relatedTools": ["base64", "url-encode", "char-count", "markdown-preview"],
+      "lastModified": "2026-03-20"
     }
   ]
 }

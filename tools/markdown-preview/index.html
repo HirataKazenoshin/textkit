@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5821634466384854"
+     crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Markdownプレビュー（Mermaid対応）— 無料オンラインツール | TxConv</title>
+  <meta name="description" content="MarkdownをリアルタイムでプレビューできるツールMermaidダイアグラムに対応。ローカルファイルの読み込み・HTML出力も可能。">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://txconv.com/tools/markdown-preview/">
+
+  <meta property="og:title" content="Markdownプレビュー（Mermaid対応）| TxConv">
+  <meta property="og:description" content="MarkdownをリアルタイムプレビューしMermaidダイアグラムを描画。ファイル読み込み・HTML出力対応。">
+  <meta property="og:url" content="https://txconv.com/tools/markdown-preview/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:image" content="https://txconv.com/assets/og-image.svg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://txconv.com/assets/og-image.svg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "TxConv", "item": "https://txconv.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Markdownプレビュー", "item": "https://txconv.com/tools/markdown-preview/" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Markdownプレビュー（Mermaid対応）",
+    "url": "https://txconv.com/tools/markdown-preview/",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web",
+    "description": "MarkdownをリアルタイムでプレビューしMermaidダイアグラムを描画。ローカルファイルの読み込み・HTML出力も可能。",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" }
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/tool.css">
+  <style>
+    /* ── Split layout ── */
+    .md-split {
+      display: flex;
+      height: 62vh;
+      min-height: 360px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .md-pane {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-width: 0;
+    }
+    .md-pane + .md-pane {
+      border-left: 1px solid var(--color-border);
+    }
+    .pane-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--sp-sm);
+      padding: 6px var(--sp-md);
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      color: var(--color-text-sub);
+      flex-shrink: 0;
+    }
+    .pane-header small { font-weight: 400; color: var(--color-text-muted); }
+
+    .md-textarea {
+      flex: 1;
+      border: none;
+      resize: none;
+      padding: var(--sp-md);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.65;
+      background: var(--color-bg);
+      color: var(--color-text);
+      outline: none;
+      tab-size: 2;
+    }
+    .md-preview-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--sp-md) var(--sp-lg);
+    }
+
+    /* ── Divider ── */
+    .md-divider {
+      width: 6px;
+      background: var(--color-border);
+      cursor: col-resize;
+      flex-shrink: 0;
+      position: relative;
+      user-select: none;
+      transition: background 0.15s;
+    }
+    .md-divider::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 2px;
+      height: 32px;
+      background: var(--color-text-muted);
+      border-radius: 2px;
+    }
+    .md-divider:hover,
+    .md-divider.is-dragging { background: var(--color-primary); opacity: 0.45; }
+
+    /* ── Toolbar ── */
+    .md-toolbar {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-sm);
+      padding: var(--sp-sm) 0;
+      flex-wrap: wrap;
+      margin-bottom: var(--sp-sm);
+    }
+    .md-stats-bar {
+      margin-left: auto;
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      display: flex;
+      gap: var(--sp-md);
+    }
+    .file-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 5px var(--sp-sm);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--color-text);
+      background: var(--color-bg);
+      transition: border-color 0.15s;
+    }
+    .file-label:hover { border-color: var(--color-primary); }
+    #md-file-input { display: none; }
+
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 5px var(--sp-md);
+      border-radius: var(--radius-sm);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      background: var(--color-primary);
+      color: #fff;
+      transition: all var(--transition);
+    }
+    .btn-download:hover:not(:disabled) { background: var(--color-primary-hover); transform: translateY(-1px); }
+    .btn-download:disabled { background: var(--color-surface-2); color: var(--color-text-faint); cursor: not-allowed; transform: none; }
+
+    /* ── Drag over ── */
+    .md-split.dragover { outline: 2px dashed var(--color-primary); outline-offset: -2px; }
+
+    /* ── Preview markdown styles ── */
+    .md-preview-scroll h1 { font-size: 1.65em; border-bottom: 1px solid var(--color-border); padding-bottom: .3em; margin: .8em 0 .5em; }
+    .md-preview-scroll h2 { font-size: 1.3em; border-bottom: 1px solid var(--color-border); padding-bottom: .25em; margin: .8em 0 .45em; }
+    .md-preview-scroll h3 { font-size: 1.1em; margin: .7em 0 .4em; }
+    .md-preview-scroll h4, .md-preview-scroll h5, .md-preview-scroll h6 { margin: .6em 0 .3em; }
+    .md-preview-scroll p { margin: .45em 0; line-height: 1.75; }
+    .md-preview-scroll code { font-family: var(--font-mono); background: var(--color-surface); padding: .1em .4em; border-radius: 3px; font-size: .875em; }
+    .md-preview-scroll pre { background: var(--color-surface); padding: var(--sp-md); border-radius: var(--radius-md); overflow-x: auto; margin: .55em 0; }
+    .md-preview-scroll pre code { background: none; padding: 0; font-size: .85em; }
+    .md-preview-scroll blockquote { border-left: 3px solid var(--color-primary); padding-left: var(--sp-md); margin: .55em 0; color: var(--color-text-sub); }
+    .md-preview-scroll table { border-collapse: collapse; width: 100%; margin: .55em 0; font-size: .9em; }
+    .md-preview-scroll th, .md-preview-scroll td { border: 1px solid var(--color-border); padding: .35em .65em; }
+    .md-preview-scroll th { background: var(--color-surface); font-weight: 600; }
+    .md-preview-scroll ul, .md-preview-scroll ol { padding-left: 1.5em; margin: .4em 0; }
+    .md-preview-scroll li { margin: .2em 0; line-height: 1.65; }
+    .md-preview-scroll a { color: var(--color-primary); }
+    .md-preview-scroll img { max-width: 100%; border-radius: var(--radius-sm); }
+    .md-preview-scroll hr { border: none; border-top: 1px solid var(--color-border); margin: .75em 0; }
+    .md-preview-scroll .mermaid { background: var(--color-surface); border-radius: var(--radius-md); padding: var(--sp-sm); margin: .6em 0; text-align: center; overflow-x: auto; }
+    .md-preview-scroll .mermaid svg { max-width: 100%; height: auto; }
+
+    /* ── Mobile ── */
+    @media (max-width: 640px) {
+      .md-split { flex-direction: column; height: auto; }
+      .md-pane { height: 38vh; }
+      .md-pane + .md-pane { border-left: none; border-top: 1px solid var(--color-border); }
+      .md-divider { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../../" class="site-logo" aria-label="TxConv ホーム">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="4 7 4 4 20 4 20 7"></polyline>
+        <line x1="9" y1="20" x2="15" y2="20"></line>
+        <line x1="12" y1="4" x2="12" y2="20"></line>
+      </svg>
+      TxConv
+    </a>
+    <nav class="site-nav" aria-label="メインナビゲーション">
+      <a href="../../#tools">ツール一覧</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <nav class="breadcrumb" aria-label="パンくずリスト">
+      <ol>
+        <li><a href="../../">TxConv</a></li>
+        <li><span aria-current="page">Markdownプレビュー</span></li>
+      </ol>
+    </nav>
+
+    <div class="tool-hero">
+      <h1>Markdownプレビュー（Mermaid対応）</h1>
+      <p class="lead">
+        MarkdownをリアルタイムでプレビューできるオンラインツールMermaidダイアグラムに対応。ローカルファイルの読み込み・HTML出力も可能。<strong>サーバー送信なし・完全ブラウザ完結。</strong>
+      </p>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="md-toolbar">
+      <label class="file-label" for="md-file-input">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+        </svg>
+        ファイルを開く (.md / .txt)
+      </label>
+      <input type="file" id="md-file-input" accept=".md,.txt,.markdown">
+
+      <button id="md-clear-btn" class="btn-icon" title="クリア" aria-label="エディタをクリア">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <button id="md-download-btn" class="btn-download" disabled aria-label="プレビューをHTMLとしてダウンロード">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        HTMLでダウンロード
+      </button>
+
+      <div class="md-stats-bar" aria-live="polite">
+        <span id="md-char-count">0 文字</span>
+        <span id="md-line-count">0 行</span>
+      </div>
+    </div>
+
+    <!-- Split pane -->
+    <div class="md-split" id="md-split" role="region" aria-label="Markdownエディタとプレビュー">
+
+      <!-- Editor -->
+      <div class="md-pane" id="md-editor-pane">
+        <div class="pane-header">
+          <span>✏️ Markdownエディタ</span>
+          <small>ドラッグ&amp;ドロップでファイル読み込み可</small>
+        </div>
+        <textarea
+          id="md-editor"
+          class="md-textarea"
+          spellcheck="false"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          aria-label="Markdownエディタ"
+          placeholder="# タイトル&#10;&#10;Markdownを入力してください..."></textarea>
+      </div>
+
+      <!-- Resize handle -->
+      <div class="md-divider" id="md-divider" role="separator" aria-label="リサイズハンドル"></div>
+
+      <!-- Preview -->
+      <div class="md-pane">
+        <div class="pane-header">
+          <span>👁 プレビュー</span>
+        </div>
+        <div class="md-preview-scroll" id="md-preview" aria-live="polite" aria-label="Markdownプレビュー"></div>
+      </div>
+
+    </div>
+
+    <!-- AdSense Placeholder -->
+    <div class="adsense-placeholder" aria-hidden="true" style="margin-top:var(--sp-lg)">
+      <span>広告スペース (728×90)</span>
+    </div>
+
+    <!-- Article -->
+    <article class="tool-article">
+      <h2>使い方</h2>
+      <p>左のエディタにMarkdownを入力すると、右にリアルタイムでプレビューされます。<strong>入力テキストはサーバーに送信されません。</strong></p>
+      <h3>ファイルの読み込み</h3>
+      <p><code>.md</code> / <code>.txt</code> ファイルをエディタエリアにドラッグ&amp;ドロップ、または「ファイルを開く」ボタンから読み込めます。</p>
+      <h3>Mermaidダイアグラム</h3>
+      <p><code>```mermaid</code> ブロックを使うと、フローチャート・シーケンス図・ガントチャートなどが描画されます。</p>
+      <h3>HTMLダウンロード</h3>
+      <p>「HTMLでダウンロード」でレンダリング済みのHTMLファイルを保存できます。MermaidはSVGで埋め込まれるためオフラインでも表示できます。</p>
+      <h3>リサイズ</h3>
+      <p>中央のバーをドラッグしてエディタとプレビューの表示幅を自由に調整できます。</p>
+    </article>
+
+    <!-- Related Tools -->
+    <section class="related-tools">
+      <h2>関連ツール</h2>
+      <div class="related-grid">
+        <a href="../char-count/" class="related-card"><span class="tool-icon">📊</span>文字数カウント</a>
+        <a href="../diff/" class="related-card"><span class="tool-icon">📝</span>テキスト差分チェック</a>
+        <a href="../encoding-convert/" class="related-card"><span class="tool-icon">🔠</span>文字コード変換</a>
+        <a href="../base64/" class="related-card"><span class="tool-icon">🔐</span>Base64エンコード</a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-inner">
+      <div><strong>TxConv</strong> &copy; 2025 – 無料テキスト変換ツール集</div>
+      <nav class="footer-links" aria-label="フッターナビゲーション">
+        <a href="../../">ホーム</a>
+        <a href="../snake-camel/">ケース変換</a>
+        <a href="../char-count/">文字数カウント</a>
+        <a href="../diff/">差分チェック</a>
+        <a href="../encoding-convert/">文字コード変換</a>
+        <a href="../../privacy/">プライバシーポリシー</a>
+        <a href="../../contact/">お問い合わせ</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<!-- marked.js UMD (runs before module script) -->
+<script src="https://cdn.jsdelivr.net/npm/marked/lib/marked.umd.js"></script>
+
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+// ── Init ──
+mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+
+// ── marked: mermaid ブロックを <pre class="mermaid"> に変換 ──
+function esc(s) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+marked.use({
+  gfm: true,
+  renderer: {
+    code({ text, lang }) {
+      if (lang === 'mermaid') return `<pre class="mermaid">${esc(text)}</pre>`;
+      return false;
+    }
+  }
+});
+
+// ── DOM refs ──
+const editor     = document.getElementById('md-editor');
+const preview    = document.getElementById('md-preview');
+const split      = document.getElementById('md-split');
+const divider    = document.getElementById('md-divider');
+const editorPane = document.getElementById('md-editor-pane');
+const fileInput  = document.getElementById('md-file-input');
+const dlBtn      = document.getElementById('md-download-btn');
+const clearBtn   = document.getElementById('md-clear-btn');
+const charEl     = document.getElementById('md-char-count');
+const lineEl     = document.getElementById('md-line-count');
+
+// ── Render ──
+let renderTimer = null;
+let renderId = 0;
+
+async function render() {
+  const id = ++renderId;
+  const md = editor.value;
+  const html = marked.parse(md);
+  if (id !== renderId) return;
+
+  preview.innerHTML = html;
+
+  const nodes = preview.querySelectorAll('.mermaid');
+  if (nodes.length) {
+    try { await mermaid.run({ nodes }); } catch (_) { /* ignore diagram errors */ }
+  }
+
+  dlBtn.disabled = md.trim().length === 0;
+  charEl.textContent = md.length.toLocaleString() + ' 文字';
+  lineEl.textContent = (md === '' ? 0 : md.split('\n').length).toLocaleString() + ' 行';
+}
+
+function scheduleRender() {
+  clearTimeout(renderTimer);
+  renderTimer = setTimeout(render, 200);
+}
+
+editor.addEventListener('input', scheduleRender);
+
+// ── File open ──
+function loadText(text) {
+  editor.value = text;
+  scheduleRender();
+}
+
+fileInput.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const r = new FileReader();
+  r.onload = (ev) => loadText(ev.target.result);
+  r.readAsText(file, 'UTF-8');
+  fileInput.value = '';
+});
+
+// ── Drag & Drop ──
+split.addEventListener('dragover', (e) => { e.preventDefault(); split.classList.add('dragover'); });
+split.addEventListener('dragleave', (e) => {
+  if (!split.contains(e.relatedTarget)) split.classList.remove('dragover');
+});
+split.addEventListener('drop', (e) => {
+  e.preventDefault();
+  split.classList.remove('dragover');
+  const file = e.dataTransfer.files[0];
+  if (!file) return;
+  const r = new FileReader();
+  r.onload = (ev) => loadText(ev.target.result);
+  r.readAsText(file, 'UTF-8');
+});
+
+// ── Clear ──
+clearBtn.addEventListener('click', () => {
+  editor.value = '';
+  preview.innerHTML = '';
+  charEl.textContent = '0 文字';
+  lineEl.textContent = '0 行';
+  dlBtn.disabled = true;
+});
+
+// ── HTML Download (rendered SVGs embedded, works offline) ──
+dlBtn.addEventListener('click', () => {
+  const today = new Date();
+  const ymd = today.getFullYear().toString()
+    + String(today.getMonth() + 1).padStart(2, '0')
+    + String(today.getDate()).padStart(2, '0');
+
+  const html = `<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Markdownプレビュー – ${ymd}</title>
+<style>
+body{font-family:system-ui,-apple-system,sans-serif;max-width:820px;margin:2rem auto;padding:0 1.25rem;line-height:1.75;color:#1a1a2e}
+h1,h2{border-bottom:1px solid #e5e7eb;padding-bottom:.3em;margin-top:1.2em}
+h3,h4,h5,h6{margin-top:.9em}
+code{font-family:ui-monospace,monospace;background:#f3f4f6;padding:.1em .4em;border-radius:3px;font-size:.875em}
+pre{background:#f3f4f6;padding:1rem;border-radius:6px;overflow-x:auto}
+pre code{background:none;padding:0}
+blockquote{border-left:3px solid #8b5cf6;padding-left:1rem;color:#6b7280;margin:.75rem 0}
+table{border-collapse:collapse;width:100%}
+th,td{border:1px solid #e5e7eb;padding:.4rem .75rem}
+th{background:#f9fafb;font-weight:600}
+img{max-width:100%}
+hr{border:none;border-top:1px solid #e5e7eb}
+.mermaid{text-align:center;margin:.75em 0;overflow-x:auto}
+.mermaid svg{max-width:100%;height:auto}
+</style>
+</head>
+<body>
+${preview.innerHTML}
+</body>
+</html>`;
+
+  const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `markdown-preview-${ymd}.html`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
+
+// ── Resizable divider ──
+let isResizing = false, startX = 0, startW = 0;
+
+function startResize(clientX) {
+  isResizing = true;
+  startX = clientX;
+  startW = editorPane.getBoundingClientRect().width;
+  divider.classList.add('is-dragging');
+  document.body.style.cursor = 'col-resize';
+  document.body.style.userSelect = 'none';
+}
+function doResize(clientX) {
+  if (!isResizing) return;
+  const total = split.getBoundingClientRect().width - 6;
+  const newW = Math.max(total * 0.2, Math.min(total * 0.8, startW + (clientX - startX)));
+  editorPane.style.flex = 'none';
+  editorPane.style.width = newW + 'px';
+}
+function stopResize() {
+  if (!isResizing) return;
+  isResizing = false;
+  divider.classList.remove('is-dragging');
+  document.body.style.cursor = '';
+  document.body.style.userSelect = '';
+}
+
+divider.addEventListener('mousedown',  (e) => { e.preventDefault(); startResize(e.clientX); });
+document.addEventListener('mousemove', (e) => doResize(e.clientX));
+document.addEventListener('mouseup',   stopResize);
+divider.addEventListener('touchstart', (e) => startResize(e.touches[0].clientX), { passive: true });
+document.addEventListener('touchmove', (e) => { if (isResizing) { e.preventDefault(); doResize(e.touches[0].clientX); } }, { passive: false });
+document.addEventListener('touchend',  stopResize);
+
+// ── Initial sample content ──
+editor.value = `# Markdownプレビュー（Mermaid対応）
+
+**太字**、*斜体*、\`インラインコード\` が使えます。
+
+## Mermaidダイアグラム
+
+\`\`\`mermaid
+graph LR
+  A[開始] --> B{条件分岐}
+  B -- Yes --> C[処理A]
+  B -- No  --> D[処理B]
+  C --> E[完了]
+  D --> E
+\`\`\`
+
+## テーブル
+
+| ヘッダー1 | ヘッダー2 | ヘッダー3 |
+|:--------|:-------:|--------:|
+| 左寄せ   | 中央寄せ  | 右寄せ   |
+| セル4   | セル5   | セル6   |
+
+## リスト
+
+- 項目1
+- 項目2
+  - ネストした項目
+
+> ブロック引用：Mermaidダイアグラムにも対応しています。
+
+\`\`\`javascript
+// コードブロック
+const hello = () => console.log('Hello, TxConv!');
+hello();
+\`\`\``;
+
+scheduleRender();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#18181b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#18181b"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- Top / bottom accent lines -->
+  <rect x="0" y="0" width="1200" height="5" fill="#a78bfa" opacity="0.7"/>
+  <rect x="0" y="625" width="1200" height="5" fill="#a78bfa" opacity="0.7"/>
+
+  <!-- T → T icon (centered above title) -->
+  <g transform="translate(505, 148)">
+    <!-- Left T (white) -->
+    <rect x="0"  y="0"  width="64" height="13" rx="2" fill="#ffffff"/>
+    <rect x="26" y="13" width="13" height="44" rx="2" fill="#ffffff"/>
+    <!-- Arrow shaft -->
+    <line x1="74" y1="28" x2="116" y2="28" stroke="#a78bfa" stroke-width="6" stroke-linecap="round"/>
+    <!-- Arrow head -->
+    <polygon points="108,18 128,28 108,38" fill="#a78bfa"/>
+    <!-- Right T (purple) -->
+    <rect x="138" y="0"  width="64" height="13" rx="2" fill="#a78bfa"/>
+    <rect x="164" y="13" width="13" height="44" rx="2" fill="#a78bfa"/>
+  </g>
+
+  <!-- Main title -->
+  <text x="600" y="318"
+    text-anchor="middle"
+    font-family="system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif"
+    font-size="112" font-weight="800" letter-spacing="-3"
+    fill="#ffffff">TxConv</text>
+
+  <!-- Subtitle -->
+  <text x="600" y="396"
+    text-anchor="middle"
+    font-family="system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif"
+    font-size="36" letter-spacing="2"
+    fill="#a1a1aa">無料テキスト変換ツール集</text>
+
+  <!-- Feature tags -->
+  <text x="600" y="462"
+    text-anchor="middle"
+    font-family="system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif"
+    font-size="24"
+    fill="#52525b">ケース変換 · 全角半角 · 文字数カウント · Base64 · Markdown · 文字コード変換</text>
+
+  <!-- Domain -->
+  <text x="1160" y="595"
+    text-anchor="end"
+    font-family="system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif"
+    font-size="26" letter-spacing="1"
+    fill="#3f3f46">txconv.com</text>
+</svg>
