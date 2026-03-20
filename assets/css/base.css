@@ -69,8 +69,9 @@
 }
 
 /* ---------- Dark Mode ---------- */
+/* System preference (when no manual override) */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --color-bg:          #0f172a;
     --color-surface:     #1e293b;
     --color-surface-2:   #273449;
@@ -84,6 +85,38 @@
     --shadow-lg: 0 10px 30px rgba(0,0,0,.5);
   }
 }
+/* Manual dark override */
+[data-theme="dark"] {
+  --color-bg:          #0f172a;
+  --color-surface:     #1e293b;
+  --color-surface-2:   #273449;
+  --color-text:        #f1f5f9;
+  --color-text-muted:  #94a3b8;
+  --color-text-faint:  #64748b;
+  --color-border:      #334155;
+  --color-primary-light: #312e81;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.4);
+  --shadow-lg: 0 10px 30px rgba(0,0,0,.5);
+}
+
+/* ---------- Theme Toggle Button ---------- */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  transition: color var(--transition), background var(--transition);
+  flex-shrink: 0;
+}
+.theme-toggle:hover {
+  color: var(--color-primary);
+  background: var(--color-surface-2);
+}
+.theme-toggle svg { width: 18px; height: 18px; }
 
 /* ---------- Reset ---------- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
