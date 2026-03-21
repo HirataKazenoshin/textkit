@@ -15,16 +15,46 @@
       "path": "tools/snake-camel/",
       "icon": "🔤",
       "tag": "命名変換",
-      "tags": ["snake_case", "camelCase", "PascalCase", "kebab-case", "SCREAMING_SNAKE_CASE", "命名規則", "変換"],
-      "jsFiles": ["assets/js/tools/case.js"],
-      "modes": [
-        { "id": "snake",     "label": "snake_case" },
-        { "id": "camel",     "label": "camelCase" },
-        { "id": "pascal",    "label": "PascalCase" },
-        { "id": "kebab",     "label": "kebab-case" },
-        { "id": "screaming", "label": "SCREAMING_SNAKE" }
+      "tags": [
+        "snake_case",
+        "camelCase",
+        "PascalCase",
+        "kebab-case",
+        "SCREAMING_SNAKE_CASE",
+        "命名規則",
+        "変換"
       ],
-      "relatedTools": ["zen-han", "char-count", "base64", "url-encode"],
+      "jsFiles": [
+        "assets/js/tools/case.js"
+      ],
+      "modes": [
+        {
+          "id": "snake",
+          "label": "snake_case"
+        },
+        {
+          "id": "camel",
+          "label": "camelCase"
+        },
+        {
+          "id": "pascal",
+          "label": "PascalCase"
+        },
+        {
+          "id": "kebab",
+          "label": "kebab-case"
+        },
+        {
+          "id": "screaming",
+          "label": "SCREAMING_SNAKE"
+        }
+      ],
+      "relatedTools": [
+        "zen-han",
+        "char-count",
+        "base64",
+        "url-encode"
+      ],
       "lastModified": "2025-01-01"
     },
     {
@@ -36,13 +66,33 @@
       "path": "tools/zen-han/",
       "icon": "Ａ",
       "tag": "文字変換",
-      "tags": ["全角", "半角", "カタカナ", "英数字", "変換", "正規化"],
-      "jsFiles": ["assets/js/tools/width.js"],
-      "modes": [
-        { "id": "to-half", "label": "全角 → 半角" },
-        { "id": "to-full", "label": "半角 → 全角" }
+      "tags": [
+        "全角",
+        "半角",
+        "カタカナ",
+        "英数字",
+        "変換",
+        "正規化"
       ],
-      "relatedTools": ["snake-camel", "char-count", "base64", "url-encode"],
+      "jsFiles": [
+        "assets/js/tools/width.js"
+      ],
+      "modes": [
+        {
+          "id": "to-half",
+          "label": "全角 → 半角"
+        },
+        {
+          "id": "to-full",
+          "label": "半角 → 全角"
+        }
+      ],
+      "relatedTools": [
+        "snake-camel",
+        "char-count",
+        "base64",
+        "url-encode"
+      ],
       "lastModified": "2025-01-01"
     },
     {
@@ -54,14 +104,41 @@
       "path": "tools/char-count/",
       "icon": "📊",
       "tag": "テキスト分析",
-      "tags": ["文字数", "語数", "行数", "バイト数", "漢字", "ひらがな", "カタカナ", "カウント"],
-      "jsFiles": ["assets/js/tools/count.js"],
-      "stats": [
-        "total", "noSpaces", "noNewlines", "bytes",
-        "lines", "words", "sentences", "paragraphs",
-        "kanji", "hiragana", "katakana", "alpha", "digits", "whitespace"
+      "tags": [
+        "文字数",
+        "語数",
+        "行数",
+        "バイト数",
+        "漢字",
+        "ひらがな",
+        "カタカナ",
+        "カウント"
       ],
-      "relatedTools": ["snake-camel", "zen-han", "base64", "url-encode"],
+      "jsFiles": [
+        "assets/js/tools/count.js"
+      ],
+      "stats": [
+        "total",
+        "noSpaces",
+        "noNewlines",
+        "bytes",
+        "lines",
+        "words",
+        "sentences",
+        "paragraphs",
+        "kanji",
+        "hiragana",
+        "katakana",
+        "alpha",
+        "digits",
+        "whitespace"
+      ],
+      "relatedTools": [
+        "snake-camel",
+        "zen-han",
+        "base64",
+        "url-encode"
+      ],
       "lastModified": "2025-01-01"
     },
     {
@@ -73,15 +150,42 @@
       "path": "tools/base64/",
       "icon": "🔐",
       "tag": "エンコード",
-      "tags": ["Base64", "エンコード", "デコード", "URLセーフ", "RFC4648", "JWT", "MIME"],
-      "jsFiles": ["assets/js/tools/encode.js"],
-      "modes": [
-        { "id": "encode",     "label": "エンコード" },
-        { "id": "decode",     "label": "デコード" },
-        { "id": "url-encode", "label": "URLセーフ エンコード" },
-        { "id": "url-decode", "label": "URLセーフ デコード" }
+      "tags": [
+        "Base64",
+        "エンコード",
+        "デコード",
+        "URLセーフ",
+        "RFC4648",
+        "JWT",
+        "MIME"
       ],
-      "relatedTools": ["url-encode", "snake-camel", "zen-han", "char-count"],
+      "jsFiles": [
+        "assets/js/tools/encode.js"
+      ],
+      "modes": [
+        {
+          "id": "encode",
+          "label": "エンコード"
+        },
+        {
+          "id": "decode",
+          "label": "デコード"
+        },
+        {
+          "id": "url-encode",
+          "label": "URLセーフ エンコード"
+        },
+        {
+          "id": "url-decode",
+          "label": "URLセーフ デコード"
+        }
+      ],
+      "relatedTools": [
+        "url-encode",
+        "snake-camel",
+        "zen-han",
+        "char-count"
+      ],
       "lastModified": "2025-01-01"
     },
     {
@@ -93,14 +197,36 @@
       "path": "tools/url-encode/",
       "icon": "🔗",
       "tag": "エンコード",
-      "tags": ["URLエンコード", "パーセントエンコーディング", "decodeURIComponent", "encodeURIComponent", "RFC3986"],
-      "jsFiles": ["assets/js/tools/encode.js"],
-      "modes": [
-        { "id": "encode",         "label": "エンコード" },
-        { "id": "decode",         "label": "デコード" },
-        { "id": "encode-partial", "label": "URL全体エンコード" }
+      "tags": [
+        "URLエンコード",
+        "パーセントエンコーディング",
+        "decodeURIComponent",
+        "encodeURIComponent",
+        "RFC3986"
       ],
-      "relatedTools": ["base64", "snake-camel", "zen-han", "char-count"],
+      "jsFiles": [
+        "assets/js/tools/encode.js"
+      ],
+      "modes": [
+        {
+          "id": "encode",
+          "label": "エンコード"
+        },
+        {
+          "id": "decode",
+          "label": "デコード"
+        },
+        {
+          "id": "encode-partial",
+          "label": "URL全体エンコード"
+        }
+      ],
+      "relatedTools": [
+        "base64",
+        "snake-camel",
+        "zen-han",
+        "char-count"
+      ],
       "lastModified": "2025-01-01"
     },
     {
@@ -112,15 +238,33 @@
       "path": "tools/salesforce-api/",
       "icon": "☁️",
       "tag": "AI変換",
-      "tags": ["Salesforce", "API名", "カスタム項目", "__c", "__mdt", "日英翻訳", "AI", "ONNX", "Transformers.js"],
-      "jsFiles": ["assets/js/libs/transformers.min.js", "assets/js/tools/salesforce.js"],
+      "tags": [
+        "Salesforce",
+        "API名",
+        "カスタム項目",
+        "__c",
+        "__mdt",
+        "日英翻訳",
+        "AI",
+        "ONNX",
+        "Transformers.js"
+      ],
+      "jsFiles": [
+        "assets/js/libs/transformers.min.js",
+        "assets/js/tools/salesforce.js"
+      ],
       "aiModel": {
         "name": "Xenova/opus-mt-ja-en",
         "type": "translation",
         "format": "ONNX quantized",
         "localPath": "assets/models/Xenova/opus-mt-ja-en/"
       },
-      "relatedTools": ["snake-camel", "zen-han", "char-count", "base64"],
+      "relatedTools": [
+        "snake-camel",
+        "zen-han",
+        "char-count",
+        "base64"
+      ],
       "lastModified": "2025-03-20"
     },
     {
@@ -132,9 +276,25 @@
       "path": "tools/diff/",
       "icon": "📝",
       "tag": "テキスト比較",
-      "tags": ["差分", "diff", "テキスト比較", "追加", "削除", "変更", "LCS", "HTMLダウンロード"],
-      "jsFiles": ["assets/js/tools/diff.js"],
-      "relatedTools": ["char-count", "snake-camel", "zen-han", "base64"],
+      "tags": [
+        "差分",
+        "diff",
+        "テキスト比較",
+        "追加",
+        "削除",
+        "変更",
+        "LCS",
+        "HTMLダウンロード"
+      ],
+      "jsFiles": [
+        "assets/js/tools/diff.js"
+      ],
+      "relatedTools": [
+        "char-count",
+        "snake-camel",
+        "zen-han",
+        "base64"
+      ],
       "lastModified": "2026-03-20"
     },
     {
@@ -146,10 +306,26 @@
       "path": "tools/markdown-preview/",
       "icon": "📄",
       "tag": "Markdown",
-      "tags": ["Markdown", "プレビュー", "Mermaid", "ダイアグラム", "フローチャート", "HTMLダウンロード", "ファイル読み込み"],
+      "tags": [
+        "Markdown",
+        "プレビュー",
+        "Mermaid",
+        "ダイアグラム",
+        "フローチャート",
+        "HTMLダウンロード",
+        "ファイル読み込み"
+      ],
       "jsFiles": [],
-      "externalLibs": ["marked.js", "mermaid@11"],
-      "relatedTools": ["char-count", "diff", "json-format", "base64"],
+      "externalLibs": [
+        "marked.js",
+        "mermaid@11"
+      ],
+      "relatedTools": [
+        "char-count",
+        "diff",
+        "json-format",
+        "base64"
+      ],
       "lastModified": "2026-03-20"
     },
     {
@@ -161,9 +337,22 @@
       "path": "tools/json-format/",
       "icon": "{ }",
       "tag": "開発ツール",
-      "tags": ["JSON", "整形", "フォーマット", "バリデーション", "minify", "圧縮", "シンタックスハイライト"],
+      "tags": [
+        "JSON",
+        "整形",
+        "フォーマット",
+        "バリデーション",
+        "minify",
+        "圧縮",
+        "シンタックスハイライト"
+      ],
       "jsFiles": [],
-      "relatedTools": ["base64", "url-encode", "diff", "char-count"],
+      "relatedTools": [
+        "base64",
+        "url-encode",
+        "diff",
+        "char-count"
+      ],
       "lastModified": "2026-03-20"
     },
     {
@@ -175,9 +364,22 @@
       "path": "tools/hira-kana/",
       "icon": "あ",
       "tag": "文字変換",
-      "tags": ["ひらがな", "カタカナ", "変換", "半角カナ", "全角", "文字変換", "日本語"],
+      "tags": [
+        "ひらがな",
+        "カタカナ",
+        "変換",
+        "半角カナ",
+        "全角",
+        "文字変換",
+        "日本語"
+      ],
       "jsFiles": [],
-      "relatedTools": ["zen-han", "char-count", "snake-camel", "diff"],
+      "relatedTools": [
+        "zen-han",
+        "char-count",
+        "snake-camel",
+        "diff"
+      ],
       "lastModified": "2026-03-20"
     },
     {
@@ -189,10 +391,88 @@
       "path": "tools/password-gen/",
       "icon": "🔑",
       "tag": "セキュリティ",
-      "tags": ["パスワード", "生成", "ランダム", "セキュリティ", "crypto", "強度チェック"],
+      "tags": [
+        "パスワード",
+        "生成",
+        "ランダム",
+        "セキュリティ",
+        "crypto",
+        "強度チェック"
+      ],
       "jsFiles": [],
-      "relatedTools": ["base64", "url-encode", "char-count", "json-format"],
+      "relatedTools": [
+        "base64",
+        "url-encode",
+        "char-count",
+        "json-format"
+      ],
       "lastModified": "2026-03-20"
+    },
+    {
+      "id": "csv-json",
+      "title": "CSV↔JSON / TSV変換",
+      "shortTitle": "CSV↔JSON変換",
+      "description": "CSVをJSONに、JSONをCSVに変換。TSV・セミコロン・パイプ区切りにも対応。ファイルのドラッグ＆ドロップ読み込み・ダウンロード対応。",
+      "url": "https://txconv.com/tools/csv-json/",
+      "path": "tools/csv-json/",
+      "icon": "⇄",
+      "tag": "開発ツール",
+      "tags": [
+        "CSV",
+        "JSON",
+        "TSV",
+        "変換",
+        "区切り文字",
+        "データ変換",
+        "デリミタ"
+      ],
+      "jsFiles": [],
+      "externalLibs": [],
+      "relatedTools": [
+        "json-format",
+        "base64",
+        "url-encode",
+        "char-count"
+      ],
+      "lastModified": "2026-03-20"
+    },
+    {
+      "id": "tax-calc",
+      "title": "消費税計算ツール",
+      "shortTitle": "消費税計算",
+      "description": "税抜き・税込み・消費税額をリアルタイム計算。10%・8%・カスタム税率と逆算、端数処理に対応。",
+      "url": "https://txconv.com/tools/tax-calc/",
+      "path": "tools/tax-calc/",
+      "icon": "¥",
+      "tag": "計算ツール",
+      "tags": [
+        "消費税",
+        "税込み",
+        "税抜き",
+        "税額",
+        "軽減税率",
+        "逆算",
+        "端数処理"
+      ],
+      "jsFiles": [
+        "assets/js/tools/tax.js"
+      ],
+      "modes": [
+        {
+          "id": "exclusive-to-inclusive",
+          "label": "税抜き → 税込み"
+        },
+        {
+          "id": "inclusive-to-exclusive",
+          "label": "税込み → 税抜き"
+        }
+      ],
+      "relatedTools": [
+        "date-diff",
+        "char-count",
+        "password-gen"
+      ],
+      "lastModified": "2026-03-21"
     }
   ]
 }

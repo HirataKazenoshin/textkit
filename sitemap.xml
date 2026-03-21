@@ -5,7 +5,7 @@
   <!-- Top page -->
   <url>
     <loc>https://txconv.com/</loc>
-    <lastmod>2025-01-01</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -13,7 +13,7 @@
   <!-- Snake ↔ Camel case tool -->
   <url>
     <loc>https://txconv.com/tools/snake-camel/</loc>
-    <lastmod>2025-01-01</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -21,7 +21,7 @@
   <!-- Full-width ↔ Half-width tool -->
   <url>
     <loc>https://txconv.com/tools/zen-han/</loc>
-    <lastmod>2025-01-01</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -29,7 +29,7 @@
   <!-- Character count tool -->
   <url>
     <loc>https://txconv.com/tools/char-count/</loc>
-    <lastmod>2025-01-01</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -37,7 +37,7 @@
   <!-- Base64 encode/decode tool -->
   <url>
     <loc>https://txconv.com/tools/base64/</loc>
-    <lastmod>2025-01-01</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -45,7 +45,7 @@
   <!-- URL encode/decode tool -->
   <url>
     <loc>https://txconv.com/tools/url-encode/</loc>
-    <lastmod>2025-01-01</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -53,7 +53,7 @@
   <!-- Salesforce API name generator -->
   <url>
     <loc>https://txconv.com/tools/salesforce-api/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -94,6 +94,22 @@
   <url>
     <loc>https://txconv.com/tools/password-gen/</loc>
     <lastmod>2026-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- CSV↔JSON conversion tool -->
+  <url>
+    <loc>https://txconv.com/tools/csv-json/</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Tax calculator tool -->
+  <url>
+    <loc>https://txconv.com/tools/tax-calc/</loc>
+    <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

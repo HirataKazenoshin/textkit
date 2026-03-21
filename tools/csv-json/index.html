@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5821634466384854"
+     crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSV↔JSON変換ツール【無料・TSV対応】ファイル読み込み可 | TxConv</title>
+  <meta name="description" content="CSVをJSONに、JSONをCSVに変換。TSV・区切り文字変換にも対応。ファイルのドラッグ&ドロップ対応。入力データはサーバーに送信されません。">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://txconv.com/tools/csv-json/">
+
+  <meta property="og:title" content="CSV↔JSON変換ツール【無料・TSV対応】| TxConv">
+  <meta property="og:description" content="CSVをJSONに、JSONをCSVに変換。TSV・区切り文字変換にも対応。入力データはサーバーに送信されません。">
+  <meta property="og:url" content="https://txconv.com/tools/csv-json/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:site_name" content="TxConv">
+  <meta property="og:image" content="https://txconv.com/assets/og-image.svg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://txconv.com/assets/og-image.svg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type":"ListItem","position":1,"name":"TxConv","item":"https://txconv.com/"},
+      {"@type":"ListItem","position":2,"name":"CSV↔JSON変換","item":"https://txconv.com/tools/csv-json/"}
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "CSVをJSONに変換する方法",
+    "step": [
+      {"@type":"HowToStep","name":"データを入力","text":"左のテキストエリアにCSVまたはJSONを貼り付けるか、ファイルをドラッグ＆ドロップします。"},
+      {"@type":"HowToStep","name":"変換モードと設定を選択","text":"変換モード（CSV→JSON等）、区切り文字、ヘッダー行の有無を設定します。"},
+      {"@type":"HowToStep","name":"結果を取得","text":"右ペインに変換結果が即座に表示されます。コピーまたはファイルダウンロードで取得できます。"}
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "CSV↔JSON変換ツール",
+    "url": "https://txconv.com/tools/csv-json/",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web",
+    "description": "CSVをJSONに、JSONをCSVに変換。TSV・区切り文字変換にも対応。入力データはサーバーに送信されません。",
+    "offers": {"@type":"Offer","price":"0","priceCurrency":"JPY"}
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="../../assets/css/base.css?v=2">
+  <link rel="stylesheet" href="../../assets/css/tool.css?v=2">
+  <script src="../../assets/js/theme.js"></script>
+
+  <style>
+    /* ── Mode tabs ── */
+    .cj-modes {
+      display: flex;
+      gap: 2px;
+      flex-wrap: wrap;
+      padding: var(--sp-xs);
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--sp-md);
+    }
+    .cj-mode-btn {
+      padding: 6px var(--sp-md);
+      border-radius: calc(var(--radius-md) - 3px);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-text-muted);
+      transition: all var(--transition);
+      white-space: nowrap;
+      flex: 1;
+      text-align: center;
+    }
+    .cj-mode-btn:hover { color: var(--color-text); background: var(--color-surface); }
+    .cj-mode-btn.active {
+      background: var(--color-surface);
+      color: var(--color-primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* ── Settings bar ── */
+    .cj-settings {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-md);
+      padding: var(--sp-sm) var(--sp-md);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      flex-wrap: wrap;
+      margin-bottom: var(--sp-md);
+    }
+    .cj-setting {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-xs);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      color: var(--color-text-muted);
+      white-space: nowrap;
+    }
+    .cj-setting select { accent-color: var(--color-primary); }
+    .cj-setting select {
+      font-size: var(--text-sm);
+      padding: 3px 6px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: var(--color-bg);
+      color: var(--color-text);
+      cursor: pointer;
+    }
+    .cj-sep {
+      display: block;
+      width: 1px;
+      height: 18px;
+      background: var(--color-border);
+      flex-shrink: 0;
+    }
+
+    /* ── Split pane ── */
+    .cj-split {
+      display: flex;
+      height: 380px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: var(--sp-sm);
+      position: relative;
+    }
+    .cj-panel {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      overflow: hidden;
+      flex: 1;
+    }
+    .cj-panel-header {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-sm);
+      padding: 6px var(--sp-sm) 6px var(--sp-md);
+      background: var(--color-surface-2);
+      border-bottom: 1px solid var(--color-border);
+      flex-shrink: 0;
+    }
+    .cj-panel-label {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+    .cj-stats {
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .cj-panel-acts { display: flex; gap: 2px; flex-shrink: 0; }
+    .cj-textarea {
+      flex: 1;
+      resize: none;
+      border: none;
+      outline: none;
+      padding: var(--sp-md);
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      line-height: 1.6;
+      background: var(--color-surface);
+      color: var(--color-text);
+      width: 100%;
+      tab-size: 2;
+    }
+    .cj-textarea[readonly] { cursor: default; }
+
+    /* ── Divider ── */
+    .cj-divider {
+      width: 5px;
+      background: var(--color-border);
+      cursor: col-resize;
+      flex-shrink: 0;
+      transition: background var(--transition);
+      position: relative;
+    }
+    .cj-divider::after { content: ''; position: absolute; inset: 0 -4px; }
+    .cj-divider:hover, .cj-divider.dragging { background: var(--color-primary); }
+
+    /* ── Drop overlay ── */
+    .cj-drop-overlay {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(99, 102, 241, 0.12);
+      border: 3px dashed var(--color-primary);
+      border-radius: calc(var(--radius-md) - 1px);
+      z-index: 20;
+      font-size: var(--text-xl);
+      font-weight: 700;
+      color: var(--color-primary);
+      pointer-events: none;
+    }
+    .cj-split.dragover .cj-drop-overlay { display: flex; }
+
+    /* ── Status bar ── */
+    .cj-statusbar {
+      min-height: 24px;
+      margin-bottom: var(--sp-md);
+      display: flex;
+      gap: var(--sp-sm);
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .cj-msg {
+      font-size: var(--text-xs);
+      padding: 3px var(--sp-sm);
+      border-radius: var(--radius-sm);
+      display: none;
+    }
+    .cj-msg.err.show { display: inline-flex; background: #fee2e2; color: #b91c1c; }
+    .cj-msg.ok.show  { display: inline-flex; background: #dcfce7; color: #15803d; }
+    @media (prefers-color-scheme: dark) {
+      .cj-msg.err.show { background: #450a0a; color: #f87171; }
+      .cj-msg.ok.show  { background: #052e16; color: #4ade80; }
+    }
+    [data-theme="dark"] .cj-msg.err.show { background: #450a0a; color: #f87171; }
+    [data-theme="dark"] .cj-msg.ok.show  { background: #052e16; color: #4ade80; }
+
+    /* ── Download button ── */
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 8px var(--sp-md);
+      border-radius: var(--radius-sm);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      background: var(--color-primary);
+      color: #fff;
+      transition: all var(--transition);
+    }
+    .btn-download:hover:not(:disabled) { background: var(--color-primary-hover); transform: translateY(-1px); }
+    .btn-download:disabled { background: var(--color-surface-2); color: var(--color-text-faint); cursor: not-allowed; transform: none; }
+    .cj-actions { display: flex; gap: var(--sp-sm); flex-wrap: wrap; margin-bottom: var(--sp-lg); }
+
+    #cj-file-input { display: none; }
+
+    /* ── Article DL/DT ── */
+    .tool-article dt {
+      font-weight: 700;
+      color: var(--color-text);
+      margin-top: var(--sp-md);
+    }
+    .tool-article dd { margin-left: var(--sp-lg); margin-top: 4px; }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .cj-split { flex-direction: column; height: auto; }
+      .cj-panel { height: 200px; }
+      .cj-divider { width: 100%; height: 5px; cursor: row-resize; }
+      .cj-divider::after { inset: -4px 0; }
+      .cj-mode-btn { font-size: var(--text-xs); padding: 5px 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../../" class="site-logo" aria-label="TxConv ホーム">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="4 7 4 4 20 4 20 7"></polyline>
+        <line x1="9" y1="20" x2="15" y2="20"></line>
+        <line x1="12" y1="4" x2="12" y2="20"></line>
+      </svg>
+      TxConv
+    </a>
+    <nav class="site-nav" aria-label="メインナビゲーション">
+      <a href="../../#tools">ツール一覧</a>
+      <button id="theme-toggle" class="theme-toggle btn-icon" aria-label="ダークモードに切り替え" title="ダークモードに切り替え">
+        <svg class="ti-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <svg class="ti-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <nav class="breadcrumb" aria-label="パンくずリスト">
+      <ol>
+        <li><a href="../../">TxConv</a></li>
+        <li><span aria-current="page">CSV↔JSON変換</span></li>
+      </ol>
+    </nav>
+
+    <div class="tool-hero">
+      <h1>CSV↔JSON / TSV変換ツール</h1>
+      <p class="lead">
+        CSVをJSONに、JSONをCSVに変換。TSV・セミコロン・パイプ区切りにも対応。ファイルのドラッグ＆ドロップ読み込みと変換結果のダウンロードに対応。<strong>入力データはサーバーに送信されません。</strong>
+      </p>
+    </div>
+
+    <!-- Mode tabs -->
+    <div class="cj-modes" role="tablist" aria-label="変換モード">
+      <button class="cj-mode-btn active" data-mode="csv-json" role="tab" aria-selected="true">CSV → JSON</button>
+      <button class="cj-mode-btn" data-mode="json-csv" role="tab" aria-selected="false">JSON → CSV</button>
+      <button class="cj-mode-btn" data-mode="csv-tsv" role="tab" aria-selected="false">CSV → TSV</button>
+      <button class="cj-mode-btn" data-mode="tsv-csv" role="tab" aria-selected="false">TSV → CSV</button>
+    </div>
+
+    <!-- Settings bar -->
+    <div class="cj-settings">
+      <label class="cj-setting">
+        <span id="cj-delim-text">入力区切り文字：</span>
+        <select id="cj-delim" aria-label="区切り文字">
+          <option value=",">カンマ（,）</option>
+          <option value=";">セミコロン（;）</option>
+          <option value="|">パイプ（|）</option>
+        </select>
+      </label>
+
+      <span class="cj-sep" id="cj-sep2"></span>
+
+      <label class="cj-setting" id="cj-format-label">
+        JSON形式：
+        <select id="cj-format" aria-label="JSON出力形式">
+          <option value="objects">配列of連想配列 {…}</option>
+          <option value="arrays">配列of配列 […]</option>
+        </select>
+      </label>
+    </div>
+
+    <!-- Split pane -->
+    <div class="cj-split" id="cj-split" role="region" aria-label="変換エディター">
+      <div class="cj-drop-overlay" aria-hidden="true">📂 ファイルをドロップ</div>
+
+      <!-- Input panel -->
+      <div class="cj-panel" id="cj-left">
+        <div class="cj-panel-header">
+          <span class="cj-panel-label" id="cj-in-label">CSV 入力</span>
+          <span class="cj-stats" id="cj-in-stats"></span>
+          <div class="cj-panel-acts">
+            <label class="btn-icon" title="ファイルを開く" tabindex="0" role="button" aria-label="ファイルを開く">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+              </svg>
+              <input type="file" id="cj-file-input" accept=".csv,.json,.tsv,.txt">
+            </label>
+            <button class="btn-icon" id="cj-clear-btn" title="クリア" aria-label="入力をクリア">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <textarea
+          id="cj-input"
+          class="cj-textarea"
+          spellcheck="false"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          aria-label="入力テキスト"
+          placeholder="CSVまたはJSONを貼り付け、またはファイルをドロップ"></textarea>
+      </div>
+
+      <!-- Resizable divider -->
+      <div class="cj-divider" id="cj-divider" role="separator" aria-orientation="vertical" aria-label="パネルサイズ調整"></div>
+
+      <!-- Output panel -->
+      <div class="cj-panel" id="cj-right">
+        <div class="cj-panel-header">
+          <span class="cj-panel-label" id="cj-out-label">JSON 出力</span>
+          <span class="cj-stats" id="cj-out-stats"></span>
+          <div class="cj-panel-acts">
+            <button class="btn-icon" id="cj-copy-btn" title="コピー" aria-label="出力をコピー">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <textarea
+          id="cj-output"
+          class="cj-textarea"
+          readonly
+          spellcheck="false"
+          aria-label="変換結果"
+          placeholder="変換結果がここに表示されます"></textarea>
+      </div>
+    </div>
+
+    <!-- Status bar -->
+    <div class="cj-statusbar">
+      <span id="cj-err" class="cj-msg err" role="alert"></span>
+      <span id="cj-ok"  class="cj-msg ok"  role="status"></span>
+    </div>
+
+    <!-- Download button -->
+    <div class="cj-actions">
+      <button id="cj-dl-btn" class="btn-download" disabled>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        <span id="cj-dl-label">変換結果をダウンロード</span>
+      </button>
+    </div>
+
+    <!-- AdSense -->
+    <div class="adsense-placeholder" aria-hidden="true">
+      <span>広告スペース (728×90)</span>
+    </div>
+
+    <!-- SEO Article -->
+    <article class="tool-article">
+      <h2>使い方</h2>
+      <p>
+        ① 左のテキストエリアにCSVまたはJSONを貼り付けるか、ファイルをドラッグ＆ドロップします（<code>.csv</code> / <code>.json</code> / <code>.tsv</code> / <code>.txt</code> 対応）。<br>
+        ② 変換モード（CSV→JSON / JSON→CSV / CSV→TSV / TSV→CSV）を選択します。<br>
+        ③ 区切り文字・ヘッダー行の有無・JSON形式を設定すると、右ペインにリアルタイムで変換結果が表示されます。「コピー」ボタンで結果をクリップボードにコピーするか、「ダウンロード」ボタンでファイルとして保存できます。
+      </p>
+      <p>
+        ヘッダー行ありでCSV→JSON変換をする場合、JSON形式として「配列of連想配列（<code>[{"名前":"田中"}]</code>）」と「配列of配列（<code>[["田中"]]</code>）」を選択できます。JSON→CSV変換では、配列of連想配列・配列of配列のどちらも自動判定して変換します。
+      </p>
+
+      <h2>CSVとJSONの違い</h2>
+      <p>
+        <strong>CSV（Comma-Separated Values）</strong>は、値をカンマ（または他の区切り文字）で区切ったプレーンテキスト形式です。表計算ソフト（Excel、Googleスプレッドシート）との親和性が高く、業務システムのデータ入出力や大量データの管理でよく使われます。構造がシンプルで人が読みやすい反面、数値・文字列・日付などのデータ型情報は持ちません。フィールド内にカンマや改行が含まれる場合は RFC 4180 に従ってダブルクォートで囲む必要があります。
+      </p>
+      <p>
+        <strong>JSON（JavaScript Object Notation）</strong>は、キーと値のペアで構成されるデータ交換フォーマットです。Web API・設定ファイル・NoSQL データベースの形式として広く使われています。数値・文字列・配列・オブジェクト・真偽値・null といったデータ型を表現でき、階層構造のデータも扱えます。JavaScript をはじめ多くのプログラミング言語で標準的にサポートされています。
+      </p>
+      <p>
+        <strong>TSV（Tab-Separated Values）</strong>は CSV のタブ区切り版です。フィールド内にカンマが含まれるデータを扱う場合でもクォートが不要なケースが多く、データベースのエクスポートや統計ツールとの連携でよく使われます。Excel へのコピー＆ペーストでも自動的に列として認識されるため、スプレッドシートとの連携に便利です。
+      </p>
+      <p>
+        CSV と JSON はそれぞれ得意な用途があります。CSV は Excel・スプレッドシートとの互換性に優れ、業務システムのマスターデータエクスポートや EC サイトの商品データ管理でよく使われます。JSON は Web API のレスポンス形式として標準的で、React・Vue などのフロントエンドフレームワークや Node.js・Python でネイティブに扱えます。スプレッドシートで管理したデータを API に渡す場面や、レガシーシステムの CSV エクスポートをモダンな API に対応させる場面で、このツールが役立ちます。
+      </p>
+
+      <h2>よくある質問</h2>
+      <dl>
+        <dt>Q. 日本語（全角文字）を変換すると文字化けしますか？</dt>
+        <dd>A. このツールはブラウザの Unicode（UTF-8）文字列として処理するため、日本語・中国語・韓国語などの全角文字も正しく変換されます。ファイルを読み込む場合も、UTF-8 および UTF-8 BOM 付きファイルに対応しています。Shift-JIS など他のエンコーディングのファイルは、先に<a href="../encoding-convert/">文字コード変換ツール</a>で UTF-8 に変換してからご利用ください。</dd>
+
+        <dt>Q. ヘッダー行とは何ですか？</dt>
+        <dd>A. CSV の 1 行目をフィールド名（カラム名）として扱うかどうかの設定です。「ヘッダー行あり」で CSV→JSON（配列of連想配列）変換をすると、1 行目のカラム名を JSON オブジェクトのキーとして使用します。「ヘッダー行なし」の場合は、すべての行がデータとして変換されます（配列of配列形式）。</dd>
+
+        <dt>Q. 大きなファイルも変換できますか？</dt>
+        <dd>A. すべての処理はブラウザ内で行われるため、ファイルサイズの上限はデバイスのメモリに依存します。目安として数 MB までのファイルは問題なく処理できます。数十 MB 以上の大容量ファイルには、Node.js の <code>csv-parse</code> ライブラリや Python の <code>pandas</code> などのサーバーサイドツールをお勧めします。</dd>
+
+        <dt>Q. 区切り文字（デリミタ）は何が選べますか？</dt>
+        <dd>A. カンマ（,）・セミコロン（;）・パイプ（|）に対応しています。タブ区切りは TSV モードで使用します。ヨーロッパ向けの CSV ではセミコロン区切りが一般的なため、セミコロンにも対応しています。フィールド内に区切り文字が含まれる場合は、RFC 4180 に従い自動的にダブルクォートで囲んで出力されます。</dd>
+
+        <dt>Q. JSON→CSVで配列of配列と配列of連想配列の両方に対応していますか？</dt>
+        <dd>A. 対応しています。<code>[{"name":"田中","age":30}]</code> のような配列of連想配列の場合はキーをヘッダー行として自動出力します。<code>[["田中",30]]</code> のような配列of配列の場合はそのまま各行のデータとして変換されます。どちらの形式も自動判定します。</dd>
+      </dl>
+    </article>
+
+    <!-- Related tools -->
+    <section class="related-tools">
+      <h2>関連ツール</h2>
+      <div class="related-grid">
+        <a href="../json-format/" class="related-card"><span class="tool-icon">{ }</span>JSON整形・フォーマット</a>
+        <a href="../base64/" class="related-card"><span class="tool-icon">🔐</span>Base64エンコード</a>
+        <a href="../url-encode/" class="related-card"><span class="tool-icon">🔗</span>URLエンコード</a>
+        <a href="../char-count/" class="related-card"><span class="tool-icon">📊</span>文字数カウント</a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-inner">
+      <div><strong>TxConv</strong> &copy; 2025 – 無料テキスト変換ツール集</div>
+      <nav class="footer-links" aria-label="フッターナビゲーション">
+        <a href="../../">ホーム</a>
+        <a href="../json-format/">JSON整形</a>
+        <a href="../base64/">Base64</a>
+        <a href="../url-encode/">URLエンコード</a>
+        <a href="../char-count/">文字数カウント</a>
+        <a href="../../privacy/">プライバシーポリシー</a>
+        <a href="../../contact/">お問い合わせ</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  // ── DOM refs ────────────────────────────────────────────────
+  const modeBtns   = document.querySelectorAll('.cj-mode-btn');
+  const delimSel   = document.getElementById('cj-delim');
+  const delimText  = document.getElementById('cj-delim-text');
+  const formatSel  = document.getElementById('cj-format');
+  const formatLabel= document.getElementById('cj-format-label');
+  const sep2       = document.getElementById('cj-sep2');
+  const inputTA    = document.getElementById('cj-input');
+  const outputTA   = document.getElementById('cj-output');
+  const inLabel    = document.getElementById('cj-in-label');
+  const outLabel   = document.getElementById('cj-out-label');
+  const inStats    = document.getElementById('cj-in-stats');
+  const outStats   = document.getElementById('cj-out-stats');
+  const errEl      = document.getElementById('cj-err');
+  const okEl       = document.getElementById('cj-ok');
+  const clearBtn   = document.getElementById('cj-clear-btn');
+  const copyBtn    = document.getElementById('cj-copy-btn');
+  const dlBtn      = document.getElementById('cj-dl-btn');
+  const fileInput  = document.getElementById('cj-file-input');
+  const split      = document.getElementById('cj-split');
+  const leftPanel  = document.getElementById('cj-left');
+  const rightPanel = document.getElementById('cj-right');
+  const divider    = document.getElementById('cj-divider');
+
+  // ── State ───────────────────────────────────────────────────
+  let mode = 'csv-json';
+  let statusTimer = null;
+
+  // ── Default samples per mode ─────────────────────────────────
+  const CSV_SAMPLE_ROWS = [
+    ['名前','年齢','部署'],
+    ['田中太郎','32','開発部'],
+    ['鈴木花子','28','デザイン部'],
+    ['佐藤一郎','45','営業部'],
+  ];
+  const SAMPLES_FIXED = {
+    'json-csv': '[\n  {"名前":"田中太郎","年齢":"32","部署":"開発部"},\n  {"名前":"鈴木花子","年齢":"28","部署":"デザイン部"},\n  {"名前":"佐藤一郎","年齢":"45","部署":"営業部"}\n]',
+    'tsv-csv': '名前\t年齢\t部署\n田中太郎\t32\t開発部\n鈴木花子\t28\tデザイン部\n佐藤一郎\t45\t営業部',
+  };
+
+  // CSV系モードはserializeDelimited後に呼ぶ必要があるため、初期化後に定義
+  function getCsvSample(d) { return serializeDelimited(CSV_SAMPLE_ROWS, d); }
+  function getSample(m, d) {
+    return (m === 'csv-json' || m === 'csv-tsv') ? getCsvSample(d) : SAMPLES_FIXED[m];
+  }
+
+  let showingSample = true;
+  function isSampleValue() { return showingSample; }
+
+  // ── RFC 4180 CSV parser ──────────────────────────────────────
+  function parseDelimited(text, delim) {
+    const rows = [];
+    let i = 0;
+    const n = text.length;
+    if (n > 0 && text.charCodeAt(0) === 0xFEFF) i = 1; // skip BOM
+
+    while (i < n) {
+      const row = [];
+      while (true) {
+        let field;
+        if (i < n && text[i] === '"') {
+          // Quoted field
+          i++;
+          field = '';
+          while (i < n) {
+            if (text[i] === '"') {
+              if (i + 1 < n && text[i + 1] === '"') { field += '"'; i += 2; }
+              else { i++; break; }
+            } else { field += text[i++]; }
+          }
+          // Consume any junk after closing quote
+          while (i < n && text[i] !== delim && text[i] !== '\r' && text[i] !== '\n') i++;
+        } else {
+          const start = i;
+          while (i < n && text[i] !== delim && text[i] !== '\r' && text[i] !== '\n') i++;
+          field = text.slice(start, i);
+        }
+        row.push(field);
+        if (i < n && text[i] === delim) { i++; }
+        else { break; }
+      }
+      if (i < n && text[i] === '\r') i++;
+      if (i < n && text[i] === '\n') i++;
+      if (row.length > 1 || (row.length === 1 && row[0] !== '')) rows.push(row);
+    }
+    return rows;
+  }
+
+  function serializeDelimited(rows, delim) {
+    return rows.map(row =>
+      row.map(f => {
+        const s = f == null ? '' : String(f);
+        if (s.includes(delim) || s.includes('"') || s.includes('\n') || s.includes('\r')) {
+          return '"' + s.replace(/"/g, '""') + '"';
+        }
+        return s;
+      }).join(delim)
+    ).join('\r\n');
+  }
+
+  // ── JSON → rows/headers ──────────────────────────────────────
+  function jsonToRows(text) {
+    let data;
+    try { data = JSON.parse(text); }
+    catch (e) { throw new Error('JSON構文エラー: ' + e.message); }
+    if (!Array.isArray(data)) throw new Error('JSONのルートは配列（[...]）である必要があります');
+    if (data.length === 0) return { headers: [], rows: [] };
+
+    if (data[0] !== null && typeof data[0] === 'object' && !Array.isArray(data[0])) {
+      // Array of objects
+      const keySet = new Set();
+      data.forEach(r => { if (r && typeof r === 'object') Object.keys(r).forEach(k => keySet.add(k)); });
+      const headers = [...keySet];
+      const rows = data.map(obj => headers.map(h => obj == null || obj[h] == null ? '' : String(obj[h])));
+      return { headers, rows };
+    }
+    if (Array.isArray(data[0])) {
+      // Array of arrays
+      return { headers: [], rows: data.map(r => r.map(v => v == null ? '' : String(v))) };
+    }
+    // Array of primitives
+    return { headers: [], rows: data.map(v => [v == null ? '' : String(v)]) };
+  }
+
+  // ── Conversion functions ─────────────────────────────────────
+  function doCsvToJson(text, delim, fmt) {
+    const rows = parseDelimited(text, delim);
+    if (rows.length === 0) return '[]';
+    if (fmt === 'objects') {
+      // 連想配列: 1行目をキーとして使用
+      const headers = rows[0];
+      const data = rows.slice(1).map(row => {
+        const obj = {};
+        headers.forEach((h, i) => { obj[h] = row[i] !== undefined ? row[i] : ''; });
+        return obj;
+      });
+      return JSON.stringify(data, null, 2);
+    }
+    // 配列of配列: ヘッダーの有無に関わらず全行出力（TSV変換と同じ挙動）
+    return JSON.stringify(rows, null, 2);
+  }
+
+  function doJsonToCsv(text, outDelim, withHeader) {
+    const { headers, rows } = jsonToRows(text);
+    const allRows = (withHeader && headers.length > 0) ? [headers, ...rows] : rows;
+    return allRows.length === 0 ? '' : serializeDelimited(allRows, outDelim);
+  }
+
+  function doReDelimit(text, fromDelim, toDelim) {
+    const rows = parseDelimited(text, fromDelim);
+    return rows.length === 0 ? '' : serializeDelimited(rows, toDelim);
+  }
+
+  // ── Stats helpers ────────────────────────────────────────────
+  function csvStats(text, delim) {
+    if (!text.trim()) return '';
+    const rows = parseDelimited(text, delim);
+    if (!rows.length) return '';
+    return rows.length + '行 × ' + Math.max(...rows.map(r => r.length)) + '列';
+  }
+
+  function jsonStats(text) {
+    if (!text.trim()) return '';
+    try {
+      const d = JSON.parse(text);
+      return Array.isArray(d) ? d.length + '件' : 'オブジェクト';
+    } catch { return ''; }
+  }
+
+  // ── UI helpers ───────────────────────────────────────────────
+  function showErr(msg) {
+    errEl.textContent = '⚠ ' + msg; errEl.className = 'cj-msg err show';
+    okEl.className = 'cj-msg ok';
+  }
+  function showOk(msg) {
+    okEl.textContent = msg; okEl.className = 'cj-msg ok show';
+    errEl.className = 'cj-msg err';
+    clearTimeout(statusTimer);
+    statusTimer = setTimeout(() => { okEl.className = 'cj-msg ok'; }, 2000);
+  }
+  function clearStatus() {
+    errEl.className = 'cj-msg err'; okEl.className = 'cj-msg ok';
+  }
+
+  // ── Update settings UI by mode ───────────────────────────────
+  function updateSettings() {
+    const show = v => (v.style.display = '');
+    const hide = v => (v.style.display = 'none');
+
+    switch (mode) {
+      case 'csv-json':
+        inLabel.textContent = 'CSV 入力'; outLabel.textContent = 'JSON 出力';
+        delimText.textContent = '入力区切り文字：';
+        show(sep2); show(formatLabel);
+        break;
+      case 'json-csv':
+        inLabel.textContent = 'JSON 入力'; outLabel.textContent = 'CSV 出力';
+        delimText.textContent = '出力区切り文字：';
+        hide(sep2); hide(formatLabel);
+        break;
+      case 'csv-tsv':
+        inLabel.textContent = 'CSV 入力'; outLabel.textContent = 'TSV 出力';
+        delimText.textContent = '入力区切り文字：';
+        hide(sep2); hide(formatLabel);
+        break;
+      case 'tsv-csv':
+        inLabel.textContent = 'TSV 入力'; outLabel.textContent = 'CSV 出力';
+        delimText.textContent = '出力区切り文字：';
+        hide(sep2); hide(formatLabel);
+        break;
+    }
+  }
+
+  // ── Main convert ─────────────────────────────────────────────
+  function convert() {
+    const text = inputTA.value;
+    clearStatus();
+    if (!text.trim()) {
+      outputTA.value = ''; inStats.textContent = ''; outStats.textContent = '';
+      dlBtn.disabled = true; return;
+    }
+    const delim = delimSel.value;
+    try {
+      let result = '';
+      switch (mode) {
+        case 'csv-json':
+          result = doCsvToJson(text, delim, formatSel.value);
+          inStats.textContent = csvStats(text, delim);
+          outStats.textContent = jsonStats(result);
+          break;
+        case 'json-csv':
+          result = doJsonToCsv(text, delim, true);
+          inStats.textContent = jsonStats(text);
+          outStats.textContent = csvStats(result, delim);
+          break;
+        case 'csv-tsv':
+          result = doReDelimit(text, delim, '\t');
+          inStats.textContent = csvStats(text, delim);
+          outStats.textContent = csvStats(result, '\t');
+          break;
+        case 'tsv-csv':
+          result = doReDelimit(text, '\t', delim);
+          inStats.textContent = csvStats(text, '\t');
+          outStats.textContent = csvStats(result, delim);
+          break;
+      }
+      outputTA.value = result;
+      dlBtn.disabled = !result;
+    } catch (e) {
+      outputTA.value = ''; outStats.textContent = '';
+      dlBtn.disabled = true; showErr(e.message);
+    }
+  }
+
+  // ── Events ──────────────────────────────────────────────────
+  modeBtns.forEach(btn => btn.addEventListener('click', () => {
+    modeBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+    btn.classList.add('active'); btn.setAttribute('aria-selected', 'true');
+    mode = btn.dataset.mode;
+    // モード切り替えで区切り文字をカンマにリセット（意図しないパイプ/セミコロンが残らないように）
+    delimSel.value = ',';
+    // サンプルのままなら新しいモードのサンプルに差し替える
+    if (isSampleValue()) {
+      inputTA.value = getSample(mode, delimSel.value);
+      showingSample = true;
+    }
+    updateSettings(); convert();
+  }));
+
+  delimSel.addEventListener('change', () => {
+    if (isSampleValue() && (mode === 'csv-json' || mode === 'csv-tsv')) {
+      inputTA.value = getSample(mode, delimSel.value);
+    }
+    convert();
+  });
+  formatSel.addEventListener('change', () => { updateSettings(); convert(); });
+
+  let convertTimer = null;
+  inputTA.addEventListener('input', () => {
+    showingSample = false;
+    clearTimeout(convertTimer); convertTimer = setTimeout(convert, 150);
+  });
+
+  copyBtn.addEventListener('click', () => {
+    const text = outputTA.value;
+    if (!text) return;
+    navigator.clipboard.writeText(text).then(() => showOk('✓ コピーしました'))
+      .catch(() => { outputTA.select(); document.execCommand('copy'); showOk('✓ コピーしました'); });
+  });
+
+  const EXT  = { 'csv-json': 'json', 'json-csv': 'csv', 'csv-tsv': 'tsv', 'tsv-csv': 'csv' };
+  const MIME = { json: 'application/json', csv: 'text/csv', tsv: 'text/tab-separated-values' };
+  dlBtn.addEventListener('click', () => {
+    const text = outputTA.value;
+    if (!text) return;
+    const ext = EXT[mode];
+    // Add UTF-8 BOM for CSV/TSV so Excel opens correctly
+    const bom = ext !== 'json' ? '\uFEFF' : '';
+    const blob = new Blob([bom + text], { type: (MIME[ext] || 'text/plain') + ';charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'converted.' + ext;
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+    showOk('✓ ダウンロードしました');
+  });
+
+  clearBtn.addEventListener('click', () => {
+    showingSample = false;
+    inputTA.value = ''; outputTA.value = '';
+    inStats.textContent = ''; outStats.textContent = '';
+    dlBtn.disabled = true; clearStatus();
+  });
+
+  function readFile(file) {
+    const reader = new FileReader();
+    reader.onload = e => { showingSample = false; inputTA.value = e.target.result; convert(); };
+    reader.onerror = () => showErr('ファイルの読み込みに失敗しました');
+    reader.readAsText(file, 'UTF-8');
+  }
+
+  fileInput.addEventListener('change', e => {
+    if (e.target.files[0]) readFile(e.target.files[0]);
+    fileInput.value = '';
+  });
+
+  split.addEventListener('dragover', e => { e.preventDefault(); split.classList.add('dragover'); });
+  split.addEventListener('dragleave', e => { if (!split.contains(e.relatedTarget)) split.classList.remove('dragover'); });
+  split.addEventListener('drop', e => {
+    e.preventDefault(); split.classList.remove('dragover');
+    if (e.dataTransfer.files[0]) readFile(e.dataTransfer.files[0]);
+  });
+
+  // ── Resizable divider ────────────────────────────────────────
+  let dragging = false, dragStartX, leftStartW;
+  divider.addEventListener('mousedown', e => {
+    dragging = true; dragStartX = e.clientX;
+    leftStartW = leftPanel.getBoundingClientRect().width;
+    divider.classList.add('dragging');
+    document.body.style.cursor = 'col-resize';
+    document.body.style.userSelect = 'none';
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    const totalW = split.getBoundingClientRect().width - 5;
+    const newW = Math.max(120, Math.min(leftStartW + (e.clientX - dragStartX), totalW - 120));
+    const pct = (newW / totalW) * 100;
+    leftPanel.style.flex = `0 0 ${pct}%`;
+    rightPanel.style.flex = `0 0 ${100 - pct}%`;
+  });
+  document.addEventListener('mouseup', () => {
+    if (!dragging) return;
+    dragging = false; divider.classList.remove('dragging');
+    document.body.style.cursor = ''; document.body.style.userSelect = '';
+  });
+
+  // ── Init ─────────────────────────────────────────────────────
+  delimSel.value = ',';
+  inputTA.value = getSample(mode, delimSel.value);
+  updateSettings();
+  convert();
+}());
+</script>
+
+</body>
+</html>
