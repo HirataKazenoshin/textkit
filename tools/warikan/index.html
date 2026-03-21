@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5821634466384854"
+     crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>割り勘計算ツール【無料・カスタム負担割合対応】 | TxConv</title>
+  <meta name="description" content="人数と金額を入力するだけの簡単割り勘から、1人ずつ負担割合・固定金額を設定できるカスタム割り勘まで対応。端数処理・コピー機能付き。サーバー送信なし。">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://txconv.com/tools/warikan/">
+
+  <meta property="og:title" content="割り勘計算ツール【無料・カスタム負担割合対応】 | TxConv">
+  <meta property="og:description" content="人数と金額を入力するだけの簡単割り勘から、1人ずつ負担割合・固定金額を設定できるカスタム割り勘まで対応。端数処理・コピー機能付き。サーバー送信なし。">
+  <meta property="og:url" content="https://txconv.com/tools/warikan/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:site_name" content="TxConv">
+  <meta property="og:image" content="https://txconv.com/assets/og-image.svg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://txconv.com/assets/og-image.svg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "TxConv", "item": "https://txconv.com/" },
+      { "@type": "ListItem", "position": 2, "name": "割り勘計算ツール", "item": "https://txconv.com/tools/warikan/" }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "かんたん割り勘の使い方",
+    "step": [
+      { "@type": "HowToStep", "name": "合計金額を入力", "text": "飲み会や食事の合計金額を入力します。" },
+      { "@type": "HowToStep", "name": "人数を設定", "text": "+/-ボタンまたは直接入力で参加人数（2〜20人）を設定します。" },
+      { "@type": "HowToStep", "name": "端数処理を選択", "text": "切り上げ・切り捨て・四捨五入から選択します。" },
+      { "@type": "HowToStep", "name": "結果を確認・コピー", "text": "1人あたりの金額と幹事の調整額をリアルタイムで確認し、コピーボタンで共有します。" }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "割り勘計算ツール",
+    "url": "https://txconv.com/tools/warikan/",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "description": "人数と金額を入力するだけの簡単割り勘から、負担割合・固定金額のカスタム設定まで対応した無料オンラインツール。",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" }
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="../../assets/css/base.css?v=2">
+  <link rel="stylesheet" href="../../assets/css/tool.css?v=2">
+  <style>
+    /* ── タブ ─────────────────────────────────── */
+    .wk-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid var(--color-border);
+      margin-bottom: var(--sp-lg);
+    }
+    .wk-tab {
+      appearance: none;
+      background: none;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font: inherit;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .wk-tab:hover { color: var(--color-text); }
+    .wk-tab.is-active {
+      color: var(--color-accent);
+      border-bottom-color: var(--color-accent);
+    }
+    .wk-panel { display: none; }
+    .wk-panel.is-active { display: block; }
+
+    /* ── 共通レイアウト ──────────────────────── */
+    .wk-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: var(--sp-lg);
+      align-items: start;
+    }
+    .wk-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      padding: var(--sp-lg);
+    }
+    .wk-result-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+    .wk-result-header {
+      padding: var(--sp-md) var(--sp-lg);
+      border-bottom: 1px solid var(--color-border);
+      background: var(--color-surface-2);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+    .wk-result-body { padding: var(--sp-lg); }
+
+    /* ── フォーム部品 ────────────────────────── */
+    .wk-field {
+      margin-bottom: var(--sp-md);
+    }
+    .wk-field:last-child { margin-bottom: 0; }
+    .wk-label {
+      display: block;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      margin-bottom: var(--sp-xs);
+      color: var(--color-text);
+    }
+    .wk-input,
+    .wk-select {
+      width: 100%;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-bg);
+      color: var(--color-text);
+      padding: 0.85rem 1rem;
+      font: inherit;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    .wk-input:focus,
+    .wk-select:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 20%, transparent);
+    }
+
+    /* 人数カウンタ */
+    .wk-counter {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-sm);
+    }
+    .wk-counter-btn {
+      appearance: none;
+      width: 2.75rem;
+      height: 2.75rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-surface-2);
+      color: var(--color-text);
+      font-size: 1.25rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      touch-action: manipulation;
+    }
+    .wk-counter-btn:hover:not(:disabled) { border-color: var(--color-accent); color: var(--color-accent); }
+    .wk-counter-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .wk-counter-input {
+      width: 5rem;
+      text-align: center;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-bg);
+      color: var(--color-text);
+      padding: 0.75rem 0.5rem;
+      font: inherit;
+      font-size: 1.1rem;
+    }
+
+    /* ── 結果表示 ────────────────────────────── */
+    .wk-result-big {
+      font-size: clamp(1.8rem, 5vw, 2.5rem);
+      font-weight: 700;
+      color: var(--color-text);
+      line-height: 1.1;
+      margin-bottom: var(--sp-xs);
+    }
+    .wk-result-sub {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin-bottom: var(--sp-md);
+    }
+    .wk-host-note {
+      font-size: var(--text-sm);
+      padding: var(--sp-sm) var(--sp-md);
+      border-radius: var(--radius-md);
+      background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+      color: var(--color-text);
+      margin-bottom: var(--sp-md);
+    }
+    .wk-error {
+      font-size: var(--text-sm);
+      color: #ef4444;
+      padding: var(--sp-sm) var(--sp-md);
+      border-radius: var(--radius-md);
+      background: color-mix(in srgb, #ef4444 10%, transparent);
+      margin-bottom: var(--sp-md);
+    }
+    .wk-placeholder {
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+      text-align: center;
+      padding: var(--sp-xl) 0;
+    }
+
+    /* ── アクションボタン ────────────────────── */
+    .wk-actions {
+      display: flex;
+      gap: var(--sp-sm);
+      flex-wrap: wrap;
+      margin-top: var(--sp-md);
+    }
+    .wk-btn {
+      appearance: none;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface-2);
+      color: var(--color-text);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1.25rem;
+      font: inherit;
+      font-size: var(--text-sm);
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+    .wk-btn:hover { border-color: var(--color-accent); }
+    .wk-btn-primary {
+      background: var(--color-accent);
+      color: #fff;
+      border-color: var(--color-accent);
+    }
+    .wk-btn-primary:hover { opacity: 0.88; }
+    .wk-btn-danger {
+      color: #ef4444;
+      border-color: #ef4444;
+    }
+    .wk-btn-danger:hover { background: color-mix(in srgb, #ef4444 10%, transparent); }
+
+    /* ── カスタム割り勘 ──────────────────────── */
+    .wk-participants { display: grid; gap: var(--sp-sm); margin-top: var(--sp-md); }
+    .wk-participant {
+      display: grid;
+      grid-template-columns: 1fr auto auto auto;
+      gap: var(--sp-sm);
+      align-items: center;
+      padding: var(--sp-sm) var(--sp-md);
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+    }
+    .wk-participant-name {
+      min-width: 0;
+    }
+    .wk-participant-type {
+      width: 5.5rem;
+      flex-shrink: 0;
+    }
+    .wk-participant-value {
+      width: 6.5rem;
+      flex-shrink: 0;
+    }
+    .wk-participant-del {
+      appearance: none;
+      width: 2.2rem;
+      height: 2.2rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: none;
+      color: var(--color-text-muted);
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .wk-participant-del:hover { color: #ef4444; border-color: #ef4444; }
+
+    /* カスタム結果リスト */
+    .wk-custom-results { display: grid; gap: 1px; background: var(--color-border); }
+    .wk-custom-result-item {
+      background: var(--color-surface);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--sp-md) var(--sp-lg);
+      gap: var(--sp-md);
+    }
+    .wk-custom-result-name { font-size: var(--text-sm); color: var(--color-text-muted); }
+    .wk-custom-result-amount { font-size: 1.1rem; font-weight: 700; }
+
+    /* ── FAQ ─────────────────────────────────── */
+    .faq-list { display: grid; gap: var(--sp-md); }
+    .faq-item {
+      padding: var(--sp-md);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-surface);
+    }
+    .faq-item h3 { margin-bottom: 0.5rem; font-size: 1rem; }
+
+    @media (max-width: 820px) {
+      .wk-layout { grid-template-columns: 1fr; }
+      .wk-participant {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+      }
+      .wk-participant-name { grid-column: 1 / -1; }
+      .wk-participant-del { grid-row: 2; grid-column: 2; justify-self: end; }
+    }
+    @media (max-width: 480px) {
+      .wk-tab { padding: 0.65rem 1rem; font-size: 0.8rem; }
+      .wk-participant { grid-template-columns: 1fr; }
+      .wk-participant-del { justify-self: start; }
+    }
+  </style>
+  <script src="../../assets/js/theme.js"></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="../../" class="site-logo" aria-label="TxConv ホーム">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="4 7 4 4 20 4 20 7"></polyline>
+        <line x1="9" y1="20" x2="15" y2="20"></line>
+        <line x1="12" y1="4" x2="12" y2="20"></line>
+      </svg>
+      TxConv
+    </a>
+    <nav class="site-nav" aria-label="メインナビゲーション">
+      <a href="../../#tools">ツール一覧</a>
+      <button id="theme-toggle" class="theme-toggle btn-icon" aria-label="ダークモードに切り替え" title="ダークモードに切り替え">
+        <svg class="ti-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <svg class="ti-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくずリスト">
+      <ol>
+        <li><a href="../../">TxConv</a></li>
+        <li><span aria-current="page">割り勘計算ツール</span></li>
+      </ol>
+    </nav>
+
+    <div class="tool-hero">
+      <h1>割り勘計算ツール</h1>
+      <p class="lead">飲み会・食事・旅行の費用を素早く割り勘。シンプルな均等割りから、1人ずつ負担割合・固定金額を設定できるカスタム割り勘まで対応。入力データはサーバーに送信されません。</p>
+    </div>
+
+    <!-- ツールUI -->
+    <section aria-label="割り勘計算ツール">
+      <div class="wk-tabs" role="tablist">
+        <button class="wk-tab is-active" role="tab" aria-selected="true" aria-controls="panel-simple" id="tab-simple">かんたん割り勘</button>
+        <button class="wk-tab" role="tab" aria-selected="false" aria-controls="panel-custom" id="tab-custom">カスタム割り勘</button>
+      </div>
+
+      <!-- タブ1：かんたん割り勘 -->
+      <div class="wk-panel is-active" id="panel-simple" role="tabpanel" aria-labelledby="tab-simple">
+        <div class="wk-layout">
+          <!-- 入力 -->
+          <div class="wk-card">
+            <div class="wk-field">
+              <label class="wk-label" for="s-total">合計金額</label>
+              <input id="s-total" class="wk-input" type="text" inputmode="numeric" placeholder="例: 12800">
+            </div>
+            <div class="wk-field">
+              <label class="wk-label" for="s-people">人数</label>
+              <div class="wk-counter">
+                <button class="wk-counter-btn" id="s-minus" aria-label="人数を減らす">−</button>
+                <input id="s-people" class="wk-counter-input" type="number" min="2" max="20" value="4" inputmode="numeric" aria-label="人数">
+                <button class="wk-counter-btn" id="s-plus" aria-label="人数を増やす">＋</button>
+                <span style="font-size:var(--text-sm);color:var(--color-text-muted)">人</span>
+              </div>
+            </div>
+            <div class="wk-actions">
+              <button class="wk-btn" id="s-clear">クリア</button>
+            </div>
+          </div>
+
+          <!-- 結果 -->
+          <div class="wk-result-card">
+            <div class="wk-result-header">計算結果</div>
+            <div class="wk-result-body" id="s-result-body">
+              <p class="wk-placeholder">合計金額を入力してください</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- タブ2：カスタム割り勘 -->
+      <div class="wk-panel" id="panel-custom" role="tabpanel" aria-labelledby="tab-custom">
+        <div class="wk-layout">
+          <!-- 入力 -->
+          <div class="wk-card">
+            <div class="wk-field">
+              <label class="wk-label" for="c-total">合計金額</label>
+              <input id="c-total" class="wk-input" type="text" inputmode="numeric" placeholder="例: 15000">
+            </div>
+
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:var(--sp-md);margin-bottom:var(--sp-xs)">
+              <span class="wk-label" style="margin:0">参加者</span>
+              <button class="wk-btn wk-btn-primary" id="c-add-participant" style="padding:0.45rem 0.9rem;font-size:var(--text-sm)">＋ 追加</button>
+            </div>
+            <div class="wk-participants" id="c-participants"></div>
+
+            <div class="wk-actions" style="margin-top:var(--sp-lg)">
+              <button class="wk-btn" id="c-clear">クリア</button>
+            </div>
+          </div>
+
+          <!-- 結果 -->
+          <div class="wk-result-card">
+            <div class="wk-result-header">計算結果</div>
+            <div id="c-result-body">
+              <p class="wk-placeholder" style="padding:var(--sp-xl) var(--sp-lg)">参加者を追加して合計金額を入力してください</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AdSense -->
+    <!-- AdSense -->
+
+    <!-- かんたん割り勘の使い方 -->
+    <article>
+      <h2>かんたん割り勘の使い方</h2>
+      <p>合計金額と人数を入力するだけで、1人あたりの支払い金額を即座に計算します。割り切れない場合は「余り X円」として表示されるので、その場で素早く精算できます。</p>
+      <ol>
+        <li>「合計金額」欄に支払い総額を整数で入力します（カンマ区切りでも入力可能）。</li>
+        <li>＋/－ボタンまたは直接入力で人数（2〜20人）を設定します。</li>
+        <li>右側の結果エリアに「1人あたりの金額」と「余り」がリアルタイム表示されます。</li>
+        <li>コピーボタンで1人あたりの金額をクリップボードにコピーできます。</li>
+      </ol>
+      <p>たとえば合計12,800円を4人で割ると、1人あたり3,200円（余り0円）となります。合計13,000円を3人で割ると1人あたり4,333円で余り1円が表示されます。</p>
+
+      <h2>カスタム割り勘の使い方</h2>
+      <p>「カスタム割り勘」タブでは、参加者ごとに負担割合や固定金額を細かく設定できます。幹事だけ2口分負担する、子供は固定で1,000円だけ払う、といった複雑な設定もまとめて計算できます。</p>
+      <ol>
+        <li>「合計金額」に支払い総額を整数で入力します。</li>
+        <li>「＋ 追加」ボタンで参加者を1人ずつ追加します（最大20人）。</li>
+        <li>各参加者の名前（省略可）、負担タイプ（割合 or 固定）、値を入力します。</li>
+        <li>「割合」は口数（例: 2 = 2口分）、「固定」は支払い金額（円）を入力します。</li>
+        <li>固定金額の参加者を除いた残額が、割合参加者に口数比で分配されます。</li>
+        <li>割り切れない場合は余りとして別途表示されます。</li>
+        <li>結果一覧のコピーボタンで全員の金額をテキスト形式でコピーできます。</li>
+      </ol>
+      <p>例: 合計15,000円・田中（2口）・鈴木（1口）・佐藤（固定2,000円）の場合、まず佐藤の2,000円を除いた13,000円を3口で分配。田中8,666円・鈴木4,333円・佐藤2,000円、余り1円と表示されます。</p>
+
+      <!-- FAQのh2は記事の一部ではないが同articleに含める形でSEO維持 -->
+    </article>
+
+    <section>
+      <h2>よくある質問</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <h3>Q: 割り切れない場合はどうなりますか？</h3>
+          <p>1円未満は切り捨てて計算し、割り切れなかった分は「余り X円」として別途表示します。誰かに上乗せするのではなく、余りとして明示することで透明性を保ちます。</p>
+        </div>
+        <div class="faq-item">
+          <h3>Q: 入力した金額はサーバーに送信されますか？</h3>
+          <p>送信されません。このツールはすべての計算をブラウザ内（クライアントサイド）で完結しています。入力した金額や名前が外部に送信・保存されることは一切ありません。</p>
+        </div>
+        <div class="faq-item">
+          <h3>Q: 何人まで対応していますか？</h3>
+          <p>かんたん割り勘は2〜20人、カスタム割り勘も最大20人まで対応しています。大人数の飲み会・合宿費用の精算にも使えます。</p>
+        </div>
+        <div class="faq-item">
+          <h3>Q: 固定金額と割合を混在させられますか？</h3>
+          <p>はい、カスタム割り勘タブで混在させられます。「固定」を選んだ参加者の金額は合計から先に除かれ、残りの金額が「割合」参加者に口数比で分配されます。幹事だけ多めに負担する・子供料金を固定にするといったケースに対応しています。</p>
+        </div>
+        <div class="faq-item">
+          <h3>Q: 結果をコピーして共有できますか？</h3>
+          <p>はい。かんたん割り勘では1人あたりの金額をワンクリックでコピーできます。カスタム割り勘では「コピー」ボタンで全員分の金額を「田中: 3,500円」形式のテキストとしてコピーし、LINEやメッセージアプリにそのまま貼り付けられます。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="related-tools">
+      <h2>関連ツール</h2>
+      <ul class="related-list">
+        <li><a href="/tools/tax-calc/">消費税計算ツール — 税抜き・税込みの変換や逆算に対応</a></li>
+        <li><a href="/tools/date-diff/">日数計算ツール — 2つの日付の間の日数をカウント</a></li>
+        <li><a href="/tools/char-count/">文字数カウント — 文字数・語数・バイト数をリアルタイム表示</a></li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<script type="module">
+  import { calcSimple, calcCustom, formatCurrency } from '../../assets/js/tools/warikan.js';
+
+  // ── ユーティリティ ────────────────────────────────────────
+  function parseAmount(str) {
+    const s = String(str).replace(/[,，\s]/g, '');
+    const n = Number(s);
+    // 整数のみ受け付ける
+    return Number.isFinite(n) && Number.isInteger(n) ? n : NaN;
+  }
+
+  // 入力フィールドから小数点・文字を除去するバリデーション
+  function enforceInteger(input) {
+    input.addEventListener('input', () => {
+      // 数字とカンマ以外を除去、小数点も除去
+      input.value = input.value.replace(/[^\d,，]/g, '');
+    });
+  }
+
+  // ── タブ切り替え ──────────────────────────────────────────
+  const tabs = document.querySelectorAll('.wk-tab');
+  const panels = document.querySelectorAll('.wk-panel');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => { t.classList.remove('is-active'); t.setAttribute('aria-selected', 'false'); });
+      panels.forEach(p => p.classList.remove('is-active'));
+      tab.classList.add('is-active');
+      tab.setAttribute('aria-selected', 'true');
+      document.getElementById(tab.getAttribute('aria-controls')).classList.add('is-active');
+    });
+  });
+
+  // ════════════════════════════════════════════════════════════
+  //  かんたん割り勘
+  // ════════════════════════════════════════════════════════════
+  const sTotal  = document.getElementById('s-total');
+  const sPeople = document.getElementById('s-people');
+  const sMinus  = document.getElementById('s-minus');
+  const sPlus   = document.getElementById('s-plus');
+  const sClear  = document.getElementById('s-clear');
+  const sBody   = document.getElementById('s-result-body');
+
+  enforceInteger(sTotal);
+
+  function updateCounterBtns() {
+    const v = parseInt(sPeople.value, 10);
+    sMinus.disabled = v <= 2;
+    sPlus.disabled  = v >= 20;
+  }
+
+  function renderSimple() {
+    const total  = parseAmount(sTotal.value);
+    const people = parseInt(sPeople.value, 10);
+
+    if (!sTotal.value.trim()) {
+      sBody.innerHTML = '<p class="wk-placeholder">合計金額を入力してください</p>';
+      return;
+    }
+
+    const result = calcSimple(total, people);
+
+    if (!result.valid) {
+      sBody.innerHTML = `<p class="wk-error">${result.error}</p>`;
+      return;
+    }
+
+    const remainderNote = result.remainder > 0
+      ? `<p class="wk-host-note">余り <strong>${result.remainder}円</strong></p>`
+      : '';
+
+    sBody.innerHTML = `
+      <p class="wk-result-sub">1人あたり</p>
+      <p class="wk-result-big">${formatCurrency(result.perPerson)}</p>
+      ${remainderNote}
+      <div class="wk-actions">
+        <button class="wk-btn wk-btn-primary" id="s-copy">コピー</button>
+      </div>
+    `;
+
+    document.getElementById('s-copy').addEventListener('click', () => {
+      navigator.clipboard.writeText(formatCurrency(result.perPerson)).then(() => {
+        const btn = document.getElementById('s-copy');
+        if (btn) { btn.textContent = 'コピーしました'; setTimeout(() => { btn.textContent = 'コピー'; }, 1500); }
+      });
+    });
+  }
+
+  sMinus.addEventListener('click', () => {
+    const v = parseInt(sPeople.value, 10);
+    if (v > 2) { sPeople.value = v - 1; updateCounterBtns(); renderSimple(); }
+  });
+  sPlus.addEventListener('click', () => {
+    const v = parseInt(sPeople.value, 10);
+    if (v < 20) { sPeople.value = v + 1; updateCounterBtns(); renderSimple(); }
+  });
+  sPeople.addEventListener('input', () => {
+    let v = parseInt(sPeople.value, 10);
+    if (isNaN(v)) return;
+    v = Math.min(20, Math.max(2, v));
+    sPeople.value = v;
+    updateCounterBtns();
+    renderSimple();
+  });
+  sTotal.addEventListener('input', renderSimple);
+  sClear.addEventListener('click', () => {
+    sTotal.value = '';
+    sPeople.value = 4;
+    updateCounterBtns();
+    renderSimple();
+  });
+
+  updateCounterBtns();
+
+  // ════════════════════════════════════════════════════════════
+  //  カスタム割り勘
+  // ════════════════════════════════════════════════════════════
+  const cTotal = document.getElementById('c-total');
+  const cAdd   = document.getElementById('c-add-participant');
+
+  enforceInteger(cTotal);
+  const cParticipants = document.getElementById('c-participants');
+  const cClear       = document.getElementById('c-clear');
+  const cBody        = document.getElementById('c-result-body');
+
+  let participants = [];
+  let nextId = 1;
+  let autoNum = 1;
+
+  function getDefaultName() { return `参加者${autoNum++}`; }
+
+  function addParticipant(name = '', type = 'ratio', value = '') {
+    if (participants.length >= 20) return;
+    const id = nextId++;
+    const displayName = name || getDefaultName();
+    participants.push({ id, name: displayName, type, value });
+    renderParticipants();
+    renderCustom();
+  }
+
+  function removeParticipant(id) {
+    participants = participants.filter(p => p.id !== id);
+    renderParticipants();
+    renderCustom();
+  }
+
+  function renderParticipants() {
+    cParticipants.innerHTML = '';
+    participants.forEach(p => {
+      const row = document.createElement('div');
+      row.className = 'wk-participant';
+      row.dataset.id = p.id;
+
+      const nameInput = document.createElement('input');
+      nameInput.className = 'wk-input wk-participant-name';
+      nameInput.type = 'text';
+      nameInput.placeholder = p.name;
+      nameInput.value = p._nameEdited ? p.name : '';
+      nameInput.setAttribute('aria-label', '参加者の名前');
+
+      const typeSelect = document.createElement('select');
+      typeSelect.className = 'wk-select wk-participant-type';
+      typeSelect.innerHTML = '<option value="ratio">割合</option><option value="fixed">固定</option>';
+      typeSelect.value = p.type;
+      typeSelect.setAttribute('aria-label', '負担タイプ');
+
+      const valueInput = document.createElement('input');
+      valueInput.className = 'wk-input wk-participant-value';
+      valueInput.type = 'text';
+      valueInput.inputMode = 'decimal';
+      valueInput.value = p.value;
+      valueInput.placeholder = p.type === 'ratio' ? '口数 例: 1' : '金額 例: 2000';
+      valueInput.setAttribute('aria-label', p.type === 'ratio' ? '口数' : '固定金額');
+
+      const delBtn = document.createElement('button');
+      delBtn.className = 'wk-participant-del';
+      delBtn.textContent = '✕';
+      delBtn.setAttribute('aria-label', '参加者を削除');
+
+      nameInput.addEventListener('input', () => {
+        p.name = nameInput.value || nameInput.placeholder;
+        p._nameEdited = !!nameInput.value;
+        renderCustom();
+      });
+      typeSelect.addEventListener('change', () => {
+        p.type = typeSelect.value;
+        p.value = '';
+        renderParticipants();
+        renderCustom();
+      });
+      valueInput.addEventListener('input', () => {
+        p.value = valueInput.value;
+        renderCustom();
+      });
+      delBtn.addEventListener('click', () => removeParticipant(p.id));
+
+      row.appendChild(nameInput);
+      row.appendChild(typeSelect);
+      row.appendChild(valueInput);
+      row.appendChild(delBtn);
+      cParticipants.appendChild(row);
+    });
+
+    cAdd.disabled = participants.length >= 20;
+  }
+
+  function renderCustom() {
+    const total = parseAmount(cTotal.value);
+
+    if (!cTotal.value.trim() || participants.length === 0) {
+      cBody.innerHTML = '<p class="wk-placeholder" style="padding:var(--sp-xl) var(--sp-lg)">参加者を追加して合計金額を入力してください</p>';
+      return;
+    }
+
+    const mapped = participants.map(p => ({
+      name: p.name,
+      type: p.type,
+      value: p.type === 'ratio' ? parseFloat(p.value) : parseAmount(p.value),
+    }));
+
+    const result = calcCustom(total, mapped);
+
+    if (!result.valid) {
+      cBody.innerHTML = `<div style="padding:var(--sp-lg)"><p class="wk-error">${result.error}</p></div>`;
+      return;
+    }
+
+    const rows = result.results.map(r =>
+      `<div class="wk-custom-result-item">
+        <span class="wk-custom-result-name">${r.name}</span>
+        <span class="wk-custom-result-amount">${formatCurrency(r.amount)}</span>
+      </div>`
+    ).join('');
+
+    const remainderRow = result.remainder > 0
+      ? `<div class="wk-custom-result-item" style="background:color-mix(in srgb, var(--color-accent) 8%, var(--color-surface))">
+          <span class="wk-custom-result-name">余り</span>
+          <span class="wk-custom-result-amount">${result.remainder}円</span>
+        </div>`
+      : '';
+
+    cBody.innerHTML = `
+      <div class="wk-custom-results">${rows}${remainderRow}</div>
+      <div style="padding:var(--sp-md) var(--sp-lg)">
+        <button class="wk-btn wk-btn-primary" id="c-copy">コピー</button>
+      </div>
+    `;
+
+    document.getElementById('c-copy').addEventListener('click', () => {
+      const text = result.results.map(r => `${r.name}: ${formatCurrency(r.amount)}`).join('\n');
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('c-copy');
+        if (btn) { btn.textContent = 'コピーしました'; setTimeout(() => { btn.textContent = 'コピー'; }, 1500); }
+      });
+    });
+  }
+
+  cTotal.addEventListener('input', renderCustom);
+  cAdd.addEventListener('click', () => addParticipant());
+  cClear.addEventListener('click', () => {
+    cTotal.value = '';
+    participants = [];
+    nextId = 1;
+    autoNum = 1;
+    renderParticipants();
+    renderCustom();
+  });
+
+  // 初期参加者3人
+  addParticipant('田中', 'ratio', '1');
+  addParticipant('鈴木', 'ratio', '1');
+  addParticipant('佐藤', 'ratio', '1');
+</script>
+</body>
+</html>
