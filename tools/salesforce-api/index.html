@@ -489,7 +489,43 @@ import { pipeline, env } from '../../assets/js/libs/transformers.min.js';
   /* ---- Generate ---- */
   async function generate() {
     const text = inputEl.value.trim();
-    if (!text || !isReady) return;
+    if (!text) return;
+
+    const { generateApiNames, lookupStandardName, substituteStandardTerms, cleanForApiName } = window.TxConvSalesforce;
+
+    // ① 完全一致：辞書に完全一致する場合はAIをスキップ
+    const standardEnglish = lookupStandardName(text);
+    if (standardEnglish) {
+      translPrev.innerHTML = `翻訳結果: <strong>${escHtml(standardEnglish)}</strong> <span style="font-size:0.8em;color:var(--color-text-muted)">(標準)</span>`;
+      clearResults();
+      const names = generateApiNames(standardEnglish);
+      setResult('snake',    names.snake);
+      setResult('camel',    names.camel);
+      setResult('screaming',names.screaming);
+      setResult('mdt',      names.mdt);
+      return;
+    }
+
+    // ② 部分一致：置換後に日本語が残らない場合のみAIをスキップ
+    //    日本語が残る場合は混合テキストがAIを混乱させるため元のテキストを使う
+    const substituted = substituteStandardTerms(text);
+    const hasRemainingJa = /[\u3040-\u30FF\u3400-\u9FFF\uF900-\uFAFF]/.test(substituted);
+
+    if (substituted !== text && !hasRemainingJa) {
+      // 全ての日本語が辞書で置換できた → AI不要
+      translPrev.innerHTML = `翻訳結果: <strong>${escHtml(substituted)}</strong> <span style="font-size:0.8em;color:var(--color-text-muted)">(標準)</span>`;
+      clearResults();
+      const names = generateApiNames(substituted);
+      setResult('snake',    names.snake);
+      setResult('camel',    names.camel);
+      setResult('screaming',names.screaming);
+      setResult('mdt',      names.mdt);
+      return;
+    }
+
+    // ③ 日本語が残る場合はAI翻訳
+    //    部分置換済みの場合、英語部分を保持し残りの日本語だけAI翻訳して合成する
+    if (!isReady) return;
 
     btnGenerate.disabled = true;
     btnGenerateTxt.textContent = '翻訳中...';
@@ -497,14 +533,37 @@ import { pipeline, env } from '../../assets/js/libs/transformers.min.js';
     clearResults();
 
     try {
-      const output = await translator(text, { max_new_tokens: 64 });
-      const english = (output[0]?.translation_text || '').trim();
+      let english;
+      if (substituted !== text && hasRemainingJa) {
+        // 部分置換済み: 残った日本語チャンクだけAI翻訳し、英語部分はそのまま保持
+        const jaPattern = /[\u3040-\u30FF\u3400-\u9FFF\uF900-\uFAFF\uFF66-\uFF9F]+/g;
+        const chunks = substituted.split(jaPattern);
+        const jaMatches = substituted.match(jaPattern) || [];
+        // 日本語チャンクをまとめてAI翻訳
+        const translations = [];
+        for (const ja of jaMatches) {
+          const out = await translator(ja, { max_new_tokens: 64 });
+          translations.push(cleanForApiName((out[0]?.translation_text || '').trim()));
+        }
+        // チャンクを交互に結合
+        let merged = '';
+        for (let i = 0; i < chunks.length; i++) {
+          merged += chunks[i];
+          if (i < translations.length) merged += ' ' + translations[i] + ' ';
+        }
+        english = cleanForApiName(merged);
+      } else {
+        // 辞書置換なし: 全文をAI翻訳
+        const output = await translator(text, { max_new_tokens: 64 });
+        const rawEnglish = (output[0]?.translation_text || '').trim();
+        if (!rawEnglish) throw new Error('翻訳結果が空です');
+        english = cleanForApiName(rawEnglish);
+      }
 
       if (!english) throw new Error('翻訳結果が空です');
 
       translPrev.innerHTML = `翻訳結果: <strong>${escHtml(english)}</strong>`;
 
-      const { generateApiNames } = window.TxConvSalesforce;
       const names = generateApiNames(english);
 
       setResult('snake',    names.snake);
