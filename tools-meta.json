@@ -464,6 +464,34 @@
       "lastModified": "2026-03-21"
     },
     {
+      "id": "unit-price",
+      "title": "単価比較ツール",
+      "shortTitle": "単価比較",
+      "description": "100gあたり・1個あたりの単価を自動計算して複数商品の最安値を判定",
+      "url": "https://txconv.com/tools/unit-price/",
+      "path": "tools/unit-price/",
+      "icon": "🛒",
+      "tag": "計算ツール",
+      "tags": ["単価計算", "100gあたり", "単価比較", "最安値", "買い物"],
+      "jsFiles": ["assets/js/tools/unit-price.js"],
+      "relatedTools": ["tax-calc", "warikan", "char-count"],
+      "lastModified": "2026-03-22"
+    },
+    {
+      "id": "bulk-replace",
+      "title": "一括テキスト置換ツール",
+      "shortTitle": "一括置換",
+      "description": "複数の置換ルールを登録してテキストを一括変換。正規表現・大文字小文字の区別に対応",
+      "url": "https://txconv.com/tools/bulk-replace/",
+      "path": "tools/bulk-replace/",
+      "icon": "🔄",
+      "tag": "テキスト整形",
+      "tags": ["テキスト置換", "一括置換", "正規表現", "文字列置換"],
+      "jsFiles": ["assets/js/tools/bulk-replace.js"],
+      "relatedTools": ["diff", "char-count", "hira-kana"],
+      "lastModified": "2026-03-22"
+    },
+    {
       "id": "tax-calc",
       "title": "消費税計算ツール",
       "shortTitle": "消費税計算",

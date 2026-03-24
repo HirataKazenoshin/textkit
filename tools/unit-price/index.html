@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5821634466384854"
+     crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>単価比較ツール【100gあたり・1個あたり】最安値を瞬時に判定 | TxConv</title>
+  <meta name="description" content="商品の内容量と価格を入力するだけで100gあたり・1個あたりの単価を自動計算。複数商品を比較して最安値をハイライト表示。スーパーやネット通販での買い物に。サーバー送信なし。">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://txconv.com/tools/unit-price/">
+
+  <meta property="og:title" content="単価比較ツール【100gあたり・1個あたり】最安値を瞬時に判定 | TxConv">
+  <meta property="og:description" content="商品の内容量と価格を入力するだけで100gあたり・1個あたりの単価を自動計算。複数商品を比較して最安値をハイライト表示。">
+  <meta property="og:url" content="https://txconv.com/tools/unit-price/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:site_name" content="TxConv">
+  <meta property="og:image" content="https://txconv.com/assets/og-image.svg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://txconv.com/assets/og-image.svg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "TxConv", "item": "https://txconv.com/" },
+      { "@type": "ListItem", "position": 2, "name": "単価比較ツール", "item": "https://txconv.com/tools/unit-price/" }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "単価比較ツールの使い方",
+    "step": [
+      { "@type": "HowToStep", "name": "比較単位を選択", "text": "100gあたり・1kgあたり・100mlあたり・1Lあたり・1つあたりから比較したい基準を選びます。" },
+      { "@type": "HowToStep", "name": "商品情報を入力", "text": "各商品の名前（任意）・金額・数量・単位を入力します。" },
+      { "@type": "HowToStep", "name": "商品を追加", "text": "「＋ 商品を追加」ボタンで最大8件まで比較できます。" },
+      { "@type": "HowToStep", "name": "結果を確認", "text": "比較単位あたりの単価が自動計算され、最安値がハイライト表示されます。" }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "単価比較ツール",
+    "url": "https://txconv.com/tools/unit-price/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "description": "商品の内容量と価格から100gあたり・1個あたりの単価を計算し最安値を判定する無料オンラインツール。",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" }
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="../../assets/css/base.css?v=2">
+  <link rel="stylesheet" href="../../assets/css/tool.css?v=2">
+  <style>
+    /* ── 比較バー ─────────────────────────────── */
+    .up-compare-bar {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-md);
+      margin-bottom: var(--sp-lg);
+      flex-wrap: wrap;
+    }
+    .up-compare-bar label {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .up-compare-select {
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-surface);
+      color: var(--color-text);
+      font-size: var(--text-sm);
+    }
+
+    /* ── 商品カード ──────────────────────────── */
+    .up-products { display: grid; gap: var(--sp-md); }
+    .up-product {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-md) var(--sp-lg);
+      display: grid;
+      grid-template-columns: 1fr repeat(3, auto) auto;
+      gap: var(--sp-sm);
+      align-items: center;
+    }
+    .up-product-name { min-width: 0; }
+    .up-field-label {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--color-text-muted);
+      margin-bottom: 2px;
+      white-space: nowrap;
+    }
+    .up-input {
+      width: 100%;
+      padding: 0.55rem 0.75rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-surface-2);
+      color: var(--color-text);
+      font-size: 1rem;
+    }
+    .up-input:focus { outline: 2px solid var(--color-accent); outline-offset: -1px; }
+    .up-price-wrap { width: 7rem; }
+    .up-qty-wrap   { width: 5.5rem; }
+    .up-unit-wrap  { width: 5.5rem; }
+    .up-select {
+      width: 100%;
+      padding: 0.55rem 0.4rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-surface-2);
+      color: var(--color-text);
+      font-size: 0.9rem;
+    }
+    .up-del-btn {
+      appearance: none;
+      width: 2.2rem;
+      height: 2.2rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: none;
+      color: var(--color-text-muted);
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-self: end;
+      margin-bottom: 1px;
+    }
+    .up-del-btn:hover { color: #ef4444; border-color: #ef4444; }
+
+    /* ── 結果カード ──────────────────────────── */
+    .up-results {
+      margin-top: var(--sp-lg);
+      display: grid;
+      gap: var(--sp-sm);
+    }
+    .up-result-item {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--sp-md) var(--sp-lg);
+      display: flex;
+      align-items: center;
+      gap: var(--sp-md);
+      flex-wrap: wrap;
+    }
+    .up-result-item.is-cheapest {
+      border-color: #22c55e;
+      background: color-mix(in srgb, #22c55e 8%, var(--color-surface));
+    }
+    .up-result-item.is-error {
+      border-color: #ef4444;
+      background: color-mix(in srgb, #ef4444 6%, var(--color-surface));
+    }
+    .up-result-name {
+      flex: 1;
+      min-width: 5rem;
+      font-weight: 600;
+    }
+    .up-result-price {
+      font-size: 1.25rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .up-result-diff {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      white-space: nowrap;
+    }
+    .up-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      background: #22c55e;
+      color: #fff;
+      border-radius: 999px;
+      padding: 0.2em 0.7em;
+      white-space: nowrap;
+    }
+    .up-error-msg {
+      font-size: var(--text-sm);
+      color: #ef4444;
+    }
+
+    /* ── アクション ──────────────────────────── */
+    .up-actions {
+      display: flex;
+      gap: var(--sp-sm);
+      margin-top: var(--sp-lg);
+      flex-wrap: wrap;
+    }
+    .up-btn {
+      padding: 0.65rem 1.2rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: none;
+      color: var(--color-text);
+      font-size: var(--text-sm);
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .up-btn:hover { background: var(--color-surface-2); }
+    .up-btn-primary {
+      background: var(--color-accent);
+      color: #fff;
+      border-color: var(--color-accent);
+    }
+    .up-btn-primary:hover { opacity: 0.9; }
+
+    /* ── FAQ ─────────────────────────────────── */
+    .faq-list { display: grid; gap: var(--sp-md); }
+    .faq-item {
+      padding: var(--sp-md);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-surface);
+    }
+    .faq-item h3 { margin-bottom: 0.5rem; font-size: 1rem; }
+
+    @media (max-width: 640px) {
+      .up-product {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto;
+      }
+      .up-product-name { grid-column: 1 / -1; }
+      .up-unit-wrap    { grid-column: 1 / 2; }
+      .up-del-btn      { grid-column: 2 / 3; justify-self: end; align-self: end; }
+    }
+  </style>
+  <script src="../../assets/js/theme.js"></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="../../" class="site-logo" aria-label="TxConv ホーム">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="4 7 4 4 20 4 20 7"></polyline>
+        <line x1="9" y1="20" x2="15" y2="20"></line>
+        <line x1="12" y1="4" x2="12" y2="20"></line>
+      </svg>
+      TxConv
+    </a>
+    <nav class="site-nav" aria-label="メインナビゲーション">
+      <a href="../../#tools">ツール一覧</a>
+      <button id="theme-toggle" class="theme-toggle btn-icon" aria-label="ダークモードに切り替え" title="ダークモードに切り替え">
+        <svg class="ti-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <svg class="ti-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくずリスト">
+      <ol>
+        <li><a href="../../">TxConv</a></li>
+        <li><span aria-current="page">単価比較ツール</span></li>
+      </ol>
+    </nav>
+
+    <div class="tool-hero">
+      <h1>単価比較ツール（100gあたり・1個あたり）</h1>
+      <p class="lead">商品の金額・内容量・単位を入力するだけで、比較単位あたりの単価を自動計算。最安値をハイライト表示します。入力データはサーバーに送信されません。</p>
+    </div>
+
+    <!-- ツールUI -->
+    <section aria-label="単価比較ツール">
+
+      <!-- 比較基準 -->
+      <div class="up-compare-bar">
+        <label for="up-compare-unit">比較単位：</label>
+        <select id="up-compare-unit" class="up-compare-select">
+          <option value="100gあたり">100gあたり</option>
+          <option value="1kgあたり">1kgあたり</option>
+          <option value="100mlあたり">100mlあたり</option>
+          <option value="1Lあたり">1Lあたり</option>
+          <option value="1つあたり">1つあたり</option>
+        </select>
+      </div>
+
+      <!-- 商品リスト -->
+      <div class="up-products" id="up-products" role="list"></div>
+
+      <!-- 結果 -->
+      <div class="up-results" id="up-results" aria-live="polite"></div>
+
+      <!-- アクション -->
+      <div class="up-actions">
+        <button class="up-btn up-btn-primary" id="up-add">＋ 商品を追加</button>
+        <button class="up-btn" id="up-clear">クリア</button>
+      </div>
+    </section>
+
+    <!-- AdSense -->
+    <!-- AdSense -->
+
+    <article>
+      <h2>単価比較ツールの使い方</h2>
+      <p>スーパーやネット通販では同じカテゴリの商品でも内容量がまちまちで、どれが一番お得かパッと判断できないことがあります。このツールは、各商品の金額と内容量を入力するだけで「100gあたり何円」「1個あたり何円」を自動計算し、一番安い商品をハイライト表示します。</p>
+      <ol>
+        <li>画面上部の「比較単位」で、何を基準に比べるか選びます（100gあたり・1kgあたり・100mlあたり・1Lあたり・1つあたり）。</li>
+        <li>商品名（省略可）・金額（円）・数量・単位を入力します。単位はg・kg・mg・ml・L・個・本・枚など対応しています。</li>
+        <li>「＋ 商品を追加」ボタンで最大8件まで比較できます。</li>
+        <li>入力するたびにリアルタイムで単価が計算され、最安値の商品に「最安値」バッジが付きます。</li>
+        <li>比較単位と商品の単位カテゴリが一致しない場合（例: gの商品と個の商品を混在）はエラーが表示されます。</li>
+      </ol>
+      <p>例えば、300gで198円のシャンプーAと400mlで248円のシャンプーBを比べたいとき、比較単位を「100mlあたり」に合わせれば正しく比較できます（A: 66円/100ml、B: 62円/100ml → Bが安い）。kg表示の食品も、入力単位を「kg」にして比較単位を「100gあたり」にすれば、自動でg換算して計算します。</p>
+
+      <h2>単位の対応表</h2>
+      <p>以下の単位に対応しています。</p>
+      <table style="width:100%;border-collapse:collapse;margin-top:var(--sp-md);font-size:var(--text-sm)">
+        <thead>
+          <tr style="background:var(--color-surface-2)">
+            <th style="padding:0.5rem 1rem;text-align:left;border:1px solid var(--color-border)">カテゴリ</th>
+            <th style="padding:0.5rem 1rem;text-align:left;border:1px solid var(--color-border)">入力できる単位</th>
+            <th style="padding:0.5rem 1rem;text-align:left;border:1px solid var(--color-border)">比較基準</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:0.5rem 1rem;border:1px solid var(--color-border)">重量</td>
+            <td style="padding:0.5rem 1rem;border:1px solid var(--color-border)">mg・g・kg</td>
+            <td style="padding:0.5rem 1rem;border:1px solid var(--color-border)">100gあたり / 1kgあたり</td>
+          </tr>
+          <tr style="background:var(--color-surface-2)">
+            <td style="padding:0.5rem 1rem;border:1px solid var(--color-border)">容量</td>
+            <td style="padding:0.5rem 1rem;border:1px solid var(--color-border)">ml・L</td>
+            <td style="padding:0.5rem 1rem;border:1px solid var(--color-border)">100mlあたり / 1Lあたり</td>
+          </tr>
+          <tr>
+            <td style="padding:0.5rem 1rem;border:1px solid var(--color-border)">個数</td>
+            <td style="padding:0.5rem 1rem;border:1px solid var(--color-border)">個・本・枚・足・袋・パック・セット</td>
+            <td style="padding:0.5rem 1rem;border:1px solid var(--color-border)">1つあたり</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="margin-top:var(--sp-sm);font-size:var(--text-sm);color:var(--color-text-muted)">※ 重量系の mg・g・kg は互いに換算可能。例: 1.5kgと300gを混在させて比較できます。</p>
+    </article>
+
+    <section>
+      <h2>よくある質問</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <h3>Q: グラムとキログラムを混在させて比較できますか？</h3>
+          <p>はい。同じ「重量」カテゴリなので、比較単位を「100gあたり」や「1kgあたり」に設定すれば、g・kg・mgが混在していても自動換算して比較できます。例えば「300g・198円」と「1.2kg・698円」を正しく比較できます。</p>
+        </div>
+        <div class="faq-item">
+          <h3>Q: 個数と重量を混在させた比較はできますか？</h3>
+          <p>できません。個数系（個・本・枚など）と重量系（g・kg）は単位カテゴリが異なるため、混在するとエラーが表示されます。同じカテゴリの商品同士でのみ比較してください。</p>
+        </div>
+        <div class="faq-item">
+          <h3>Q: 何商品まで比較できますか？</h3>
+          <p>最大8商品まで比較できます。初期表示は2商品で、「＋ 商品を追加」ボタンで追加できます。3商品以上になると各商品の削除ボタンが表示されます。</p>
+        </div>
+        <div class="faq-item">
+          <h3>Q: 入力データはサーバーに送信されますか？</h3>
+          <p>送信されません。すべての計算はブラウザ内（クライアントサイド）で完結しています。入力した商品名・金額・数量が外部に送信・保存されることは一切ありません。</p>
+        </div>
+        <div class="faq-item">
+          <h3>Q: スマホでも使えますか？</h3>
+          <p>はい。スマートフォンでの利用を想定した大きめのボタン・入力欄を採用しています。スーパーやコンビニでの買い物中にその場で使えます。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="related-tools">
+      <h2>関連ツール</h2>
+      <ul class="related-list">
+        <li><a href="/tools/tax-calc/">消費税計算ツール — 税抜き・税込みの変換や逆算に対応</a></li>
+        <li><a href="/tools/warikan/">割り勘計算ツール — 飲み会・食事の費用を均等・カスタム割り勘</a></li>
+        <li><a href="/tools/char-count/">文字数カウント — 文字数・語数・バイト数をリアルタイム表示</a></li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<script type="module">
+  import {
+    getUnitCategory, getDefaultCompareUnit,
+    calcUnitPrice, compareProducts
+  } from '../../assets/js/tools/unit-price.js';
+
+  // ── 定数 ─────────────────────────────────────────────────────
+  const UNITS = ['g', 'kg', 'mg', 'ml', 'L', '個', '本', '枚', '足', '袋', 'パック', 'セット'];
+
+  const INITIAL_PRODUCTS = [
+    { name: '', price: '', quantity: '', unit: 'g' },
+    { name: '', price: '', quantity: '', unit: 'g' },
+  ];
+
+  // ── 状態 ─────────────────────────────────────────────────────
+  let products = INITIAL_PRODUCTS.map((p, i) => ({ ...p, id: i }));
+  let nextId = products.length;
+
+  // ── DOM ──────────────────────────────────────────────────────
+  const compareUnitEl = document.getElementById('up-compare-unit');
+  const productsEl    = document.getElementById('up-products');
+  const resultsEl     = document.getElementById('up-results');
+  const addBtn        = document.getElementById('up-add');
+  const clearBtn      = document.getElementById('up-clear');
+
+  // ── ユーティリティ ────────────────────────────────────────────
+  function parseNum(str) {
+    const n = parseFloat(String(str).replace(/[,，\s]/g, ''));
+    return Number.isFinite(n) ? n : NaN;
+  }
+  function fmt(n) {
+    return new Intl.NumberFormat('ja-JP', { maximumFractionDigits: 2 }).format(n) + '円';
+  }
+  function fmtDiff(n) {
+    const sign = n > 0 ? '+' : '';
+    return sign + new Intl.NumberFormat('ja-JP', { maximumFractionDigits: 2 }).format(n) + '円';
+  }
+
+  // ── レンダリング ──────────────────────────────────────────────
+  function renderProducts() {
+    productsEl.innerHTML = '';
+    products.forEach((p, idx) => {
+      const row = document.createElement('div');
+      row.className = 'up-product';
+      row.setAttribute('role', 'listitem');
+      row.dataset.id = p.id;
+
+      // 名前
+      const nameWrap = document.createElement('div');
+      nameWrap.className = 'up-product-name';
+      const nameLbl = document.createElement('span');
+      nameLbl.className = 'up-field-label';
+      nameLbl.textContent = '商品名（任意）';
+      const nameInp = document.createElement('input');
+      nameInp.className = 'up-input';
+      nameInp.type = 'text';
+      nameInp.placeholder = `商品${idx + 1}`;
+      nameInp.value = p.name;
+      nameInp.setAttribute('aria-label', '商品名');
+      nameInp.addEventListener('input', () => { p.name = nameInp.value; renderResults(); });
+      nameWrap.append(nameLbl, nameInp);
+
+      // 金額
+      const priceWrap = document.createElement('div');
+      priceWrap.className = 'up-price-wrap';
+      const priceLbl = document.createElement('span');
+      priceLbl.className = 'up-field-label';
+      priceLbl.textContent = '金額（円）';
+      const priceInp = document.createElement('input');
+      priceInp.className = 'up-input';
+      priceInp.type = 'text';
+      priceInp.inputMode = 'decimal';
+      priceInp.placeholder = '例: 198';
+      priceInp.value = p.price;
+      priceInp.setAttribute('aria-label', '金額');
+      priceInp.addEventListener('input', () => { p.price = priceInp.value; renderResults(); });
+      priceWrap.append(priceLbl, priceInp);
+
+      // 数量
+      const qtyWrap = document.createElement('div');
+      qtyWrap.className = 'up-qty-wrap';
+      const qtyLbl = document.createElement('span');
+      qtyLbl.className = 'up-field-label';
+      qtyLbl.textContent = '数量';
+      const qtyInp = document.createElement('input');
+      qtyInp.className = 'up-input';
+      qtyInp.type = 'text';
+      qtyInp.inputMode = 'decimal';
+      qtyInp.placeholder = '例: 300';
+      qtyInp.value = p.quantity;
+      qtyInp.setAttribute('aria-label', '数量');
+      qtyInp.addEventListener('input', () => { p.quantity = qtyInp.value; renderResults(); });
+      qtyWrap.append(qtyLbl, qtyInp);
+
+      // 単位
+      const unitWrap = document.createElement('div');
+      unitWrap.className = 'up-unit-wrap';
+      const unitLbl = document.createElement('span');
+      unitLbl.className = 'up-field-label';
+      unitLbl.textContent = '単位';
+      const unitSel = document.createElement('select');
+      unitSel.className = 'up-select';
+      unitSel.setAttribute('aria-label', '単位');
+      UNITS.forEach(u => {
+        const opt = document.createElement('option');
+        opt.value = u;
+        opt.textContent = u;
+        if (u === p.unit) opt.selected = true;
+        unitSel.appendChild(opt);
+      });
+      unitSel.addEventListener('change', () => {
+        p.unit = unitSel.value;
+        autoCompareUnit();
+        renderResults();
+      });
+      unitWrap.append(unitLbl, unitSel);
+
+      // 削除ボタン
+      const delBtn = document.createElement('button');
+      delBtn.className = 'up-del-btn';
+      delBtn.setAttribute('aria-label', '削除');
+      delBtn.textContent = '✕';
+      delBtn.style.visibility = products.length > 2 ? 'visible' : 'hidden';
+      delBtn.addEventListener('click', () => {
+        products = products.filter(x => x.id !== p.id);
+        renderProducts();
+        renderResults();
+      });
+
+      row.append(nameWrap, priceWrap, qtyWrap, unitWrap, delBtn);
+      productsEl.appendChild(row);
+    });
+
+    addBtn.disabled = products.length >= 8;
+  }
+
+  function autoCompareUnit() {
+    // 最初の有効な単位カテゴリに合わせて比較単位を推奨
+    for (const p of products) {
+      const cat = getUnitCategory(p.unit);
+      if (cat) {
+        const def = getDefaultCompareUnit(cat);
+        if (compareUnitEl.value !== def) {
+          // カテゴリが変わった場合のみ更新
+          const currentCat = {
+            '100gあたり': 'weight', '1kgあたり': 'weight',
+            '100mlあたり': 'volume', '1Lあたり': 'volume',
+            '1つあたり': 'count',
+          }[compareUnitEl.value];
+          if (currentCat !== cat) compareUnitEl.value = def;
+        }
+        break;
+      }
+    }
+  }
+
+  function renderResults() {
+    const compareUnit = compareUnitEl.value;
+    const mapped = products.map(p => ({
+      name: p.name,
+      price: parseNum(p.price),
+      quantity: parseNum(p.quantity),
+      unit: p.unit,
+    }));
+
+    // 全て未入力ならプレースホルダー
+    const anyFilled = mapped.some(p => Number.isFinite(p.price) && Number.isFinite(p.quantity));
+    if (!anyFilled) {
+      resultsEl.innerHTML = '';
+      return;
+    }
+
+    const results = compareProducts(mapped, compareUnit);
+    resultsEl.innerHTML = '';
+    results.forEach((r, i) => {
+      const item = document.createElement('div');
+      item.className = 'up-result-item' + (r.isCheapest ? ' is-cheapest' : '') + (!r.valid ? ' is-error' : '');
+
+      const name = document.createElement('span');
+      name.className = 'up-result-name';
+      name.textContent = r.name || `商品${i + 1}`;
+
+      item.appendChild(name);
+
+      if (!r.valid) {
+        const err = document.createElement('span');
+        err.className = 'up-error-msg';
+        err.textContent = r.error;
+        item.appendChild(err);
+      } else {
+        const price = document.createElement('span');
+        price.className = 'up-result-price';
+        price.textContent = fmt(r.unitPrice) + ' / ' + compareUnit;
+        item.appendChild(price);
+
+        if (r.isCheapest) {
+          const badge = document.createElement('span');
+          badge.className = 'up-badge';
+          badge.textContent = '最安値';
+          item.appendChild(badge);
+        } else if (r.diffAmount !== null && r.diffAmount > 0) {
+          const diff = document.createElement('span');
+          diff.className = 'up-result-diff';
+          diff.textContent = `最安値より${Math.round(r.diffRate)}%割高（${fmtDiff(r.diffAmount)} / ${compareUnit}）`;
+          item.appendChild(diff);
+        }
+      }
+
+      resultsEl.appendChild(item);
+    });
+  }
+
+  // ── イベント ──────────────────────────────────────────────────
+  compareUnitEl.addEventListener('change', renderResults);
+
+  addBtn.addEventListener('click', () => {
+    if (products.length >= 8) return;
+    const lastUnit = products[products.length - 1]?.unit || 'g';
+    products.push({ id: nextId++, name: '', price: '', quantity: '', unit: lastUnit });
+    renderProducts();
+    renderResults();
+  });
+
+  clearBtn.addEventListener('click', () => {
+    products = [
+      { id: nextId++, name: '', price: '', quantity: '', unit: 'g' },
+      { id: nextId++, name: '', price: '', quantity: '', unit: 'g' },
+    ];
+    renderProducts();
+    renderResults();
+  });
+
+  // ── 初期化 ────────────────────────────────────────────────────
+  renderProducts();
+</script>
+</body>
+</html>

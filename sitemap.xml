@@ -114,6 +114,22 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Unit price comparison tool -->
+  <url>
+    <loc>https://txconv.com/tools/unit-price/</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Bulk text replace tool -->
+  <url>
+    <loc>https://txconv.com/tools/bulk-replace/</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Tax calculator tool -->
   <url>
     <loc>https://txconv.com/tools/tax-calc/</loc>
