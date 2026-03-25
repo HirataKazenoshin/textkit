@@ -13,7 +13,7 @@ import http.server
 import socketserver
 import mimetypes
 
-PORT = 8080
+PORT = 8079
 
 # Python の mimetypes モジュールに .mjs / .wasm を登録
 mimetypes.add_type('application/javascript', '.mjs')

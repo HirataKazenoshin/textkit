@@ -492,6 +492,20 @@
       "lastModified": "2026-03-22"
     },
     {
+      "id": "excel-to-md",
+      "title": "ExcelテーブルをMarkdownに変換",
+      "shortTitle": "Excel→Markdown",
+      "description": "ExcelやGoogleスプレッドシートのヘッダーとデータを貼り付けるだけでMarkdownテーブルに変換する無料オンラインツール",
+      "url": "https://txconv.com/tools/excel-to-md/",
+      "path": "tools/excel-to-md/",
+      "icon": "📋",
+      "tag": "テキスト整形",
+      "tags": ["Excel", "Markdown", "テーブル", "表変換", "スプレッドシート", "TSV"],
+      "jsFiles": ["assets/js/tools/excel-to-md.js"],
+      "relatedTools": ["csv-json", "markdown-preview", "bulk-replace"],
+      "lastModified": "2026-03-25"
+    },
+    {
       "id": "tax-calc",
       "title": "消費税計算ツール",
       "shortTitle": "消費税計算",

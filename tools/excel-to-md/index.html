@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5821634466384854"
+     crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ExcelテーブルをMarkdownに変換【無料】| TxConv</title>
+  <meta name="description" content="ExcelやスプレッドシートのテーブルをMarkdown形式に変換する無料オンラインツール。ヘッダーとデータを貼り付けるだけで即変換。列の整列・セル内改行対応。入力データはサーバーに送信されません。">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://txconv.com/tools/excel-to-md/">
+
+  <meta property="og:title" content="ExcelテーブルをMarkdownに変換【無料】| TxConv">
+  <meta property="og:description" content="ExcelやスプレッドシートのテーブルをMarkdown形式に変換する無料オンラインツール。ヘッダーとデータを貼り付けるだけで即変換。">
+  <meta property="og:url" content="https://txconv.com/tools/excel-to-md/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:site_name" content="TxConv">
+  <meta property="og:image" content="https://txconv.com/assets/og-image.svg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://txconv.com/assets/og-image.svg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "TxConv", "item": "https://txconv.com/" },
+      { "@type": "ListItem", "position": 2, "name": "ExcelテーブルをMarkdownに変換", "item": "https://txconv.com/tools/excel-to-md/" }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "ExcelテーブルをMarkdownに変換する方法",
+    "step": [
+      { "@type": "HowToStep", "name": "ヘッダーを貼り付ける", "text": "Excelでヘッダー行（1行目）を選択してコピーし、「ヘッダー」欄に貼り付けます。" },
+      { "@type": "HowToStep", "name": "データを貼り付ける", "text": "Excelでデータ行を選択してコピーし、「データ」欄に貼り付けます。" },
+      { "@type": "HowToStep", "name": "Markdownをコピーする", "text": "変換結果のMarkdownテーブルが自動生成されます。コピーボタンでクリップボードにコピーできます。" }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ExcelテーブルをMarkdownに変換",
+    "url": "https://txconv.com/tools/excel-to-md/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "description": "ExcelやスプレッドシートのテーブルをMarkdown形式に変換する無料オンラインツール。",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" }
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="../../assets/css/base.css?v=2">
+  <link rel="stylesheet" href="../../assets/css/tool.css?v=2">
+  <style>
+    /* ── レイアウト ──────────────────────────── */
+    .em-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-lg);
+      align-items: start;
+    }
+    .em-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-lg);
+    }
+
+    /* ── セクションラベル ────────────────────── */
+    .em-section-label {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      margin-bottom: var(--sp-sm);
+    }
+    .em-hint {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      margin-bottom: var(--sp-sm);
+    }
+
+    /* ── テキストエリア ──────────────────────── */
+    .em-textarea {
+      width: 100%;
+      padding: var(--sp-sm) var(--sp-md);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-surface-2);
+      color: var(--color-text);
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9rem;
+      resize: vertical;
+      box-sizing: border-box;
+    }
+    .em-textarea:focus { outline: 2px solid var(--color-accent); outline-offset: -1px; }
+    .em-textarea-header { height: 68px; }
+    .em-textarea-data   { height: 160px; }
+    .em-textarea-output { height: 160px; }
+
+    /* ── ステータス・エラー ────────────────────── */
+    .em-stats {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      margin-top: 4px;
+      min-height: 1.2em;
+      text-align: right;
+    }
+    .em-error {
+      font-size: 0.8rem;
+      color: #ef4444;
+      margin-top: var(--sp-xs);
+      min-height: 1.2em;
+    }
+
+    /* ── 整列コントロール ────────────────────── */
+    .em-align-cols {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-sm);
+    }
+    .em-align-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .em-align-col-name {
+      font-size: 0.7rem;
+      color: var(--color-text-muted);
+      max-width: 72px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .em-align-btns {
+      display: flex;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+    .em-align-btn {
+      padding: 0.25rem 0.5rem;
+      border: none;
+      border-left: 1px solid var(--color-border);
+      background: none;
+      color: var(--color-text-muted);
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: inherit;
+      line-height: 1;
+    }
+    .em-align-btn:first-child { border-left: none; }
+    .em-align-btn.is-active {
+      background: var(--color-accent);
+      color: #fff;
+    }
+    .em-align-btn:hover:not(.is-active) { background: var(--color-surface-2); }
+
+    /* ── ボタン ──────────────────────────────── */
+    .em-btn {
+      padding: 0.65rem 1.2rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: none;
+      color: var(--color-text);
+      font-size: var(--text-sm);
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .em-btn:hover { background: var(--color-surface-2); }
+    .em-btn-primary {
+      background: var(--color-accent);
+      color: #fff;
+      border-color: var(--color-accent);
+    }
+    .em-btn-primary:hover { opacity: 0.9; }
+    .em-actions { display: flex; gap: var(--sp-sm); margin-top: var(--sp-md); flex-wrap: wrap; }
+
+    /* ── プレビュー ──────────────────────────── */
+    .em-preview-wrap {
+      margin-top: var(--sp-md);
+      padding-top: var(--sp-md);
+      border-top: 1px solid var(--color-border);
+    }
+    .em-preview-label {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      margin-bottom: var(--sp-sm);
+    }
+    .em-preview {
+      overflow-x: auto;
+      min-height: 2rem;
+    }
+    .em-preview table {
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      min-width: 100%;
+    }
+    .em-preview th,
+    .em-preview td {
+      border: 1px solid var(--color-border);
+      padding: 0.35rem 0.6rem;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .em-preview th {
+      background: var(--color-surface-2);
+      font-weight: 600;
+      text-align: left;
+    }
+    .em-preview-empty {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      font-style: italic;
+    }
+
+    /* ── FAQ ─────────────────────────────────── */
+    .faq-list { display: grid; gap: var(--sp-md); margin-top: var(--sp-md); }
+    .faq-item {
+      padding: var(--sp-md);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-surface);
+    }
+    .faq-item h3 { margin-bottom: 0.5rem; font-size: 1rem; }
+
+    @media (max-width: 820px) {
+      .em-layout { grid-template-columns: 1fr; }
+    }
+  </style>
+  <script src="../../assets/js/theme.js"></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="../../" class="site-logo" aria-label="TxConv ホーム">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="4 7 4 4 20 4 20 7"></polyline>
+        <line x1="9" y1="20" x2="15" y2="20"></line>
+        <line x1="12" y1="4" x2="12" y2="20"></line>
+      </svg>
+      TxConv
+    </a>
+    <nav class="site-nav" aria-label="メインナビゲーション">
+      <a href="../../#tools">ツール一覧</a>
+      <button id="theme-toggle" class="theme-toggle btn-icon" aria-label="ダークモードに切り替え" title="ダークモードに切り替え">
+        <svg class="ti-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <svg class="ti-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくずリスト">
+      <ol>
+        <li><a href="../../">TxConv</a></li>
+        <li><span aria-current="page">ExcelテーブルをMarkdownに変換</span></li>
+      </ol>
+    </nav>
+
+    <div class="tool-hero">
+      <h1>ExcelテーブルをMarkdownに変換</h1>
+      <p class="lead">ExcelやGoogleスプレッドシートのヘッダーとデータを貼り付けるだけで、Markdownテーブルに即変換。列の整列・セル内改行に対応。入力データはサーバーに送信されません。</p>
+    </div>
+
+    <!-- ツールUI -->
+    <section aria-label="ExcelテーブルをMarkdownに変換">
+      <div class="em-layout">
+
+        <!-- 左カラム: ヘッダー + 整列 + データ -->
+        <div>
+          <div class="em-card">
+            <div class="em-section-label">ヘッダー（1行目）</div>
+            <p class="em-hint">Excelのヘッダー行をコピーして貼り付けてください。</p>
+            <textarea id="em-header" class="em-textarea em-textarea-header"
+              placeholder="例：名前&#9;年齢&#9;部署"
+              aria-label="ヘッダー行"></textarea>
+          </div>
+
+          <!-- 整列コントロール（ヘッダー入力後に表示） -->
+          <div class="em-card" id="em-align-wrap" style="margin-top:var(--sp-md); display:none">
+            <div class="em-section-label">列の整列</div>
+            <div class="em-align-cols" id="em-align-cols" aria-label="列ごとの整列設定"></div>
+          </div>
+
+          <div class="em-card" style="margin-top:var(--sp-md)">
+            <div class="em-section-label">データ</div>
+            <p class="em-hint">Excelのデータ行をコピーして貼り付けてください（複数行可）。セル内改行（Alt+Enter）も対応しています。</p>
+            <textarea id="em-data" class="em-textarea em-textarea-data"
+              placeholder="例：田中&#9;30&#9;営業部"
+              aria-label="データ行"></textarea>
+            <div class="em-stats" id="em-stats" aria-live="polite"></div>
+          </div>
+
+          <div class="em-actions">
+            <button class="em-btn" id="em-clear">クリア</button>
+          </div>
+        </div>
+
+        <!-- 右カラム: 出力 + プレビュー -->
+        <div>
+          <div class="em-card">
+            <div class="em-section-label">Markdownテーブル</div>
+            <textarea id="em-output" class="em-textarea em-textarea-output"
+              readonly aria-label="Markdownテーブル出力"
+              placeholder="ヘッダーを入力すると変換結果が表示されます"></textarea>
+            <div class="em-error" id="em-error" aria-live="polite"></div>
+            <div class="em-actions">
+              <button class="em-btn em-btn-primary" id="em-copy">コピー</button>
+            </div>
+
+            <!-- プレビュー -->
+            <div class="em-preview-wrap">
+              <div class="em-preview-label">プレビュー</div>
+              <div class="em-preview" id="em-preview">
+                <p class="em-preview-empty">ヘッダーとデータを入力するとプレビューが表示されます。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- AdSense -->
+
+    <article>
+      <h2>ExcelテーブルをMarkdownに変換する方法</h2>
+      <p>GitHubのREADME・Notion・esa・Zennなど、Markdownを使うドキュメントにExcelのデータを貼り付けたいとき、手動でパイプ記号を入力するのは手間がかかります。このツールを使えばExcelからコピー&amp;ペーストするだけで即座にMarkdownテーブルを生成できます。</p>
+      <ol>
+        <li>Excelでヘッダー行（列名が入っている行）を選択してコピーし、「ヘッダー」欄に貼り付けます。</li>
+        <li>Excelでデータ行を選択してコピーし、「データ」欄に貼り付けます。複数行まとめてコピーできます。</li>
+        <li>ヘッダーが認識されると「列の整列」が表示されます。列ごとに左・中央・右寄せを設定できます。</li>
+        <li>入力と同時にMarkdownテーブルとプレビューがリアルタイムで生成されます。</li>
+        <li>「コピー」ボタンでクリップボードにコピーし、GitHubやNotionなどに貼り付けてください。</li>
+      </ol>
+      <p>Excelのセルをコピーするとタブ区切りでクリップボードに格納されます。セル内でAlt+Enterで改行したセルも正しく処理され、Markdown出力では <code>&lt;br&gt;</code> に変換されます。</p>
+    </article>
+
+    <section>
+      <h2>よくある質問</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <h3>Q: Googleスプレッドシートのデータも使えますか？</h3>
+          <p>はい、使えます。Googleスプレッドシートもセルをコピーするとタブ区切り形式でクリップボードに格納されるため、同じように貼り付けてご利用いただけます。</p>
+        </div>
+        <div class="faq-item">
+          <h3>Q: セル内に「|」（パイプ）が含まれている場合はどうなりますか？</h3>
+          <p>Markdownテーブルの区切り文字として機能しないよう、自動的に <code>\|</code> にエスケープ処理されます。</p>
+        </div>
+        <div class="faq-item">
+          <h3>Q: セル内改行（Alt+Enter）はどう処理されますか？</h3>
+          <p>ExcelでAlt+Enterを使って入力した改行は、コピー時に引用符付きセルとして格納されます。このツールはその形式を正しくパースし、Markdown出力では <code>&lt;br&gt;</code> に変換します。多くのMarkdownレンダラー（GitHub・Notion等）でそのまま改行として表示されます。</p>
+        </div>
+        <div class="faq-item">
+          <h3>Q: データの列数がヘッダーと合わない場合はどうなりますか？</h3>
+          <p>データの列数がヘッダーより少ない場合は空セルで補完されます。ヘッダーより多い列がある場合もそのまま出力されます。</p>
+        </div>
+        <div class="faq-item">
+          <h3>Q: 入力したデータはサーバーに送信されますか？</h3>
+          <p>送信されません。すべての処理はブラウザ内（クライアントサイド）で完結しています。入力したテキストが外部のサーバーに送信・保存されることは一切ありません。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="related-tools">
+      <h2>関連ツール</h2>
+      <ul class="related-list">
+        <li><a href="/tools/csv-json/">CSV↔JSON / TSV変換 — CSVをJSONに、JSONをCSVに変換</a></li>
+        <li><a href="/tools/markdown-preview/">Markdownプレビュー — MarkdownをリアルタイムにHTMLプレビュー</a></li>
+        <li><a href="/tools/bulk-replace/">一括テキスト置換 — 複数の置換ルールを登録して一括変換</a></li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<script type="module">
+  import { convertToMarkdown } from '../../assets/js/tools/excel-to-md.js';
+
+  // ── 状態 ─────────────────────────────────────────────────────
+  let alignments = [];
+
+  // ── DOM ──────────────────────────────────────────────────────
+  const headerEl    = document.getElementById('em-header');
+  const dataEl      = document.getElementById('em-data');
+  const outputEl    = document.getElementById('em-output');
+  const errorEl     = document.getElementById('em-error');
+  const statsEl     = document.getElementById('em-stats');
+  const copyBtn     = document.getElementById('em-copy');
+  const clearBtn    = document.getElementById('em-clear');
+  const alignWrapEl = document.getElementById('em-align-wrap');
+  const alignColsEl = document.getElementById('em-align-cols');
+  const previewEl   = document.getElementById('em-preview');
+
+  // ── HTML プレビュー生成 ───────────────────────────────────────
+  function escHtml(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function renderCellHtml(text) {
+    // HTML エスケープしてから \n を <br> に変換（安全）
+    return escHtml(text).replace(/\n/g, '<br>').replace(/\r/g, '');
+  }
+
+  function buildPreview(headers, parsedRows, aligns) {
+    if (!headers || headers.length === 0) {
+      return '<p class="em-preview-empty">ヘッダーとデータを入力するとプレビューが表示されます。</p>';
+    }
+    const colCount = headers.length;
+    let html = '<table><thead><tr>';
+    headers.forEach((h, i) => {
+      const a = aligns[i] && aligns[i] !== 'none' ? ` style="text-align:${aligns[i]}"` : '';
+      html += `<th${a}>${renderCellHtml(h)}</th>`;
+    });
+    html += '</tr></thead><tbody>';
+    (parsedRows || []).forEach(row => {
+      html += '<tr>';
+      for (let i = 0; i < colCount; i++) {
+        const a = aligns[i] && aligns[i] !== 'none' ? ` style="text-align:${aligns[i]}"` : '';
+        html += `<td${a}>${renderCellHtml(row[i] || '')}</td>`;
+      }
+      html += '</tr>';
+    });
+    html += '</tbody></table>';
+    return html;
+  }
+
+  // ── 整列コントロール描画 ──────────────────────────────────────
+  function renderAlignControls(colCount, headers) {
+    if (colCount === 0) {
+      alignWrapEl.style.display = 'none';
+      return;
+    }
+
+    // alignments 配列をカラム数に合わせる
+    while (alignments.length < colCount) alignments.push('none');
+    alignments = alignments.slice(0, colCount);
+
+    alignWrapEl.style.display = '';
+    alignColsEl.innerHTML = '';
+
+    headers.forEach((name, i) => {
+      const col = document.createElement('div');
+      col.className = 'em-align-col';
+
+      const nameEl = document.createElement('span');
+      nameEl.className = 'em-align-col-name';
+      nameEl.title = name;
+      nameEl.textContent = name || `列${i + 1}`;
+
+      const btnsEl = document.createElement('div');
+      btnsEl.className = 'em-align-btns';
+      btnsEl.setAttribute('role', 'group');
+      btnsEl.setAttribute('aria-label', `${name || `列${i + 1}`}の整列`);
+
+      [['left', '左'], ['center', '中'], ['right', '右']].forEach(([dir, label]) => {
+        const btn = document.createElement('button');
+        btn.className = 'em-align-btn' + (alignments[i] === dir ? ' is-active' : '');
+        btn.textContent = label;
+        btn.title = dir === 'left' ? '左寄せ' : dir === 'center' ? '中央寄せ' : '右寄せ';
+        btn.addEventListener('click', () => {
+          alignments[i] = alignments[i] === dir ? 'none' : dir;
+          renderAlignControls(colCount, headers);
+          convert();
+        });
+        btnsEl.appendChild(btn);
+      });
+
+      col.append(nameEl, btnsEl);
+      alignColsEl.appendChild(col);
+    });
+  }
+
+  // ── 変換メイン ────────────────────────────────────────────────
+  function convert() {
+    const { markdown, colCount, rowCount, headers, parsedRows, error } =
+      convertToMarkdown(headerEl.value, dataEl.value, alignments);
+
+    if (error && headerEl.value.trim() !== '') {
+      outputEl.value = '';
+      errorEl.textContent = error;
+      previewEl.innerHTML = '<p class="em-preview-empty">ヘッダーとデータを入力するとプレビューが表示されます。</p>';
+    } else {
+      outputEl.value = markdown;
+      errorEl.textContent = '';
+      previewEl.innerHTML = buildPreview(headers, parsedRows, alignments);
+    }
+
+    // 整列コントロール
+    renderAlignControls(colCount, headers);
+
+    // データ行数
+    const lines = dataEl.value === '' ? 0 : parsedRows ? parsedRows.length : 0;
+    statsEl.textContent = lines > 0 ? `${lines}行` : '';
+  }
+
+  // ── イベント ──────────────────────────────────────────────────
+  headerEl.addEventListener('input', convert);
+  dataEl.addEventListener('input', convert);
+
+  copyBtn.addEventListener('click', () => {
+    if (!outputEl.value) return;
+    navigator.clipboard.writeText(outputEl.value).then(() => {
+      copyBtn.textContent = 'コピーしました';
+      setTimeout(() => { copyBtn.textContent = 'コピー'; }, 1500);
+    });
+  });
+
+  clearBtn.addEventListener('click', () => {
+    headerEl.value = '';
+    dataEl.value = '';
+    outputEl.value = '';
+    errorEl.textContent = '';
+    statsEl.textContent = '';
+    alignments = [];
+    alignWrapEl.style.display = 'none';
+    previewEl.innerHTML = '<p class="em-preview-empty">ヘッダーとデータを入力するとプレビューが表示されます。</p>';
+  });
+</script>
+</body>
+</html>
