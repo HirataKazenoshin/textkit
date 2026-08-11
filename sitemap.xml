@@ -24,6 +24,12 @@
     <priority>0.4</priority>
   </url>
 
+  <url><loc>https://txconv.com/guides/</loc><lastmod>2026-08-11</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://txconv.com/guides/salesforce-api-naming/</loc><lastmod>2026-08-11</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://txconv.com/guides/csv-json/</loc><lastmod>2026-08-11</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://txconv.com/guides/json-format/</loc><lastmod>2026-08-11</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://txconv.com/guides/character-count/</loc><lastmod>2026-08-11</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
   <url>
     <loc>https://txconv.com/en/</loc>
     <lastmod>2026-08-11</lastmod>
