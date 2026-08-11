@@ -10,6 +10,33 @@
     <priority>1.0</priority>
   </url>
 
+  <url>
+    <loc>https://txconv.com/about/</loc>
+    <lastmod>2026-08-11</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://txconv.com/terms/</loc>
+    <lastmod>2026-08-11</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://txconv.com/en/</loc>
+    <lastmod>2026-08-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://txconv.com/en/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://txconv.com/" />
+  </url>
+
+  <url><loc>https://txconv.com/en/json-formatter/</loc><lastmod>2026-08-11</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://txconv.com/en/case-converter/</loc><lastmod>2026-08-11</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://txconv.com/en/base64/</loc><lastmod>2026-08-11</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
   <!-- Snake ↔ Camel case tool -->
   <url>
     <loc>https://txconv.com/tools/snake-camel/</loc>
