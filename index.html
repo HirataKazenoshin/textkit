@@ -9,6 +9,9 @@
   <meta name="description" content="TxConvはスネーク↔キャメルケース変換、全角↔半角変換、文字数カウント、Base64エンコード、URLエンコードなど便利なテキスト変換ツールを無料で提供します。サーバー送信なし・完全ブラウザ完結。">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://txconv.com/">
+  <link rel="alternate" hreflang="en" href="https://txconv.com/en/">
+  <link rel="alternate" hreflang="ja" href="https://txconv.com/">
+  <link rel="alternate" hreflang="x-default" href="https://txconv.com/">
 
   <!-- Open Graph -->
   <meta property="og:title" content="TxConv – 無料テキスト変換ツール集">
@@ -54,9 +57,10 @@
       </svg>
       TxConv
     </a>
-    <nav class="site-nav" aria-label="メインナビゲーション">
-      <a href="#tools">ツール一覧</a>
-      <a href="#about">サイトについて</a>
+  <nav class="site-nav" aria-label="メインナビゲーション">
+    <a href="#tools">ツール一覧</a>
+    <a href="#about">サイトについて</a>
+    <a href="/en/" lang="en">English</a>
     
       <button id="theme-toggle" class="theme-toggle btn-icon" aria-label="ダークモードに切り替え" title="ダークモードに切り替え">
         <!-- Moon (shown in light mode) -->
@@ -265,10 +269,20 @@
         <p>
           入力したテキストは<strong>一切サーバーに送信されません</strong>。すべての処理はお使いのブラウザ上で完結します。機密情報を含むテキストも安全にお使いいただけます。
         </p>
-        <h3>技術仕様</h3>
-        <p>
-          外部フレームワーク・CDN を一切使用しない Vanilla HTML / CSS / JavaScript で構築されています。高速な読み込みと優れたプライバシーを両立しています。
-        </p>
+      <h3>技術仕様</h3>
+      <p>
+        外部フレームワーク・CDN を一切使用しない Vanilla HTML / CSS / JavaScript で構築されています。高速な読み込みと優れたプライバシーを両立しています。
+      </p>
+
+      <h3>ツールの使い方と注意点</h3>
+      <p>
+        各ツールは、入力・変換・結果の確認という流れで利用できます。変換結果は必ず内容を確認したうえでご利用ください。とくに JSON、CSV、URL エンコード、Base64 は、用途や文字コードによって期待する結果が異なる場合があります。機密性の高い内容を扱う際にも、TxConv はブラウザ内で処理するため、入力内容を当サイトのサーバーへ送信しません。
+      </p>
+
+      <h3>広告について</h3>
+      <p>
+        TxConv は無料で提供しています。運営を継続するため、ページの内容と明確に区別した広告を掲載することがあります。広告はツールの操作や変換結果を妨げる位置には配置しません。詳しくは<a href="privacy/">プライバシーポリシー</a>および<a href="terms/">利用規約</a>をご確認ください。
+      </p>
       </div>
     </div>
   </section>
@@ -289,6 +303,7 @@
         <a href="tools/base64/">Base64</a>
         <a href="tools/url-encode/">URLエンコード</a>
         <a href="privacy/">プライバシーポリシー</a>
+        <a href="terms/">利用規約</a>
         <a href="contact/">お問い合わせ</a>
       </nav>
     </div>
