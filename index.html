@@ -93,6 +93,14 @@
   <link rel="stylesheet" href="assets/css/base.css?v=2">
   <link rel="stylesheet" href="assets/css/tool.css?v=2">
   <script src="/assets/js/theme.js"></script>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J1XW1KRWJZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-J1XW1KRWJZ");
+  </script>
 </head>
 <body>
 
@@ -344,14 +352,14 @@
           そのため、社内の機密文書、個人情報を含むテキスト、API キーやパスワードなど、センシティブな情報も安全に処理できます。
         </p>
         <p>
-          また、Cookie によるトラッキングも行っていません。詳しくは<a href="privacy/">プライバシーポリシー</a>をご確認ください。
+          なお、サイトの改善のためアクセス解析（Google Analytics）を利用しており、Cookie 等を通じて閲覧ページなどの利用状況を収集します。入力したテキストの内容が収集されることはありません。詳しくは<a href="privacy/">プライバシーポリシー</a>をご確認ください。
         </p>
 
         <h3>技術仕様</h3>
         <p>
-          TxConv は外部フレームワーク・CDN を一切使用しない Vanilla HTML / CSS / JavaScript で構築されています。
+          TxConv のツールは、外部フレームワークに依存しない Vanilla HTML / CSS / JavaScript で構築されています。
           React や Vue.js のような JavaScript フレームワークに依存しないため、ページサイズが小さく、読み込みが高速です。
-          また、外部 CDN への接続がないため、第三者サービスにデータが漏洩するリスクもありません。
+          変換処理そのものは外部と通信しないため、入力したテキストが第三者サービスに渡ることはありません（アクセス解析と広告のスクリプトを除く）。
         </p>
 
         <h3>よくある質問</h3>
