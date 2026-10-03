@@ -46,6 +46,56 @@
   }
   </script>
 
+  <!-- Structured Data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "ひらがなとカタカナの違いは何ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "ひらがなは主に日本語の文法要素（助詞・助動詞）や和語の表記に使われ、カタカナは外来語・外国の地名・人名・オノマトペなどに使われます。どちらも同じ音を表す表音文字ですが、用途が異なります。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "半角カタカナとは何ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "半角カタカナはJIS X 0201に由来する文字で、全角カタカナの半分の幅で表示されます。かつてのガラケーやレガシーシステムで使われましたが、現代では全角カタカナへの統一が推奨されています。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "長音符（ー）や促音（っ/ッ）は正しく変換されますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい。小文字（っ→ッ、ッ→っ）も正しく変換されます。長音符「ー」はカタカナにのみ存在するため、カタカナ→ひらがな変換でもそのまま保持されます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "漢字や英数字は変換されますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "いいえ。漢字・英数字・記号・句読点はそのまま保持されます。ひらがな・カタカナ（または半角カナ）のみが変換の対象です。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "半角カナの濁点・半濁点は正しく処理されますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい。「ｶﾞ」→「ガ」、「ﾊﾟ」→「パ」のように、基本文字と後続する濁点・半濁点を1文字に結合して変換します。"
+        }
+      }
+    ]
+  }
+  </script>
+
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="../../assets/css/base.css?v=2">

@@ -44,6 +44,54 @@
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" }
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Markdownとは？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Markdownは、2004年にJohn Gruberによって開発された軽量マークアップ言語です。プレーンテキストに簡単な記号を加えるだけで、見出し・太字・リスト・リンクなどの書式を表現でき、HTMLに変換して読みやすい文書を作成できます。GitHubのREADMEや技術ドキュメント、ブログ記事など幅広い場面で利用されています。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Mermaidダイアグラムとは？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Mermaidは、テキストベースでフローチャート・シーケンス図・ガントチャート・クラス図などを描画できるJavaScriptライブラリです。Markdownのコードブロック内に専用の記法で図を記述するだけで、自動的にSVG画像としてレンダリングされます。本ツールではMermaidに完全対応しており、リアルタイムで図を確認できます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Markdownの基本構文は？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Markdownの基本構文には、見出し（# ～ ######）、太字（**テキスト**）、斜体（*テキスト*）、順序なしリスト（- 項目）、順序付きリスト（1. 項目）、リンク（[テキスト](URL)）、画像（![代替テキスト](URL)）、コードブロック（```言語名）、テーブル（パイプ記法）、引用（> テキスト）などがあります。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Markdownファイルをプレビューする方法は？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "本ツールでは、左のエディタにMarkdownを直接入力するか、.mdまたは.txtファイルをドラッグ＆ドロップして読み込むことで、右側にリアルタイムでプレビューが表示されます。すべての処理はブラウザ内で完結し、サーバーにデータが送信されることはありません。プレビュー結果はHTMLファイルとしてダウンロードすることも可能です。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "このMarkdownプレビューツールは無料ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい、完全に無料でご利用いただけます。アカウント登録やログインも不要で、ブラウザさえあればどなたでもすぐにお使いいただけます。データはすべてブラウザ上で処理されるため、プライバシーも安全です。"
+        }
+      }
+    ]
+  }
+  </script>
 
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="shortcut icon" href="/favicon.ico">
@@ -330,16 +378,73 @@
 
     <!-- Article -->
     <article class="tool-article">
-      <h2>使い方</h2>
-      <p>左のエディタにMarkdownを入力すると、右にリアルタイムでプレビューされます。<strong>入力テキストはサーバーに送信されません。</strong></p>
-      <h3>ファイルの読み込み</h3>
-      <p><code>.md</code> / <code>.txt</code> ファイルをエディタエリアにドラッグ&amp;ドロップ、または「ファイルを開く」ボタンから読み込めます。</p>
-      <h3>Mermaidダイアグラム</h3>
-      <p><code>```mermaid</code> ブロックを使うと、フローチャート・シーケンス図・ガントチャートなどが描画されます。</p>
-      <h3>HTMLダウンロード</h3>
-      <p>「HTMLでダウンロード」でレンダリング済みのHTMLファイルを保存できます。MermaidはSVGで埋め込まれるためオフラインでも表示できます。</p>
-      <h3>リサイズ</h3>
-      <p>中央のバーをドラッグしてエディタとプレビューの表示幅を自由に調整できます。</p>
+      <h2>Markdownプレビューツールの使い方</h2>
+      <p>このMarkdownプレビューツールは、ブラウザ上でMarkdownをリアルタイムに確認できる無料のオンラインエディタです。以下の手順で簡単にご利用いただけます。</p>
+      <ol>
+        <li><strong>Markdownを入力する：</strong>左側のエディタにMarkdownテキストを直接入力します。入力内容は即座に右側のプレビューに反映されます。</li>
+        <li><strong>ファイルを読み込む：</strong><code>.md</code> または <code>.txt</code> ファイルを「ファイルを開く」ボタンから選択するか、エディタエリアにドラッグ＆ドロップして読み込みます。</li>
+        <li><strong>Mermaidダイアグラムを描画する：</strong><code>```mermaid</code> コードブロックを使用すると、フローチャートやシーケンス図がリアルタイムで描画されます。</li>
+        <li><strong>HTMLとしてダウンロードする：</strong>「HTMLでダウンロード」ボタンをクリックすると、プレビュー結果をHTMLファイルとして保存できます。MermaidダイアグラムはSVGとして埋め込まれるため、オフラインでも表示可能です。</li>
+        <li><strong>レイアウトを調整する：</strong>中央のバーをドラッグして、エディタとプレビューの表示幅を自由に変更できます。</li>
+      </ol>
+      <p><strong>すべての処理はブラウザ内で完結し、入力データがサーバーに送信されることはありません。</strong>安心してご利用ください。</p>
+
+      <h2>Markdownとは</h2>
+      <p>Markdown（マークダウン）は、2004年にJohn Gruberによって考案された<strong>軽量マークアップ言語</strong>です。プレーンテキストに「#」「*」「-」などの簡単な記号を加えるだけで、見出し・太字・リスト・リンクなどの書式をつけることができます。Markdownで書かれたテキストはHTMLに変換して表示されるため、特別なエディタがなくても読みやすい文書を作成できるのが特徴です。</p>
+      <p>Markdownは、そのシンプルさと可搬性の高さから、ソフトウェア開発者だけでなくライターや研究者にも広く支持されています。HTMLに比べて学習コストが低く、テキストエディタだけで執筆できるため、特に技術文書やメモの作成において効率的です。</p>
+
+      <h3>Markdownの基本構文</h3>
+      <p>Markdownには多くの構文がありますが、まずは以下の基本要素を覚えると日常的な文書作成に十分対応できます。</p>
+      <ul>
+        <li><strong>見出し：</strong><code># 見出し1</code>、<code>## 見出し2</code>、<code>### 見出し3</code> のように、<code>#</code> の数で見出しレベルを指定します（最大6段階）。</li>
+        <li><strong>太字・斜体：</strong><code>**太字**</code> で太字、<code>*斜体*</code> で斜体になります。<code>***太字斜体***</code> で両方を同時に適用できます。</li>
+        <li><strong>リスト：</strong>順序なしリストは <code>- 項目</code>、順序付きリストは <code>1. 項目</code> と記述します。インデントすることでネストも可能です。</li>
+        <li><strong>リンク：</strong><code>[表示テキスト](URL)</code> の形式でハイパーリンクを作成します。</li>
+        <li><strong>画像：</strong><code>![代替テキスト](画像URL)</code> で画像を埋め込みます。リンク構文の先頭に <code>!</code> を付ける形です。</li>
+        <li><strong>コードブロック：</strong>バッククォート3つ（<code>```</code>）で囲み、言語名を指定するとシンタックスハイライトが適用されます。インラインコードは <code>`コード`</code> で記述します。</li>
+        <li><strong>テーブル：</strong>パイプ記号（<code>|</code>）とハイフン（<code>---</code>）を使って表を作成します。GFM（GitHub Flavored Markdown）拡張として広く対応しています。</li>
+        <li><strong>引用：</strong><code>&gt; テキスト</code> でブロック引用を作成します。</li>
+      </ul>
+
+      <h3>Mermaidダイアグラムとは</h3>
+      <p>Mermaidは、テキストベースの定義からフローチャートやシーケンス図、ガントチャートなどの<strong>ダイアグラムを自動生成</strong>できるJavaScriptライブラリです。Markdownコードブロック内に専用の記法で図を記述するだけで、SVG画像としてレンダリングされます。</p>
+      <p>本ツールではMermaidに完全対応しており、エディタ内で記述した図がリアルタイムでプレビューされます。以下は各ダイアグラムの簡単な例です。</p>
+      <ul>
+        <li><strong>フローチャート：</strong><code>graph LR; A[開始] --&gt; B{判定}; B --Yes--&gt; C[処理]; B --No--&gt; D[終了];</code> のように記述し、処理の流れを視覚化します。</li>
+        <li><strong>シーケンス図：</strong><code>sequenceDiagram; Alice-&gt;&gt;Bob: リクエスト; Bob--&gt;&gt;Alice: レスポンス;</code> のように、システム間のメッセージのやり取りを時系列で表現します。</li>
+        <li><strong>ガントチャート：</strong><code>gantt; title プロジェクト計画; section 開発; タスクA :a1, 2024-01-01, 30d;</code> のように、プロジェクトのスケジュールを視覚的に管理できます。</li>
+      </ul>
+
+      <h3>Markdownの活用シーン</h3>
+      <p>Markdownは、さまざまな場面で活用されています。以下に代表的な活用例を紹介します。</p>
+      <ul>
+        <li><strong>GitHub README：</strong>GitHubをはじめとするコードホスティングサービスでは、リポジトリのトップページに表示されるREADME.mdファイルにMarkdownが採用されています。プロジェクトの概要・インストール手順・使い方などをわかりやすくまとめることができます。</li>
+        <li><strong>技術ドキュメント：</strong>APIリファレンスや開発ガイドなどの技術文書をMarkdownで記述し、MkDocsやDocusaurusなどの静的サイトジェネレーターでWebサイトとして公開するケースが増えています。</li>
+        <li><strong>ブログ記事：</strong>HugoやJekyllなどのブログエンジンでは、記事をMarkdownで執筆します。HTMLタグを意識せずにコンテンツの作成に集中できるため、執筆効率が大幅に向上します。</li>
+        <li><strong>メモ・ノート：</strong>ObsidianやNotionなどのノートアプリではMarkdown記法をサポートしており、日常のメモや議事録、学習ノートの作成に広く使われています。</li>
+      </ul>
+
+      <h2>よくある質問（FAQ）</h2>
+      <details>
+        <summary>Markdownとは？</summary>
+        <p>Markdownは、2004年にJohn Gruberによって開発された軽量マークアップ言語です。プレーンテキストに簡単な記号を加えるだけで、見出し・太字・リスト・リンクなどの書式を表現でき、HTMLに変換して読みやすい文書を作成できます。GitHubのREADMEや技術ドキュメント、ブログ記事など幅広い場面で利用されています。</p>
+      </details>
+      <details>
+        <summary>Mermaidダイアグラムとは？</summary>
+        <p>Mermaidは、テキストベースでフローチャート・シーケンス図・ガントチャート・クラス図などを描画できるJavaScriptライブラリです。Markdownのコードブロック内に専用の記法で図を記述するだけで、自動的にSVG画像としてレンダリングされます。本ツールではMermaidに完全対応しており、リアルタイムで図を確認できます。</p>
+      </details>
+      <details>
+        <summary>Markdownの基本構文は？</summary>
+        <p>Markdownの基本構文には、見出し（# ～ ######）、太字（**テキスト**）、斜体（*テキスト*）、順序なしリスト（- 項目）、順序付きリスト（1. 項目）、リンク（[テキスト](URL)）、画像（![代替テキスト](URL)）、コードブロック（```言語名）、テーブル（パイプ記法）、引用（> テキスト）などがあります。</p>
+      </details>
+      <details>
+        <summary>Markdownファイルをプレビューする方法は？</summary>
+        <p>本ツールでは、左のエディタにMarkdownを直接入力するか、.mdまたは.txtファイルをドラッグ＆ドロップして読み込むことで、右側にリアルタイムでプレビューが表示されます。すべての処理はブラウザ内で完結し、サーバーにデータが送信されることはありません。プレビュー結果はHTMLファイルとしてダウンロードすることも可能です。</p>
+      </details>
+      <details>
+        <summary>このMarkdownプレビューツールは無料ですか？</summary>
+        <p>はい、完全に無料でご利用いただけます。アカウント登録やログインも不要で、ブラウザさえあればどなたでもすぐにお使いいただけます。データはすべてブラウザ上で処理されるため、プライバシーも安全です。</p>
+      </details>
     </article>
 
     <!-- Related Tools -->

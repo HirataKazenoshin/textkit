@@ -49,6 +49,56 @@
   }
   </script>
 
+  <!-- Structured Data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "snake_caseとは何ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "snake_case（スネークケース）は、単語をアンダースコア（_）で区切り、すべて小文字で記述する命名規則です。PythonやRuby、データベースのカラム名などで広く使われています。例: user_first_name, get_total_count"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "camelCaseとsnake_caseの違いは何ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "camelCase（キャメルケース）は単語の区切りを大文字で表現し、スペースや記号を使いません（例: myVariableName）。一方、snake_caseはアンダースコアで単語を区切り、すべて小文字にします（例: my_variable_name）。JavaScriptやJavaではcamelCaseが主流で、PythonやRubyではsnake_caseが標準です。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "どのプログラミング言語でどのケース（命名規則）を使いますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "主な使い分けは以下の通りです。snake_case: Python、Ruby、Rust、PHP、SQL。camelCase: JavaScript、TypeScript、Java、C#の変数・関数名。PascalCase: クラス名（Java、C#、TypeScript）、Reactコンポーネント。kebab-case: CSSクラス名、HTMLの属性、URLスラッグ。SCREAMING_SNAKE_CASE: 定数（多くの言語共通）。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "PascalCaseとcamelCaseの違いは何ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "PascalCase（パスカルケース）は最初の単語も大文字で始まります（例: MyClassName）。camelCase（キャメルケース）は最初の単語だけ小文字で始まり、2番目以降の単語を大文字にします（例: myVariableName）。PascalCaseはUpperCamelCaseとも呼ばれ、クラス名やコンポーネント名に使われます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "命名規則を統一するメリットは何ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "命名規則を統一することで、コードの可読性が向上し、チーム開発での認識のズレを防げます。また、リンター（ESLint、Pylintなど）による自動チェックが可能になり、コードレビューの効率も上がります。一貫した命名規則はプロジェクトの保守性を大きく向上させます。"
+        }
+      }
+    ]
+  }
+  </script>
+
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="../../assets/css/base.css?v=2">
@@ -171,18 +221,124 @@
 
     <!-- Article / Info -->
     <article class="tool-article">
-      <h2>ケース変換について</h2>
+
+      <h2>ケース変換ツールの使い方</h2>
       <p>
-        プログラミングではプロジェクトや言語によって異なる命名規則（ネーミングコンベンション）が使われます。このツールで主要な形式を素早く変換できます。
+        このツールを使えば、プログラミングで使われる主要な命名規則（ケース）をワンクリックで相互変換できます。以下の手順で簡単にご利用いただけます。
       </p>
-      <h3>対応フォーマット</h3>
+      <ol>
+        <li><strong>変換先のケースを選択</strong>：ツール上部のタブから、変換したいケース（<code>snake_case</code>、<code>camelCase</code>、<code>PascalCase</code>、<code>kebab-case</code>、<code>SCREAMING_SNAKE_CASE</code>）を選びます。</li>
+        <li><strong>テキストを入力</strong>：左側の入力欄に変換元のテキストを入力します。例えば <code>getUserName</code> や <code>user_first_name</code> などの識別子を入力してください。</li>
+        <li><strong>リアルタイムで結果を確認</strong>：入力と同時に右側の出力欄に変換結果が表示されます。サーバーへの送信は一切行わないため、機密性の高いコードでも安心です。</li>
+        <li><strong>結果をコピー</strong>：出力欄の右上にあるコピーボタンをクリックすると、結果をクリップボードにコピーできます。</li>
+      </ol>
       <p>
-        <code>snake_case</code>（Python・Ruby・DBカラム名）、<code>camelCase</code>（JavaScript・Java変数）、<code>PascalCase</code>（クラス名・React コンポーネント）、<code>kebab-case</code>（CSS クラス・URL）、<code>SCREAMING_SNAKE_CASE</code>（定数）に対応。
+        複数行にも対応しています。1行に1つの識別子を入力すると、各行が独立して変換されます。大量の変数名やカラム名を一括変換したい場合に便利です。
       </p>
-      <h3>複数行対応</h3>
+
+      <h2>命名規則（ネーミングコンベンション）とは</h2>
       <p>
-        複数の単語を一度に変換するには、1行に1つの識別子を入力してください。各行が独立して変換されます。
+        命名規則（ネーミングコンベンション）とは、プログラミングにおいて変数名・関数名・クラス名・定数名などの識別子を命名する際のルールです。チーム開発では、統一された命名規則に従うことでコードの可読性が大幅に向上し、他の開発者がコードを素早く理解できるようになります。
       </p>
+      <p>
+        多くのプログラミング言語やフレームワークには推奨される命名規則があり、リンター（ESLint、Pylint、RuboCopなど）によって自動的にチェックすることも可能です。命名規則を守ることは、バグの予防やコードレビューの効率化にもつながります。
+      </p>
+      <p>
+        以下では、代表的な5つのケース（命名規則）について詳しく解説します。
+      </p>
+
+      <h3>snake_case（スネークケース）</h3>
+      <p>
+        <code>snake_case</code>は、単語をアンダースコア（<code>_</code>）で区切り、すべて小文字で記述するスタイルです。アンダースコアが蛇のように見えることから「スネークケース」と呼ばれています。
+      </p>
+      <p>
+        <strong>使用される場面：</strong>Python（PEP 8で推奨）、Ruby、Rust、PHP（変数名・関数名）、SQLのテーブル名やカラム名、C言語の関数名などで標準的に使われます。
+      </p>
+      <p>
+        <strong>例：</strong><code>user_name</code>、<code>get_total_count</code>、<code>max_retry_limit</code>、<code>created_at</code>
+      </p>
+
+      <h3>camelCase（キャメルケース / ローワーキャメルケース）</h3>
+      <p>
+        <code>camelCase</code>は、最初の単語を小文字で始め、2番目以降の単語の先頭を大文字にするスタイルです。大文字がラクダのこぶのように見えることから「キャメルケース」と呼ばれます。正確には「ローワーキャメルケース（lowerCamelCase）」とも呼ばれ、PascalCaseと区別されます。
+      </p>
+      <p>
+        <strong>使用される場面：</strong>JavaScript / TypeScriptの変数名・関数名（最も一般的）、Javaの変数名・メソッド名、C#のローカル変数・パラメータ名、Go言語のエクスポートされない識別子などで使われます。
+      </p>
+      <p>
+        <strong>例：</strong><code>userName</code>、<code>getTotalCount</code>、<code>maxRetryLimit</code>、<code>isActive</code>
+      </p>
+
+      <h3>PascalCase（パスカルケース / アッパーキャメルケース）</h3>
+      <p>
+        <code>PascalCase</code>は、すべての単語の先頭を大文字にするスタイルです。「アッパーキャメルケース（UpperCamelCase）」とも呼ばれます。プログラミング言語Pascalに由来する名前です。
+      </p>
+      <p>
+        <strong>使用される場面：</strong>ほぼすべての言語でクラス名に使われます。具体的には、Java・C#・TypeScriptのクラス名・インターフェース名、Reactコンポーネント名（必須）、Go言語のエクスポートされる識別子、.NETのメソッド名・プロパティ名などが挙げられます。
+      </p>
+      <p>
+        <strong>例：</strong><code>UserProfile</code>、<code>GetTotalCount</code>、<code>HttpClientFactory</code>、<code>MyAppComponent</code>
+      </p>
+
+      <h3>kebab-case（ケバブケース）</h3>
+      <p>
+        <code>kebab-case</code>は、単語をハイフン（<code>-</code>）で区切り、すべて小文字で記述するスタイルです。単語がケバブの串に刺さっているように見えることから名付けられました。
+      </p>
+      <p>
+        <strong>使用される場面：</strong>CSSのクラス名・プロパティ名（BEM記法でも使用）、HTMLのカスタム属性（<code>data-*</code>）、URLのスラッグ、npmパッケージ名、CLIコマンドのオプション名などで広く使われます。多くのプログラミング言語ではハイフンが減算演算子と解釈されるため、変数名には使用できません。
+      </p>
+      <p>
+        <strong>例：</strong><code>user-name</code>、<code>get-total-count</code>、<code>my-app-component</code>、<code>background-color</code>
+      </p>
+
+      <h3>SCREAMING_SNAKE_CASE（スクリーミングスネークケース）</h3>
+      <p>
+        <code>SCREAMING_SNAKE_CASE</code>は、snake_caseと同様にアンダースコアで単語を区切りますが、すべて大文字で記述します。「叫んでいる（screaming）」ように見えることからこの名前がつきました。コンスタントケース（CONSTANT_CASE）とも呼ばれます。
+      </p>
+      <p>
+        <strong>使用される場面：</strong>ほぼすべてのプログラミング言語で定数名に使われます。Javaの<code>static final</code>変数、Pythonのモジュールレベル定数、JavaScriptの<code>const</code>定数（特にグローバルな設定値）、C/C++の<code>#define</code>マクロ、環境変数名などが代表的な用途です。
+      </p>
+      <p>
+        <strong>例：</strong><code>MAX_RETRY_COUNT</code>、<code>API_BASE_URL</code>、<code>DEFAULT_TIMEOUT</code>、<code>DATABASE_HOST</code>
+      </p>
+
+      <h2>よくある質問（FAQ）</h2>
+
+      <details>
+        <summary>snake_caseとは何ですか？</summary>
+        <p>
+          snake_case（スネークケース）は、単語をアンダースコア（<code>_</code>）で区切り、すべて小文字で記述する命名規則です。PythonやRuby、データベースのカラム名などで広く使われています。例えば、<code>user_first_name</code>や<code>get_total_count</code>のように記述します。可読性が高く、特にアンダースコアが空白の代わりとして機能するため、長い識別子でも読みやすいのが特徴です。
+        </p>
+      </details>
+
+      <details>
+        <summary>camelCaseとsnake_caseの違いは何ですか？</summary>
+        <p>
+          camelCase（キャメルケース）は単語の区切りを大文字で表現し、スペースや記号を使いません（例: <code>myVariableName</code>）。一方、snake_caseはアンダースコアで単語を区切り、すべて小文字にします（例: <code>my_variable_name</code>）。JavaScriptやJavaではcamelCaseが主流で、PythonやRubyではsnake_caseが標準です。プロジェクトの言語やフレームワークに合わせて使い分けるのが一般的です。
+        </p>
+      </details>
+
+      <details>
+        <summary>どのプログラミング言語でどのケース（命名規則）を使いますか？</summary>
+        <p>
+          主な使い分けは以下の通りです。<strong>snake_case</strong>: Python、Ruby、Rust、PHP、SQL。<strong>camelCase</strong>: JavaScript、TypeScript、Java、C#の変数・関数名。<strong>PascalCase</strong>: クラス名（Java、C#、TypeScript）、Reactコンポーネント。<strong>kebab-case</strong>: CSSクラス名、HTMLの属性、URLスラッグ。<strong>SCREAMING_SNAKE_CASE</strong>: 定数（多くの言語共通）。ただし、これらはあくまで慣例であり、チームやプロジェクトの規約が優先されます。
+        </p>
+      </details>
+
+      <details>
+        <summary>PascalCaseとcamelCaseの違いは何ですか？</summary>
+        <p>
+          PascalCase（パスカルケース）は最初の単語も含めてすべての単語の先頭を大文字にします（例: <code>MyClassName</code>）。camelCase（キャメルケース）は最初の単語だけ小文字で始まり、2番目以降の単語を大文字にします（例: <code>myVariableName</code>）。PascalCaseはUpperCamelCaseとも呼ばれ、クラス名やReactコンポーネント名に使われます。camelCaseは変数名やメソッド名に使われるのが一般的です。
+        </p>
+      </details>
+
+      <details>
+        <summary>命名規則を統一するメリットは何ですか？</summary>
+        <p>
+          命名規則を統一することで、コードの可読性が向上し、チーム開発での認識のズレを防げます。また、ESLintやPylintなどのリンターによる自動チェックが可能になり、コードレビューの効率も上がります。新しいメンバーがプロジェクトに参加した際のオンボーディングもスムーズになり、一貫した命名規則はプロジェクト全体の保守性を大きく向上させます。
+        </p>
+      </details>
+
     </article>
 
     <!-- Related Tools -->

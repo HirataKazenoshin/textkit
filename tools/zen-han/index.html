@@ -48,6 +48,56 @@
   }
   </script>
 
+  <!-- Structured Data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "全角と半角の違いは何ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "全角文字は日本語フォントで1文字分の幅を占め、主にJIS X 0208規格に由来します。半角文字はその半分の幅で、ASCII文字やJIS X 0201のカタカナが該当します。Unicodeでは全角英数字はU+FF01〜U+FF5Eに、半角カタカナはU+FF65〜U+FF9Fに割り当てられています。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "なぜ全角半角変換が必要なのですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Webフォームのバリデーション、データベースの検索精度向上、CSVやExcelデータのクレンジング、住所・電話番号の表記統一など、多くの実務場面で全角半角の統一が求められます。文字幅が混在するとデータの重複判定や並び替えに不具合が生じるため、正規化処理が不可欠です。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "全角カタカナと半角カタカナの違いは何ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "全角カタカナ（ア〜ン）はUnicodeのU+30A0〜U+30FFに含まれ、濁点・半濁点が1文字として表現されます。半角カタカナ（ｱ〜ﾝ）はU+FF65〜U+FF9Fに含まれ、濁音・半濁音は基本文字＋濁点記号の2文字で表現されるため、文字数が異なる場合があります。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "プログラムで全角半角変換を行う方法は？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "JavaScriptではString.prototype.charCodeAt()とString.fromCharCode()を使い、Unicodeコードポイントのオフセット（0xFEE0）を加減算して変換できます。Pythonではunicodedataモジュールのnormalize('NFKC', text)で半角化が可能です。カタカナは濁点結合の処理が必要なため、専用のマッピングテーブルを用いるのが確実です。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "全角スペースと半角スペースはどう違いますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "全角スペース（U+3000）は日本語の1文字分の幅を持ち、半角スペース（U+0020）はその半分です。HTMLやプログラムのソースコードでは半角スペースが標準ですが、日本語文書では全角スペースが使われることがあり、データ処理時には統一が必要です。"
+        }
+      }
+    ]
+  }
+  </script>
+
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="../../assets/css/base.css?v=2">
@@ -181,18 +231,127 @@
 
     <!-- Article / Info -->
     <article class="tool-article">
-      <h2>全角・半角とは</h2>
+
+      <h2>全角・半角変換ツールの使い方</h2>
       <p>
-        日本語テキストには「全角（全角幅）」と「半角（半角幅）」の2種類の文字があります。全角文字は通常の日本語フォントで1文字分の幅を持ち、半角文字はその半分の幅です。
+        本ツールは、テキストエリアに入力された文字をリアルタイムで全角から半角、または半角から全角へ変換します。画面上部のタブで変換方向（「全角 → 半角」「半角 → 全角」）を切り替え、チェックボックスで変換対象（英数字・記号、カタカナ）を選択できます。変換処理はすべてブラウザ上の JavaScript で完結し、サーバーへのデータ送信は一切行いません。個人情報や機密データを含むテキストでも安心してご利用いただけます。変換結果はワンクリックでクリップボードにコピーでき、そのまま他のアプリケーションに貼り付けられます。
       </p>
-      <h3>変換対象の文字種</h3>
+
+      <h2>全角と半角とは</h2>
       <p>
-        英大文字（Ａ–Ｚ / A–Z）、英小文字（ａ–ｚ / a–z）、数字（０–９ / 0–9）、記号（！＠＃ など）、全角スペース・半角スペース、カタカナ（ア行・カ行・濁音・半濁音を含む全対応）。
+        「全角」と「半角」は、日本語コンピューティングにおける文字幅の概念です。この区別は1970年代の日本語文字コード規格に起源を持ちます。JIS X 0201（1969年制定）では英数字とカタカナが1バイト（半角幅）で定義され、JIS X 0208（1978年制定）では漢字・ひらがな・全角カタカナなどが2バイト（全角幅）で表現されました。
       </p>
-      <h3>主な用途</h3>
       <p>
-        フォーム入力値の正規化、データベースの文字統一、検索精度向上のためのインデックス正規化、Excel・CSV データのクレンジングなど。
+        現在主流のUnicodeでは、文字のバイト数と表示幅は直接対応しませんが、歴史的経緯から全角・半角の区別は残っています。Unicode上では全角英数字は U+FF01〜U+FF5E（Fullwidth Forms）に配置され、対応する半角文字（U+0021〜U+007E、いわゆるASCII）との間にはコードポイント差 0xFEE0 が存在します。半角カタカナは U+FF65〜U+FF9F に配置されています。Unicode正規化形式のNFKC（Normalization Form KC）を適用すると、全角英数字は対応する半角ASCII文字に変換されます。
       </p>
+
+      <h3>全角半角変換が必要なケース</h3>
+      <p>
+        実務では以下のような場面で全角半角の統一が求められます。
+      </p>
+      <ul>
+        <li><strong>フォーム入力のバリデーション</strong> — ユーザーが全角で入力した電話番号やメールアドレスを半角に正規化し、正しい形式チェックを行う。</li>
+        <li><strong>データの正規化・名寄せ</strong> — 顧客データベースで「東京都」と「東京都」のように全角半角が混在すると重複判定が困難になるため、統一処理を行う。</li>
+        <li><strong>住所・電話番号の表記統一</strong> — 郵便番号や電話番号のハイフン、番地の数字を半角に揃えることで、帳票出力や外部システム連携時の不具合を防ぐ。</li>
+        <li><strong>CSV・Excelデータのクレンジング</strong> — 複数ソースから集めたCSVデータで全角数字と半角数字が混在する場合、集計・ソート・フィルタリングが正しく動作しない。事前に半角へ統一することでデータ品質を担保する。</li>
+        <li><strong>検索精度の向上</strong> — 全文検索エンジンのインデックス構築時に文字幅を正規化することで、「ＡＢＣ」と「ABC」を同一トークンとして扱い、検索漏れを防止する。</li>
+      </ul>
+
+      <h3>対応する文字種と変換例</h3>
+      <p>本ツールが対応する文字種と、それぞれの変換例は以下の通りです。</p>
+      <table style="width:100%; border-collapse:collapse; margin:1em 0; font-size:var(--text-sm);">
+        <thead>
+          <tr style="border-bottom:2px solid var(--color-border); text-align:left;">
+            <th style="padding:0.5em;">文字種</th>
+            <th style="padding:0.5em;">全角</th>
+            <th style="padding:0.5em;">半角</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--color-border);">
+            <td style="padding:0.5em;">英大文字</td>
+            <td style="padding:0.5em;">Ａ Ｂ Ｃ … Ｚ</td>
+            <td style="padding:0.5em;">A B C … Z</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--color-border);">
+            <td style="padding:0.5em;">英小文字</td>
+            <td style="padding:0.5em;">ａ ｂ ｃ … ｚ</td>
+            <td style="padding:0.5em;">a b c … z</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--color-border);">
+            <td style="padding:0.5em;">数字</td>
+            <td style="padding:0.5em;">０ １ ２ … ９</td>
+            <td style="padding:0.5em;">0 1 2 … 9</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--color-border);">
+            <td style="padding:0.5em;">記号</td>
+            <td style="padding:0.5em;">！ ＠ ＃ ＄ ％</td>
+            <td style="padding:0.5em;">! @ # $ %</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--color-border);">
+            <td style="padding:0.5em;">スペース</td>
+            <td style="padding:0.5em;">（U+3000）</td>
+            <td style="padding:0.5em;">（U+0020）</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--color-border);">
+            <td style="padding:0.5em;">カタカナ</td>
+            <td style="padding:0.5em;">アイウエオ ガギグ</td>
+            <td style="padding:0.5em;">ｱｲｳｴｵ ｶﾞｷﾞｸﾞ</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        カタカナの濁音・半濁音は特に注意が必要です。全角では「ガ」（1文字）ですが、半角では「ｶﾞ」（基本文字＋濁点の2文字）となり、文字数が変わります。本ツールではこの結合処理も正しく行います。
+      </p>
+
+      <h3>プログラミングでの全角半角処理</h3>
+      <p>
+        開発者が全角半角変換をコードで実装する場合、主に2つのアプローチがあります。
+      </p>
+      <p>
+        <strong>1. Unicodeコードポイントのオフセット計算</strong> — 全角英数字・記号（U+FF01〜U+FF5E）と対応するASCII文字（U+0021〜U+007E）の差は一律 0xFEE0 です。JavaScriptでは <code>str.charCodeAt(i) - 0xFEE0</code> で半角化、<code>str.charCodeAt(i) + 0xFEE0</code> で全角化できます。全角スペース（U+3000）は個別に半角スペース（U+0020）へマッピングします。
+      </p>
+      <p>
+        <strong>2. 正規表現とマッピングテーブル</strong> — カタカナは濁点・半濁点の結合処理が必要なため、単純なオフセット計算では対応できません。全角カタカナから半角カタカナへの変換テーブル（例：「ガ」→「ｶﾞ」）を用意し、正規表現 <code>/[ァ-ヶ]/g</code> でマッチさせて置換するのが確実な方法です。Pythonでは <code>unicodedata.normalize('NFKC', text)</code> を使うことで、全角英数字の半角化とカタカナの全角化を一括で行えます。
+      </p>
+
+      <h2>よくある質問（FAQ）</h2>
+
+      <details>
+        <summary>全角と半角の違いは何ですか？</summary>
+        <p>
+          全角文字は日本語フォントで1文字分の幅を占め、主にJIS X 0208規格に由来します。半角文字はその半分の幅で、ASCII文字やJIS X 0201のカタカナが該当します。Unicodeでは全角英数字はU+FF01〜U+FF5Eに、半角カタカナはU+FF65〜U+FF9Fに割り当てられています。
+        </p>
+      </details>
+
+      <details>
+        <summary>なぜ全角半角変換が必要なのですか？</summary>
+        <p>
+          Webフォームのバリデーション、データベースの検索精度向上、CSVやExcelデータのクレンジング、住所・電話番号の表記統一など、多くの実務場面で全角半角の統一が求められます。文字幅が混在するとデータの重複判定や並び替えに不具合が生じるため、正規化処理が不可欠です。
+        </p>
+      </details>
+
+      <details>
+        <summary>全角カタカナと半角カタカナの違いは何ですか？</summary>
+        <p>
+          全角カタカナ（ア〜ン）はUnicodeのU+30A0〜U+30FFに含まれ、濁点・半濁点が1文字として表現されます。半角カタカナ（ｱ〜ﾝ）はU+FF65〜U+FF9Fに含まれ、濁音・半濁音は基本文字＋濁点記号の2文字で表現されるため、文字数が異なる場合があります。
+        </p>
+      </details>
+
+      <details>
+        <summary>プログラムで全角半角変換を行う方法は？</summary>
+        <p>
+          JavaScriptではString.prototype.charCodeAt()とString.fromCharCode()を使い、Unicodeコードポイントのオフセット（0xFEE0）を加減算して変換できます。Pythonではunicodedataモジュールのnormalize('NFKC', text)で半角化が可能です。カタカナは濁点結合の処理が必要なため、専用のマッピングテーブルを用いるのが確実です。
+        </p>
+      </details>
+
+      <details>
+        <summary>全角スペースと半角スペースはどう違いますか？</summary>
+        <p>
+          全角スペース（U+3000）は日本語の1文字分の幅を持ち、半角スペース（U+0020）はその半分です。HTMLやプログラムのソースコードでは半角スペースが標準ですが、日本語文書では全角スペースが使われることがあり、データ処理時には統一が必要です。
+        </p>
+      </details>
+
     </article>
 
     <!-- Related Tools -->

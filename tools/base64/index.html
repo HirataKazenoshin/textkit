@@ -48,6 +48,56 @@
   }
   </script>
 
+  <!-- Structured Data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Base64エンコードとは何ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Base64エンコードは、バイナリデータを64種類のASCII文字（A-Z、a-z、0-9、+、/）とパディング文字（=）を使ってテキスト形式に変換するエンコード方式です。RFC 4648で標準化されており、メール添付やData URIなどで広く使われています。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Base64は暗号化ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "いいえ、Base64は暗号化ではありません。Base64は単なるエンコード方式であり、誰でも簡単にデコードして元のデータを復元できます。機密データの保護にはAESやRSAなどの暗号化アルゴリズムを使用してください。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "URLセーフBase64とは何ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "URLセーフBase64（RFC 4648 §5）は、標準Base64の「+」を「-」に、「/」を「_」に置き換え、末尾のパディング「=」を省略した形式です。URLやファイル名に安全に使用でき、JWTなどで採用されています。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "なぜBase64を使うのですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Base64は、バイナリデータをテキストのみを扱うプロトコルやフォーマットで安全に転送するために使います。主な用途はメール添付（MIME）、CSSのData URI、JWT、HTTP Basic認証、XMLやJSONへのバイナリデータ埋め込みなどです。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Base64エンコードするとデータサイズはどうなりますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Base64エンコードすると、データサイズは元の約1.33倍（約33%増）になります。これは3バイトの入力が4文字の出力になるためです。さらに改行やパディングにより若干増加する場合があります。"
+        }
+      }
+    ]
+  }
+  </script>
+
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="../../assets/css/base.css?v=2">
@@ -183,22 +233,125 @@
 
     <!-- Article / Info -->
     <article class="tool-article">
-      <h2>Base64 エンコードとは</h2>
+
+      <h2>Base64エンコード・デコードツールの使い方</h2>
       <p>
-        Base64 は、バイナリデータを ASCII テキストとして表現するためのエンコード方式です。64 種類の印刷可能な ASCII 文字（A–Z、a–z、0–9、+、/）を使ってデータを表現します。
+        このツールを使えば、テキストとBase64文字列を簡単に相互変換できます。以下の手順でご利用ください。
       </p>
-      <h3>主な用途</h3>
+      <ol>
+        <li><strong>モードを選択</strong>：画面上部のタブから「エンコード」「デコード」「URLセーフ エンコード」「URLセーフ デコード」のいずれかを選びます。</li>
+        <li><strong>テキストを入力</strong>：左側のテキストエリアに変換したい文字列を入力します。日本語を含むあらゆるUTF-8テキストに対応しています。</li>
+        <li><strong>リアルタイム変換</strong>：入力と同時に右側のテキストエリアに変換結果が表示されます。サーバーへの送信は一切行わず、すべてブラウザ内で処理されます。</li>
+        <li><strong>結果をコピー</strong>：右側パネルのコピーボタンをクリックすると、変換結果がクリップボードにコピーされます。</li>
+      </ol>
+
+      <h2>Base64エンコードの仕組み</h2>
       <p>
-        メール添付ファイルのエンコード（MIME）、CSS の Data URI、JWT（JSON Web Token）のペイロード、HTTP Basic 認証ヘッダー、API レスポンスのバイナリデータ転送などで使われます。
+        Base64は、RFC 4648で標準化されたエンコード方式です。バイナリデータ（0と1の列）をテキスト形式に変換することで、テキストベースのプロトコルでもバイナリデータを安全にやり取りできるようにします。
       </p>
-      <h3>URLセーフ Base64 とは</h3>
       <p>
-        標準 Base64 の <code>+</code> を <code>-</code> に、<code>/</code> を <code>_</code> に置き換え、末尾の <code>=</code> パディングを除去した形式（RFC 4648 §5）。URL やファイル名に安全に使用できます。JWT でも使われています。
+        具体的な変換の流れは以下の通りです。まず、入力データを<strong>6ビットずつのグループ</strong>に分割します。通常のバイトは8ビットですが、Base64では6ビット単位で処理します。3バイト（24ビット）の入力が、4つの6ビットグループ（4文字）に変換されます。
       </p>
-      <h3>日本語について</h3>
       <p>
-        このツールは UTF-8 エンコーディングを使用して日本語を正しく Base64 に変換します。Python の <code>base64.b64encode(text.encode('utf-8'))</code> と同等の結果が得られます。
+        各6ビットグループ（0〜63の値）は、以下の<strong>Base64文字テーブル</strong>に従って1文字のASCII文字にマッピングされます。
       </p>
+      <ul>
+        <li><code>A</code>〜<code>Z</code>（値0〜25）</li>
+        <li><code>a</code>〜<code>z</code>（値26〜51）</li>
+        <li><code>0</code>〜<code>9</code>（値52〜61）</li>
+        <li><code>+</code>（値62）、<code>/</code>（値63）</li>
+      </ul>
+      <p>
+        入力バイト数が3の倍数でない場合、<strong>パディング文字 <code>=</code></strong> が末尾に追加されます。入力が1バイト余る場合は <code>==</code> が、2バイト余る場合は <code>=</code> が付きます。例えば、「<code>A</code>」（1バイト）をBase64エンコードすると <code>QQ==</code> となり、「<code>AB</code>」（2バイト）は <code>QUI=</code> となります。
+      </p>
+
+      <h3>標準Base64とURLセーフBase64の違い</h3>
+      <p>
+        標準Base64（RFC 4648 §4）では文字 <code>+</code> と <code>/</code> を使用しますが、これらはURLにおいて特別な意味を持つため、URLパラメータやファイル名に直接使用すると問題が生じます。
+      </p>
+      <p>
+        <strong>URLセーフBase64</strong>（RFC 4648 §5）は、この問題を解決するために <code>+</code> を <code>-</code>（ハイフン）に、<code>/</code> を <code>_</code>（アンダースコア）に置き換えた変種です。さらに、パディングの <code>=</code> もURLでは <code>%3D</code> にエスケープが必要なため、通常は省略されます。JWT（JSON Web Token）のヘッダーやペイロード部分には、このURLセーフBase64が使用されています。
+      </p>
+
+      <h3>Base64の主な用途</h3>
+      <p>
+        Base64はさまざまな場面で活用されています。代表的な用途を詳しく見てみましょう。
+      </p>
+      <p>
+        <strong>メール添付（MIME）</strong>：電子メールのプロトコル（SMTP）は元々7ビットASCIIテキストのみを扱う設計でした。画像やPDFなどのバイナリファイルを添付するために、MIME規格ではBase64エンコードが使われています。メールソフトが自動的にエンコード・デコードを行うため、ユーザーが意識することはほとんどありません。
+      </p>
+      <p>
+        <strong>Data URI</strong>：HTMLやCSSの中に小さな画像やフォントを直接埋め込む際に使用します。例えば、<code>data:image/png;base64,iVBORw0KGgo...</code> のような形式で、外部ファイルへのHTTPリクエストを減らしてページ読み込み速度を向上させることができます。
+      </p>
+      <p>
+        <strong>JWT（JSON Web Token）</strong>：Webアプリケーションの認証で広く使われるJWTは、ヘッダー・ペイロード・署名の3つの部分で構成され、ヘッダーとペイロードはURLセーフBase64でエンコードされます。例：<code>eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0In0.署名</code>
+      </p>
+      <p>
+        <strong>HTTP Basic認証</strong>：ユーザー名とパスワードを <code>ユーザー名:パスワード</code> の形式でBase64エンコードし、<code>Authorization: Basic dXNlcjpwYXNz</code> のようにHTTPヘッダーに含めて送信します。ただし、Base64は暗号化ではないため、必ずHTTPS通信と併用する必要があります。
+      </p>
+      <p>
+        <strong>XMLやJSONへのバイナリ埋め込み</strong>：テキスト形式のデータフォーマットにバイナリデータを含めたい場合にBase64が使われます。APIレスポンスで画像データを返す場合や、設定ファイルに証明書を埋め込む場合などが該当します。
+      </p>
+
+      <h3>日本語テキストのBase64エンコード（UTF-8の扱い）</h3>
+      <p>
+        日本語などのマルチバイト文字をBase64エンコードする際には、まず文字列を<strong>バイト列に変換する文字エンコーディング</strong>が重要になります。現在のWeb標準ではUTF-8が主流です。
+      </p>
+      <p>
+        例えば、「あ」という文字はUTF-8で <code>0xE3 0x81 0x82</code> の3バイトになります。これをBase64エンコードすると <code>44GC</code> となります。同じ「あ」でもShift_JISでは <code>0x82 0xA0</code> の2バイトとなり、Base64の結果も異なります。
+      </p>
+      <p>
+        このツールでは<strong>UTF-8エンコーディングを使用</strong>しているため、Pythonの <code>base64.b64encode("テキスト".encode("utf-8"))</code> や、JavaScriptの <code>btoa(unescape(encodeURIComponent("テキスト")))</code> と同じ結果が得られます。他のシステムと連携する際は、文字エンコーディングが一致しているか必ず確認してください。
+      </p>
+
+      <h3>Base64は暗号化ではない（セキュリティ上の注意点）</h3>
+      <p>
+        Base64は<strong>エンコード（符号化）であり、暗号化（encryption）ではありません</strong>。これは非常に重要なポイントです。Base64エンコードされた文字列は、誰でも即座にデコードして元のデータを取得できます。秘密鍵や特別な知識は一切不要です。
+      </p>
+      <p>
+        したがって、パスワード、APIキー、個人情報などの機密データをBase64でエンコードしただけでは、まったくセキュリティ対策になりません。機密データを保護するには、<strong>AES</strong>や<strong>RSA</strong>などの適切な暗号化アルゴリズムを使用してください。
+      </p>
+      <p>
+        HTTP Basic認証でBase64が使われていますが、これはデータ形式の変換が目的であり、セキュリティはHTTPS（TLS）による通信の暗号化に依存しています。Base64単体ではセキュリティを提供しないことを常に意識しましょう。
+      </p>
+
+      <h2>よくある質問（FAQ）</h2>
+
+      <details>
+        <summary>Base64エンコードとは何ですか？</summary>
+        <p>
+          Base64エンコードは、バイナリデータを64種類のASCII文字（A-Z、a-z、0-9、+、/）とパディング文字（=）を使ってテキスト形式に変換するエンコード方式です。RFC 4648で標準化されており、メール添付やData URIなどで広く使われています。3バイトの入力データが4文字のASCIIテキストに変換されるため、データサイズは約33%増加します。
+        </p>
+      </details>
+
+      <details>
+        <summary>Base64は暗号化ですか？</summary>
+        <p>
+          いいえ、Base64は暗号化ではありません。Base64は単なるエンコード方式であり、誰でも簡単にデコードして元のデータを復元できます。パスワードやAPIキーなどの機密データをBase64でエンコードしても安全ではありません。機密データの保護にはAESやRSAなどの暗号化アルゴリズムを使用してください。
+        </p>
+      </details>
+
+      <details>
+        <summary>URLセーフBase64とは何ですか？</summary>
+        <p>
+          URLセーフBase64（RFC 4648 §5）は、標準Base64の「<code>+</code>」を「<code>-</code>」に、「<code>/</code>」を「<code>_</code>」に置き換え、末尾のパディング「<code>=</code>」を省略した形式です。URLやファイル名で特殊文字として扱われる <code>+</code>、<code>/</code>、<code>=</code> を避けることで、URLパラメータやファイル名に安全に使用できます。JWT（JSON Web Token）でもこの形式が採用されています。
+        </p>
+      </details>
+
+      <details>
+        <summary>なぜBase64を使うのですか？</summary>
+        <p>
+          Base64は、バイナリデータをテキストのみを扱うプロトコルやフォーマットで安全に転送するために使います。電子メール（SMTP/MIME）、CSSのData URI、JWT、HTTP Basic認証、XMLやJSONへのバイナリデータ埋め込みなどが代表的な用途です。テキストベースの仕組みの中でバイナリデータを壊さずにやり取りできるのがBase64の最大の利点です。
+        </p>
+      </details>
+
+      <details>
+        <summary>Base64エンコードするとデータサイズはどうなりますか？</summary>
+        <p>
+          Base64エンコードすると、データサイズは元の約1.33倍（約33%増）になります。これは3バイト（24ビット）の入力が4文字（32ビット）の出力に変換されるためです。例えば、元のデータが300バイトの場合、Base64エンコード後は約400文字（400バイト）になります。さらに、MIMEでは76文字ごとに改行が挿入されるため、若干のオーバーヘッドが追加されます。
+        </p>
+      </details>
+
     </article>
 
     <!-- Related Tools -->

@@ -35,6 +35,56 @@
   }
   </script>
 
+  <!-- Structured Data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "TxConv は本当に無料ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい、すべてのツールを完全無料でご利用いただけます。アカウント登録やクレジットカード情報の入力も不要です。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "入力したテキストはサーバーに送信されますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "いいえ。すべての処理はブラウザ内で完結します。入力テキストはネットワークに送信されず、サーバーに保存されることもありません。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "スマートフォンでも使えますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい。レスポンシブデザインに対応しており、iPhone / Android のブラウザから快適にご利用いただけます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "オフラインで使えますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "初回のページ読み込みにはインターネット接続が必要ですが、一度読み込んだ後はブラウザのキャッシュが有効な限り、オフラインでもツールを使用できます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "商用利用は可能ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい、TxConv は商用・非商用を問わず自由にご利用いただけます。"
+        }
+      }
+    ]
+  }
+  </script>
+
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="assets/css/base.css?v=2">
@@ -260,15 +310,67 @@
         <h2>TxConv について</h2>
         <p>
           TxConv は、エンジニア・デザイナー・ライターが日常的に使うテキスト変換・加工ツールを一か所にまとめた無料サービスです。
+          プログラミング中の命名規則変換、ドキュメント作成時の文字数確認、データ変換やエンコード処理など、日々の作業で繰り返し発生する小さなタスクをブラウザだけで素早く完了できます。
         </p>
+
+        <h3>TxConv が選ばれる理由</h3>
+        <ul>
+          <li><strong>完全無料・登録不要</strong> &mdash; アカウント作成やログインは必要ありません。ブラウザでアクセスするだけですぐに使えます。</li>
+          <li><strong>サーバー送信ゼロ</strong> &mdash; 入力したテキストは一切サーバーに送信されません。すべての処理はお使いのブラウザ上（クライアントサイド）で完結するため、機密情報を含むテキストも安心してお使いいただけます。</li>
+          <li><strong>広告が最小限</strong> &mdash; ユーザー体験を損なわないよう、広告の表示を最小限にとどめています。</li>
+          <li><strong>高速・軽量</strong> &mdash; 外部フレームワークや重い JavaScript ライブラリを使用せず、Vanilla HTML / CSS / JavaScript のみで構築。ページの読み込みが速く、低速回線やモバイル環境でも快適にご利用いただけます。</li>
+          <li><strong>レスポンシブ対応</strong> &mdash; PC・タブレット・スマートフォンのどのデバイスからでも快適に操作できます。</li>
+        </ul>
+
+        <h3>こんなシーンで活躍します</h3>
+        <p>
+          TxConv のツール群は、以下のようなシーンで日常的にお使いいただけます。
+        </p>
+        <ul>
+          <li><strong>ソフトウェア開発</strong> &mdash; 変数名のケース変換（snake_case &harr; camelCase）、JSON データの整形・バリデーション、Base64 / URL エンコード、CSV と JSON の相互変換など。</li>
+          <li><strong>ドキュメント作成・ライティング</strong> &mdash; 文字数カウントで文字数制限の確認、Markdown のリアルタイムプレビュー、Excel 表の Markdown テーブル変換など。</li>
+          <li><strong>日本語テキスト処理</strong> &mdash; 全角・半角の統一変換、ひらがな・カタカナの変換、テキストの一括置換によるデータクレンジングなど。</li>
+          <li><strong>日常・ビジネス</strong> &mdash; 消費税の計算、割り勘の計算、商品の単価比較、安全なパスワードの生成など。</li>
+        </ul>
+
         <h3>プライバシーと安全性</h3>
         <p>
-          入力したテキストは<strong>一切サーバーに送信されません</strong>。すべての処理はお使いのブラウザ上で完結します。機密情報を含むテキストも安全にお使いいただけます。
+          TxConv では、ユーザーのプライバシーを最優先に考えています。入力したテキストは<strong>一切外部に送信されません</strong>。
+          すべてのツールは JavaScript によるクライアントサイド処理で動作しており、テキストデータがネットワークを通過することはありません。
+          そのため、社内の機密文書、個人情報を含むテキスト、API キーやパスワードなど、センシティブな情報も安全に処理できます。
         </p>
+        <p>
+          また、Cookie によるトラッキングも行っていません。詳しくは<a href="privacy/">プライバシーポリシー</a>をご確認ください。
+        </p>
+
         <h3>技術仕様</h3>
         <p>
-          外部フレームワーク・CDN を一切使用しない Vanilla HTML / CSS / JavaScript で構築されています。高速な読み込みと優れたプライバシーを両立しています。
+          TxConv は外部フレームワーク・CDN を一切使用しない Vanilla HTML / CSS / JavaScript で構築されています。
+          React や Vue.js のような JavaScript フレームワークに依存しないため、ページサイズが小さく、読み込みが高速です。
+          また、外部 CDN への接続がないため、第三者サービスにデータが漏洩するリスクもありません。
         </p>
+
+        <h3>よくある質問</h3>
+        <details>
+          <summary>TxConv は本当に無料ですか？</summary>
+          <p>はい、すべてのツールを完全無料でご利用いただけます。アカウント登録やクレジットカード情報の入力も不要です。</p>
+        </details>
+        <details>
+          <summary>入力したテキストはサーバーに送信されますか？</summary>
+          <p>いいえ。すべての処理はブラウザ内で完結します。入力テキストはネットワークに送信されず、サーバーに保存されることもありません。ブラウザの開発者ツール（F12 &rarr; Network タブ）で通信内容をご自身で確認いただけます。</p>
+        </details>
+        <details>
+          <summary>スマートフォンでも使えますか？</summary>
+          <p>はい。レスポンシブデザインに対応しており、iPhone / Android のブラウザから快適にご利用いただけます。</p>
+        </details>
+        <details>
+          <summary>オフラインで使えますか？</summary>
+          <p>初回のページ読み込みにはインターネット接続が必要ですが、一度読み込んだ後はブラウザのキャッシュが有効な限り、オフラインでもツールを使用できます。</p>
+        </details>
+        <details>
+          <summary>商用利用は可能ですか？</summary>
+          <p>はい、TxConv は商用・非商用を問わず自由にご利用いただけます。</p>
+        </details>
       </div>
     </div>
   </section>

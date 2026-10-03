@@ -59,6 +59,55 @@
   }
   </script>
 
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "MarkdownテーブルとHTMLテーブルの違いは？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Markdownテーブルはパイプ（|）とハイフン（-）だけで記述できるシンプルな書式です。HTMLテーブルのように<table>タグを書く必要がなく、プレーンテキストのまま読みやすいのが特徴です。ただしセル結合や複雑なスタイル指定はできないため、シンプルな表に適しています。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Excelから直接コピペできますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい、Excelのセルを選択してコピーし、本ツールのヘッダー欄・データ欄にそのまま貼り付けるだけで変換できます。Excelはコピー時にタブ区切りテキストとしてクリップボードに格納されるため、特別な操作は不要です。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Googleスプレッドシートにも対応していますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい、Googleスプレッドシートにも対応しています。GoogleスプレッドシートもExcelと同様にタブ区切り形式でコピーされるため、同じ手順でMarkdownテーブルに変換できます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Markdownテーブルの書き方は？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Markdownテーブルは、ヘッダー行・区切り行・データ行の3つで構成されます。各セルをパイプ（|）で区切り、ヘッダーとデータの間にハイフン（---）の区切り行を入れます。例：| 名前 | 年齢 |（改行）| --- | --- |（改行）| 田中 | 30 |"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "変換したMarkdownテーブルはどこで使えますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "GitHub（README・Issue・PR）、GitLab、Notion、Qiita、Zenn、esa、Docbase、HackMDなど、Markdownに対応するほとんどのサービスでそのまま利用できます。技術ドキュメントやブログ記事の作成に便利です。"
+        }
+      }
+    ]
+  }
+  </script>
+
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="../../assets/css/base.css?v=2">

@@ -58,6 +58,55 @@
   }
   </script>
 
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "JSONとは何ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "JSON（JavaScript Object Notation）は、軽量なテキストベースのデータ交換フォーマットです。RFC 8259で標準化されており、Web APIのレスポンスや設定ファイルなど幅広い用途で使用されています。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "JSON整形ツールの使い方は？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "左のテキストエリアにJSONを貼り付けるか、.jsonファイルをドラッグ＆ドロップします。インデント幅とモードを選択すると、右側に整形結果が即時表示されます。コピーボタンでクリップボードにコピーできます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "JSONのバリデーションとは？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "JSONバリデーションとは、入力されたテキストがJSON仕様（RFC 8259）に準拠しているかを検証することです。末尾カンマ、シングルクォート、コメントなどはJSON仕様では許可されておらず、バリデーションエラーになります。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "JSON圧縮（Minify）とは何ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Minifyとは、JSONから改行・インデント・余分なスペースをすべて除去し、データサイズを最小化する処理です。API通信の高速化やストレージの節約に効果的です。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "入力したJSONはサーバーに送信されますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "いいえ。すべての処理はブラウザ上（クライアントサイド）で完結します。入力データは外部サーバーに一切送信されないため、機密情報を含むJSONでも安全にご利用いただけます。"
+        }
+      }
+    ]
+  }
+  </script>
+
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="../../assets/css/base.css?v=2">
@@ -324,48 +373,90 @@
 
     <!-- Article -->
     <article class="tool-article">
-      <h2>使い方（3ステップ）</h2>
+      <h2>JSON整形ツールの使い方</h2>
+      <p>このJSON整形ツールは、3つの簡単なステップでJSONデータを見やすくフォーマットできます。初めての方でもすぐにお使いいただけます。</p>
       <ol style="list-style:decimal;padding-left:1.5em;color:var(--color-text-muted);line-height:2">
-        <li>左のテキストエリアにJSONを貼り付けるか、<code>.json</code>ファイルをドラッグ＆ドロップします。</li>
-        <li>インデント幅（2スペース・4スペース・タブ）と整形／圧縮モードを選択します。</li>
-        <li>右側に即時表示される整形済みJSONを「コピー」ボタンでクリップボードにコピーします。</li>
+        <li><strong>JSONを入力する：</strong>左のテキストエリアにJSONを貼り付けるか、<code>.json</code>ファイルをドラッグ＆ドロップします。クリップボードから<kbd>Ctrl+V</kbd>（Macの場合は<kbd>Cmd+V</kbd>）で貼り付けることもできます。</li>
+        <li><strong>インデント・モードを選択する：</strong>インデント幅は「スペース2」「スペース4」「タブ」から選択できます。モードは「整形（Pretty）」でインデント付きの見やすい形式に、「圧縮（Minify）」で改行やスペースを除去した最小形式に変換できます。</li>
+        <li><strong>結果をコピーする：</strong>右側に即時表示される整形済みJSONを「コピー」ボタンでクリップボードにコピーします。そのままエディタやAPIクライアントに貼り付けてご利用ください。</li>
       </ol>
+      <p>入力と同時にJSONのバリデーション（構文チェック）も自動で行われます。エラーがある場合は、エラー内容と発生箇所が日本語で表示されるため、修正箇所をすぐに特定できます。</p>
 
-      <h2>JSONとは</h2>
+      <h2>JSON（JavaScript Object Notation）とは</h2>
       <p>
-        JSON（JavaScript Object Notation）は、軽量なデータ交換フォーマットです。人間が読み書きしやすく、機械が解析・生成しやすい特徴を持ちます。WebAPIのレスポンス形式として最も広く使われており、設定ファイルやデータストレージにも多用されます。JSONはキーと値のペア（オブジェクト）と、値の順序付きリスト（配列）を組み合わせてデータを表現します。
+        JSON（JavaScript Object Notation）は、軽量なテキストベースのデータ交換フォーマットです。2001年にDouglas Crockfordによって提唱され、現在はRFC 8259（2017年12月発行）およびECMA-404として国際標準化されています。もともとJavaScriptのオブジェクトリテラル構文に由来しますが、言語に依存しない汎用フォーマットとして、Python、Java、Go、Ruby、PHPなどほぼすべてのプログラミング言語でパーサーが提供されています。
       </p>
       <p>
-        JSONで使用できるデータ型は、文字列（ダブルクォート必須）、数値（整数・浮動小数点・指数表記）、真偽値（<code>true</code>/<code>false</code>）、null、オブジェクト、配列の6種類です。
-        コメントはJSONの仕様上サポートされていません。コメントが必要な場合はJSON5やJSONC（VS Codeの設定ファイルで使用）を検討してください。
+        Web APIのリクエスト・レスポンス形式として最も広く使われているほか、<code>package.json</code>（Node.js）、<code>settings.json</code>（VS Code）、<code>tsconfig.json</code>（TypeScript）などの設定ファイル、NoSQLデータベース（MongoDBなど）のドキュメント形式としても活用されています。XMLと比較してデータサイズが小さく、構文がシンプルなため、モダンなWeb開発ではJSONが標準的なデータフォーマットとなっています。
       </p>
+
+      <h3>JSONの基本構文（オブジェクト、配列、文字列、数値、boolean、null）</h3>
+      <p>JSONで使用できるデータ型は以下の6種類です。</p>
+      <ul style="padding-left:1.5em;line-height:2;color:var(--color-text-muted)">
+        <li><strong>オブジェクト：</strong>波括弧 <code>{}</code> で囲み、キーと値のペアをコロンで区切ります。キーは必ずダブルクォートで囲んだ文字列でなければなりません。例：<code>{"name": "TxConv", "version": 1}</code></li>
+        <li><strong>配列：</strong>角括弧 <code>[]</code> で囲み、カンマ区切りで値を並べます。異なるデータ型の混在も可能です。例：<code>[1, "hello", true, null]</code></li>
+        <li><strong>文字列：</strong>ダブルクォート <code>""</code> で囲みます。シングルクォートは使用できません。エスケープシーケンス（<code>\"</code>、<code>\\</code>、<code>\n</code>、<code>\uXXXX</code>など）が利用可能です。</li>
+        <li><strong>数値：</strong>整数、浮動小数点数、指数表記に対応しています。先頭のゼロ（<code>01</code>など）や<code>NaN</code>、<code>Infinity</code>は使用できません。</li>
+        <li><strong>boolean（真偽値）：</strong><code>true</code>または<code>false</code>のみです。大文字（<code>True</code>、<code>FALSE</code>）は不正です。</li>
+        <li><strong>null：</strong>値が存在しないことを示します。小文字の<code>null</code>のみ有効です。</li>
+      </ul>
+
+      <h3>JSON整形（Pretty Print）のメリット</h3>
+      <p>
+        JSON整形（Pretty Print）とは、改行とインデントを挿入してJSONデータを人間が読みやすい形式に変換する処理です。整形には以下のようなメリットがあります。
+      </p>
+      <ul style="padding-left:1.5em;line-height:2;color:var(--color-text-muted)">
+        <li><strong>可読性の向上：</strong>ネストの深い複雑なJSONでも、インデントにより階層構造が一目でわかります。数百行を超える大きなJSONデータの確認に特に有効です。</li>
+        <li><strong>デバッグの効率化：</strong>APIレスポンスやログデータを整形することで、期待する値が正しくセットされているかを素早く確認できます。キーの欠落やデータ型の間違いも発見しやすくなります。</li>
+        <li><strong>コードレビューの円滑化：</strong>設定ファイルやテストデータをPretty Print形式で管理すると、Gitでの差分比較（diff）が行単位で明確になり、レビュアーが変更点を把握しやすくなります。</li>
+      </ul>
+
+      <h3>JSON圧縮（Minify）とは</h3>
+      <p>
+        JSON圧縮（Minify）とは、改行・インデント・余分なスペースをすべて除去し、JSONデータを最小サイズの1行に変換する処理です。データの内容や構造は一切変わりません。
+      </p>
+      <ul style="padding-left:1.5em;line-height:2;color:var(--color-text-muted)">
+        <li><strong>データサイズの削減：</strong>インデントや改行を除去することで、一般的にファイルサイズが20〜40%程度削減されます。大量のJSONデータを保存・転送する場合にストレージと帯域幅を節約できます。</li>
+        <li><strong>通信の効率化：</strong>REST APIやWebSocketでJSONを送受信する際、Minify済みのデータを使うことで転送時間が短縮され、レスポンス速度の向上につながります。</li>
+        <li><strong>ログの一元管理：</strong>1行形式のJSONは、ログ管理ツール（Fluentd、Logstashなど）で1レコード＝1行として扱いやすく、検索やフィルタリングが容易になります。</li>
+      </ul>
+
+      <h3>よくあるJSONエラーと対処法</h3>
+      <p>JSONを扱う際によく遭遇するエラーと、その原因・対処法を紹介します。</p>
+      <ul style="padding-left:1.5em;line-height:2;color:var(--color-text-muted)">
+        <li><strong>末尾カンマ（trailing comma）：</strong>配列やオブジェクトの最後の要素にカンマを付けるとエラーになります。例：<code>{"a": 1, "b": 2,}</code> は不正です。JavaScriptでは許容されますが、JSON仕様（RFC 8259）では禁止されています。</li>
+        <li><strong>シングルクォート：</strong>JSONの文字列はダブルクォートのみ有効です。<code>{'name': 'TxConv'}</code> はエラーになります。<code>{"name": "TxConv"}</code> に修正してください。</li>
+        <li><strong>コメント：</strong><code>//</code>や<code>/* */</code>などのコメントはJSON仕様ではサポートされていません。コメント付きJSONが必要な場合は、JSON5やJSONC（VS Codeの設定で使用）を検討してください。</li>
+        <li><strong>キー名の引用符なし：</strong><code>{name: "TxConv"}</code> のようにキーを引用符で囲まないとエラーになります。すべてのキーは<code>"name"</code>のようにダブルクォートで囲む必要があります。</li>
+        <li><strong>制御文字の混入：</strong>コピー＆ペースト時に不可視の制御文字（BOMやゼロ幅スペースなど）が混入するとパースに失敗することがあります。テキストエディタで制御文字の表示を有効にして確認してください。</li>
+      </ul>
 
       <h2>よくある質問（FAQ）</h2>
 
-      <h3>Q. エラー「Unexpected token」が出る</h3>
-      <p>
-        最もよくあるのは末尾カンマの問題です。JSONでは配列・オブジェクトの最後の要素にカンマを付けてはいけません（例：<code>{"a":1,}</code> は不正）。また、キーは必ずダブルクォートで囲む必要があります（シングルクォート不可）。このツールはエラー箇所を日本語で表示するので、修正の参考にしてください。
-      </p>
+      <details>
+        <summary>JSONとは何ですか？</summary>
+        <p>JSON（JavaScript Object Notation）は、軽量なテキストベースのデータ交換フォーマットです。RFC 8259で標準化されており、Web APIのレスポンスや設定ファイルなど幅広い用途で使用されています。言語に依存しないため、ほぼすべてのプログラミング言語で利用可能です。</p>
+      </details>
 
-      <h3>Q. 大きなJSONファイルでも動きますか？</h3>
-      <p>
-        ブラウザのJavaScriptエンジンで処理するため、数MB程度のJSONなら問題なく動作します。数十MB以上になるとブラウザが応答しなくなる場合があるため、大容量ファイルは<code>jq</code>などのCLIツールの使用をお勧めします。
-      </p>
+      <details>
+        <summary>JSON整形ツールの使い方は？</summary>
+        <p>左のテキストエリアにJSONを貼り付けるか、.jsonファイルをドラッグ＆ドロップします。インデント幅とモードを選択すると、右側に整形結果が即時表示されます。コピーボタンでクリップボードにコピーできます。すべての処理はブラウザ上で完結し、サーバーへのデータ送信は一切ありません。</p>
+      </details>
 
-      <h3>Q. 入力したJSONはサーバーに送信されますか？</h3>
-      <p>
-        いいえ。すべての処理はお使いのブラウザ上（クライアントサイド）で完結します。機密情報を含むJSONでも安全にお使いいただけます。
-      </p>
+      <details>
+        <summary>JSONのバリデーションとは？</summary>
+        <p>JSONバリデーションとは、入力されたテキストがJSON仕様（RFC 8259）に準拠しているかを検証することです。末尾カンマ、シングルクォート、コメントなどはJSON仕様では許可されておらず、バリデーションエラーになります。本ツールではエラー内容と発生位置を日本語で表示するため、修正が容易です。</p>
+      </details>
 
-      <h3>Q. 圧縮（Minify）とは何ですか？</h3>
-      <p>
-        Minifyは改行・インデント・余分なスペースをすべて取り除き、JSONを1行に圧縮します。ファイルサイズを小さくしてAPIレスポンスを高速化したり、データを1行のログに記録したりする際に使います。
-      </p>
+      <details>
+        <summary>JSON圧縮（Minify）とは何ですか？</summary>
+        <p>Minifyとは、JSONから改行・インデント・余分なスペースをすべて除去し、データサイズを最小化する処理です。データの構造や内容は変わりません。API通信の高速化やストレージの節約、ログの一元管理などに効果的です。</p>
+      </details>
 
-      <h3>Q. シンタックスハイライトの色の意味は？</h3>
-      <p>
-        キー名は<span style="color:#6366f1;font-weight:600">紫</span>、文字列値は<span style="color:#22c55e">緑</span>、数値は<span style="color:#f59e0b">黄</span>、<code>true</code>/<code>false</code>は<span style="color:#ec4899">ピンク</span>、<code>null</code>はグレーで表示されます。視覚的にJSONの構造を把握するのに役立ちます。
-      </p>
+      <details>
+        <summary>入力したJSONはサーバーに送信されますか？</summary>
+        <p>いいえ。すべての処理はブラウザ上（クライアントサイド）で完結します。入力データは外部サーバーに一切送信されないため、機密情報を含むJSONでも安全にご利用いただけます。</p>
+      </details>
     </article>
 
     <section class="related-tools">

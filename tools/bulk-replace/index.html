@@ -60,6 +60,55 @@
   }
   </script>
 
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "一括置換とは？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "一括置換とは、テキスト中の特定の文字列を別の文字列にまとめて書き換える操作のことです。複数の置換ルールを同時に適用することで、手作業では時間のかかる大量のテキスト修正を効率的に行えます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "正規表現で置換できますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "現在のバージョンでは通常の文字列マッチングによる置換に対応しています。正規表現による高度なパターンマッチングは今後のアップデートで対応予定です。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "大文字小文字を区別して置換できますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい、オプションで「大文字・小文字を区別する」のオン・オフを切り替えられます。区別をオフにすると、ABCとabcのように大文字小文字が異なる文字列も同じものとして扱い、まとめて置換できます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "複数の置換ルールを同時に適用できますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "はい、最大20件の置換ルールを登録でき、ボタン1つですべてのルールを上から順に一括適用できます。各ルールはチェックボックスで有効・無効を個別に切り替えられます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "入力したテキストはサーバーに送信されますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "送信されません。すべての処理はブラウザ内で完結しており、入力テキストや置換ルールが外部サーバーに送信・保存されることは一切ありません。機密情報を含む文書にも安心してご利用いただけます。"
+        }
+      }
+    ]
+  }
+  </script>
+
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="../../assets/css/base.css?v=2">

@@ -48,6 +48,56 @@
   }
   </script>
 
+  <!-- Structured Data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "URLエンコードとは？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "URLエンコード（パーセントエンコーディング）とは、URLに含められない文字（日本語・スペース・特殊記号など）を「%XX」形式の16進数表現に変換する仕組みです。RFC 3986で標準化されており、Webブラウザやサーバーが正しくURLを解釈するために不可欠な技術です。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "encodeURIComponentとencodeURIの違いは？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "encodeURIComponentはクエリパラメータの値など部分的な文字列に使い、スラッシュ(/)やコロン(:)も含めほぼすべての特殊文字をエンコードします。一方encodeURIはURL全体に使い、URLの構造を示す文字（:, /, ?, #, &, = など）はエンコードせず保持します。用途に応じて使い分けることが重要です。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "日本語URLはどうエンコードされる？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "日本語はまずUTF-8でバイト列に変換され、その各バイトが%XX形式にエンコードされます。例えば「あ」はUTF-8で0xE3 0x81 0x82の3バイトとなり、%E3%81%82と表現されます。ひらがな・カタカナ・漢字はいずれも3バイトになるため、1文字あたり9文字のエンコード文字列になります。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "パーセントエンコーディングとは？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "パーセントエンコーディングはURLエンコードの正式名称で、パーセント記号(%)に続く2桁の16進数で1バイトを表現します。RFC 3986で定義されたこの方式により、ASCII文字以外の文字やURL内で特別な意味を持つ予約文字を安全にURLに含めることができます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "URLエンコードが必要な場面は？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "主にAPIのクエリパラメータに日本語や特殊文字を含める場合、リダイレクトURLをパラメータとして渡す場合、HTMLのメールリンク(mailto:)に件名や本文を含める場合、Cookieに非ASCII文字を保存する場合などにURLエンコードが必要です。"
+        }
+      }
+    ]
+  }
+  </script>
+
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="../../assets/css/base.css?v=2">
@@ -182,22 +232,107 @@
 
     <!-- Article / Info -->
     <article class="tool-article">
-      <h2>URL エンコードとは</h2>
+
+      <h2>URLエンコード・デコードツールの使い方</h2>
       <p>
-        URL エンコード（パーセントエンコーディング）は、URL で使用できない文字を <code>%XX</code> 形式の16進数表現に変換する方式です。RFC 3986 で定義されています。
+        本ツールを使えば、テキストのURLエンコード（パーセントエンコーディング）とデコードを簡単に行えます。以下の手順でご利用ください。
       </p>
-      <h3>encodeURIComponent と encodeURI の違い</h3>
+      <ol>
+        <li><strong>モードを選択</strong>：画面上部のタブから「エンコード」「デコード」「URL全体エンコード」のいずれかを選択します。</li>
+        <li><strong>テキストを入力</strong>：左側の入力欄に変換したいテキストまたはURLエンコード済み文字列を貼り付けます。</li>
+        <li><strong>結果を確認</strong>：入力と同時に右側の出力欄にリアルタイムで変換結果が表示されます。</li>
+        <li><strong>コピー</strong>：出力欄右上のコピーボタンをクリックすると、変換結果がクリップボードにコピーされます。</li>
+      </ol>
       <p>
-        <code>encodeURIComponent</code> はアルファベット・数字・<code>- _ . ! ~ * ' ( )</code> 以外のすべての文字をエンコードします。クエリパラメータの値に使用します。<code>encodeURI</code> は URL 全体の構造（<code>: / ? # &amp; = @ !</code> など）を保持したままその他の文字をエンコードします。
+        すべての処理はブラウザ上で完結し、サーバーへのデータ送信は一切行いません。機密性の高いURLやパラメータも安心して変換できます。
       </p>
-      <h3>日本語の URL エンコード</h3>
+
+      <h2>URLエンコード（パーセントエンコーディング）の仕組み</h2>
       <p>
-        日本語文字は UTF-8 で最大 3 バイトになるため、1 文字が <code>%E3%81%82</code>（あ）のように 9 文字のエンコード文字列になります。
+        URLエンコードは、正式には「パーセントエンコーディング（Percent-Encoding）」と呼ばれ、<strong>RFC 3986</strong>（Uniform Resource Identifier: Generic Syntax）で標準化されています。URLに含められない文字を<code>%</code>記号と2桁の16進数で表現する仕組みです。
       </p>
-      <h3>エラーについて</h3>
       <p>
-        不正な <code>%</code> シーケンスを含む文字列のデコードが失敗する場合、「URL全体エンコード」モードでは不正な部分をそのまま保持するセーフデコードを使用しています。
+        具体的には、対象の文字をまずUTF-8でバイト列に変換し、そのバイトごとに<code>%XX</code>（XXは16進数の大文字表記）に置き換えます。例えばスペース（0x20）は<code>%20</code>に、アンパサンド（&amp;, 0x26）は<code>%26</code>になります。この変換により、URL構文で特別な意味を持つ文字や、ASCII範囲外の文字をURL内に安全に含めることができます。
       </p>
+
+      <h3>エンコードされる文字とされない文字</h3>
+      <p>
+        RFC 3986では、URLに直接使用できる文字（非予約文字）と、URL構文上の意味を持つ文字（予約文字）を明確に定義しています。
+      </p>
+      <ul>
+        <li><strong>非予約文字（エンコード不要）</strong>：英字（A-Z, a-z）、数字（0-9）、ハイフン（-）、ピリオド（.）、アンダースコア（_）、チルダ（~）</li>
+        <li><strong>予約文字（用途によりエンコードが必要）</strong>：<code>: / ? # [ ] @ ! $ &amp; ' ( ) * + , ; =</code></li>
+        <li><strong>その他の文字（常にエンコードが必要）</strong>：日本語・中国語などの非ASCII文字、スペース、制御文字など</li>
+      </ul>
+      <p>
+        予約文字は、URL構文の一部として使用する場合はエンコードしませんが、データ（クエリパラメータの値など）として使用する場合はエンコードが必要です。この区別が<code>encodeURIComponent</code>と<code>encodeURI</code>の違いにつながります。
+      </p>
+
+      <h3>encodeURIComponent vs encodeURI vs escape の違い</h3>
+      <p>
+        JavaScriptにはURL関連のエンコード関数が3種類あります。それぞれの特徴と使い分けを理解することが重要です。
+      </p>
+      <ul>
+        <li>
+          <strong><code>encodeURIComponent()</code></strong>：最も広範囲にエンコードする関数です。英数字と<code>- _ . ! ~ * ' ( )</code>以外のすべての文字をエンコードします。クエリパラメータの値やパスの一部分など、URLの「部品」に使います。<br>
+          例：<code>encodeURIComponent("a=1&b=2")</code> → <code>a%3D1%26b%3D2</code>
+        </li>
+        <li>
+          <strong><code>encodeURI()</code></strong>：URL全体の構造を保持しつつエンコードします。<code>: / ? # &amp; = @ + $</code>などの予約文字はそのまま残ります。完全なURLを渡す場合に使います。<br>
+          例：<code>encodeURI("https://example.com/検索?q=テスト")</code> → <code>https://example.com/%E6%A4%9C%E7%B4%A2?q=%E3%83%86%E3%82%B9%E3%83%88</code>
+        </li>
+        <li>
+          <strong><code>escape()</code>（非推奨）</strong>：古い関数でUTF-8ではなくUCS-2ベースのエンコードを行います。<code>%uXXXX</code>形式を使用し、国際化対応に問題があるため、現在は使用すべきではありません。代わりに<code>encodeURIComponent</code>を使ってください。
+        </li>
+      </ul>
+
+      <h3>日本語URLのエンコード（UTF-8とパーセントエンコーディング）</h3>
+      <p>
+        日本語をURLに含める場合、文字はまずUTF-8でバイト列に変換されます。UTF-8では日本語の多くの文字（ひらがな・カタカナ・漢字）は3バイトで表現されるため、1文字が3つの<code>%XX</code>に変換され、結果として9文字分のエンコード文字列になります。
+      </p>
+      <p>
+        例えば「あ」はUTF-8で<code>0xE3 0x81 0x82</code>の3バイトとなり、<code>%E3%81%82</code>と表現されます。「東京」であれば<code>%E6%9D%B1%E4%BA%AC</code>（18文字）になります。最近のブラウザはアドレスバーに日本語を表示しますが、実際のHTTPリクエストではパーセントエンコーディングされた形式で送信されています。
+      </p>
+
+      <h3>実務での活用シーン</h3>
+      <p>
+        URLエンコードは日常のWeb開発で頻繁に必要になります。主な活用シーンをご紹介します。
+      </p>
+      <ul>
+        <li><strong>APIクエリパラメータ</strong>：REST APIのリクエストで、検索キーワードやフィルター条件に日本語・特殊文字を含める場合。例：<code>?q=%E6%9D%B1%E4%BA%AC&category=%E9%A3%9F%E4%BA%8B</code></li>
+        <li><strong>リダイレクトURL</strong>：OAuth認証のコールバックURLやログイン後のリダイレクト先URLをパラメータとして渡す場合。URL内にURLを含めるため、二重エンコードに注意が必要です。</li>
+        <li><strong>メール内リンク</strong>：<code>mailto:</code>リンクに件名（subject）や本文（body）を含める場合。日本語の件名・本文をURLエンコードして指定します。</li>
+        <li><strong>Cookie・ストレージ</strong>：CookieやlocalStorageに非ASCII文字を含む値を保存する際、エンコードが必要になる場合があります。</li>
+        <li><strong>HTMLフォーム送信</strong>：<code>application/x-www-form-urlencoded</code>形式でフォームデータが送信される際、自動的にURLエンコードが適用されます。スペースが<code>+</code>になる点がRFC 3986との違いです。</li>
+      </ul>
+
+      <h2>よくある質問（FAQ）</h2>
+
+      <details>
+        <summary>URLエンコードとは？</summary>
+        <p>URLエンコード（パーセントエンコーディング）とは、URLに含められない文字（日本語・スペース・特殊記号など）を「%XX」形式の16進数表現に変換する仕組みです。RFC 3986で標準化されており、Webブラウザやサーバーが正しくURLを解釈するために不可欠な技術です。</p>
+      </details>
+
+      <details>
+        <summary>encodeURIComponentとencodeURIの違いは？</summary>
+        <p>encodeURIComponentはクエリパラメータの値など部分的な文字列に使い、スラッシュ(/)やコロン(:)も含めほぼすべての特殊文字をエンコードします。一方encodeURIはURL全体に使い、URLの構造を示す文字（:, /, ?, #, &amp;, = など）はエンコードせず保持します。用途に応じて使い分けることが重要です。</p>
+      </details>
+
+      <details>
+        <summary>日本語URLはどうエンコードされる？</summary>
+        <p>日本語はまずUTF-8でバイト列に変換され、その各バイトが%XX形式にエンコードされます。例えば「あ」はUTF-8で0xE3 0x81 0x82の3バイトとなり、%E3%81%82と表現されます。ひらがな・カタカナ・漢字はいずれも3バイトになるため、1文字あたり9文字のエンコード文字列になります。</p>
+      </details>
+
+      <details>
+        <summary>パーセントエンコーディングとは？</summary>
+        <p>パーセントエンコーディングはURLエンコードの正式名称で、パーセント記号(%)に続く2桁の16進数で1バイトを表現します。RFC 3986で定義されたこの方式により、ASCII文字以外の文字やURL内で特別な意味を持つ予約文字を安全にURLに含めることができます。</p>
+      </details>
+
+      <details>
+        <summary>URLエンコードが必要な場面は？</summary>
+        <p>主にAPIのクエリパラメータに日本語や特殊文字を含める場合、リダイレクトURLをパラメータとして渡す場合、HTMLのメールリンク(mailto:)に件名や本文を含める場合、Cookieに非ASCII文字を保存する場合などにURLエンコードが必要です。</p>
+      </details>
+
     </article>
 
     <!-- Related Tools -->

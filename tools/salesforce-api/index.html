@@ -45,6 +45,56 @@
   }
   </script>
 
+  <!-- Structured Data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "SalesforceのAPI名とは何ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "API名はSalesforceの内部で使用される一意の識別子です。カスタムフィールドやカスタムオブジェクトを作成すると自動的に付与され、Apex、SOQL、メタデータAPIなどからアクセスする際に使用します。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "__cと__mdtの違いは何ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "__cはカスタムフィールドやカスタムオブジェクトのサフィックスで、__mdtはカスタムメタデータ型のサフィックスです。__mdtはアプリケーションの設定やマッピング情報の保存に使われます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "API名の命名規則は何ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "使用できる文字は英数字とアンダースコアのみです。先頭は英字で始める必要があり、連続するアンダースコアは使用できません。最大40文字（サフィックス除く）の制限があります。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "日本語ラベルからAPI名を決める方法は？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "日本語のラベルを英語に翻訳し、単語をアンダースコアで区切るsnake_case形式にするのが一般的です。このツールではAIが自動的に日英翻訳とAPI名生成を行います。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "このツールはオフラインで動作しますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "初回はAIモデルのダウンロードにインターネット接続が必要ですが、モデルがブラウザにキャッシュされた後はオフラインでも使用可能です。翻訳処理はすべてブラウザ内で完結します。"
+        }
+      }
+    ]
+  }
+  </script>
+
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="../../assets/css/base.css?v=2">
@@ -351,18 +401,94 @@
 
     <!-- Article -->
     <article class="tool-article">
-      <h2>使い方</h2>
+      <h2>Salesforce API名生成ツールの使い方</h2>
+      <ol>
+        <li>テキスト入力欄に、日本語でカスタム項目名やオブジェクト名を入力します（例：「取引先担当者」「注文明細」）。</li>
+        <li>初回利用時はAIモデルが自動的にダウンロードされます（約30MB、次回以降はキャッシュから読み込まれます）。</li>
+        <li>「API名を生成」ボタンをクリックすると、AIが日本語を英語に翻訳し、Salesforceの命名規則に沿ったAPI名を自動生成します。</li>
+        <li>生成されたAPI名（snake_case / camelCase / __c / __mdt）をコピーして、Salesforceの設定画面に貼り付けてご利用ください。</li>
+      </ol>
       <p>
-        日本語でSalesforceのカスタム項目名・オブジェクト名を入力し、「API名を生成」ボタンを押すと、ブラウザ内蔵のAIが日英翻訳を行い、Salesforceのネーミング規則に沿ったAPI名を生成します。
+        すべての処理はブラウザ内で完結し、入力した日本語テキストがサーバーに送信されることはありません。機密性の高い項目名も安心してご利用いただけます。
       </p>
-      <h3>AI翻訳について</h3>
+
+      <h2>SalesforceのAPI名とは</h2>
       <p>
-        このツールは <strong>Helsinki-NLP/opus-mt-ja-en</strong> モデル（量子化ONNX形式）を <strong>Transformers.js</strong> で動かしており、すべての処理がブラウザ内で完結します。翻訳結果は外部に送信されません。
+        Salesforce では、カスタムフィールドやカスタムオブジェクトを作成する際に「表示ラベル」と「API名」の2つを設定します。
+        表示ラベルはユーザーが画面上で目にする名前（日本語も可能）で、API名はシステム内部で使用される一意の英語識別子です。
       </p>
-      <h3>Salesforce API名のルール</h3>
       <p>
-        カスタム項目は <code>__c</code>、カスタムメタデータ型は <code>__mdt</code> で終わります。使用できる文字は英数字とアンダースコアのみ、最大40文字（サフィックス除く）、先頭は英字、連続アンダースコア不可です。
+        API名は、Apex コードでの参照（<code>Account.Custom_Field__c</code>）、SOQL クエリ（<code>SELECT Custom_Field__c FROM Account</code>）、メタデータ API によるデプロイ、
+        データローダーによるデータ操作など、Salesforce のプログラム的な操作すべてで使われます。
+        そのため、わかりやすく一貫性のある命名が非常に重要です。
       </p>
+
+      <h3>__c と __mdt のサフィックス</h3>
+      <p>
+        Salesforce では、カスタム項目の種類に応じて異なるサフィックスが自動的に付与されます。
+      </p>
+      <ul>
+        <li><strong><code>__c</code></strong>（Custom）&mdash; カスタムフィールドやカスタムオブジェクトに付与されます。例：<code>Order_Detail__c</code>（カスタムオブジェクト）、<code>Total_Amount__c</code>（カスタムフィールド）。</li>
+        <li><strong><code>__mdt</code></strong>（Custom Metadata Type）&mdash; カスタムメタデータ型に付与されます。アプリケーションの設定値やマッピング定義など、デプロイ可能な設定データの保存に使います。例：<code>Tax_Rate_Setting__mdt</code>。</li>
+        <li><strong><code>__r</code></strong>（Relationship）&mdash; カスタムリレーション名に使用されます（本ツールでは生成対象外）。</li>
+      </ul>
+
+      <h3>API名の命名規則</h3>
+      <p>
+        Salesforce のAPI名には厳格なルールがあります。
+      </p>
+      <ul>
+        <li><strong>使用可能文字</strong>：英字（A-Z, a-z）、数字（0-9）、アンダースコア（_）のみ。日本語・スペース・ハイフンなどは使用不可。</li>
+        <li><strong>先頭文字</strong>：必ず英字で始める（数字やアンダースコアで始められない）。</li>
+        <li><strong>連続アンダースコア不可</strong>：<code>Order__Detail</code> のようにアンダースコアが2つ以上連続する名前は設定できません（<code>__c</code> サフィックスは例外）。</li>
+        <li><strong>末尾アンダースコア不可</strong>：サフィックスの前にアンダースコアで終わることはできません。</li>
+        <li><strong>文字数制限</strong>：サフィックスを除いて最大40文字。</li>
+      </ul>
+
+      <h3>日本語ラベルからAPI名を決める際のベストプラクティス</h3>
+      <p>
+        日本語の表示ラベルから英語のAPI名を決める際は、以下のポイントに注意すると、チーム全体で一貫性のあるメタデータを構築できます。
+      </p>
+      <ul>
+        <li><strong>意味が伝わる英訳を選ぶ</strong> &mdash; 「取引先」→ <code>Account</code>、「注文明細」→ <code>Order_Detail</code> のように、英語圏の開発者にも理解できる名前にする。</li>
+        <li><strong>省略しすぎない</strong> &mdash; <code>Ord_Dtl__c</code> より <code>Order_Detail__c</code> の方が可読性が高い。</li>
+        <li><strong>snake_case で統一する</strong> &mdash; Salesforce の標準項目は <code>PascalCase</code>（例：<code>AccountNumber</code>）ですが、カスタム項目は <code>Snake_Case</code>（例：<code>Order_Detail__c</code>）で作成するのが一般的です。</li>
+        <li><strong>プレフィックスを活用する</strong> &mdash; パッケージやアプリ固有の項目には <code>APP_Field_Name__c</code> のようなプレフィックスを付けると、標準項目との衝突を避けられます。</li>
+      </ul>
+
+      <h3>AI翻訳の仕組み</h3>
+      <p>
+        このツールは <strong>Helsinki-NLP/opus-mt-ja-en</strong> モデル（量子化ONNX形式）を <strong>Transformers.js</strong> で動かしています。
+        Transformers.js はブラウザの WebAssembly / WebGPU 上で機械学習モデルを実行するライブラリで、すべての推論処理がクライアントサイドで完結します。
+        翻訳結果が外部サーバーに送信されることは一切ありません。
+      </p>
+      <p>
+        初回利用時にモデルファイル（約30MB）がダウンロードされ、ブラウザの Cache Storage にキャッシュされます。
+        2回目以降はキャッシュから即座に読み込まれるため、起動が高速です。
+      </p>
+
+      <h2>よくある質問（FAQ）</h2>
+
+      <details>
+        <summary>SalesforceのAPI名とは何ですか？</summary>
+        <p>API名はSalesforceの内部で使用される一意の識別子です。カスタムフィールドやカスタムオブジェクトを作成すると自動的に付与され、Apex、SOQL、メタデータAPIなどからアクセスする際に使用します。表示ラベル（日本語）とは別に、英語ベースのAPI名が必要です。</p>
+      </details>
+      <details>
+        <summary>__cと__mdtの違いは何ですか？</summary>
+        <p><code>__c</code> はカスタムフィールドやカスタムオブジェクトのサフィックスです。<code>__mdt</code> はカスタムメタデータ型のサフィックスで、アプリケーションの設定やマッピング情報など、デプロイ可能な設定データの保存に使われます。</p>
+      </details>
+      <details>
+        <summary>API名の命名規則は何ですか？</summary>
+        <p>使用できる文字は英数字とアンダースコアのみです。先頭は英字で始める必要があり、連続するアンダースコアは使用できません。サフィックスを除いて最大40文字の制限があります。</p>
+      </details>
+      <details>
+        <summary>日本語ラベルからAPI名を決める方法は？</summary>
+        <p>日本語のラベルを英語に翻訳し、単語をアンダースコアで区切る snake_case 形式にするのが一般的です。このツールではAIが自動的に日英翻訳とAPI名生成を行うため、手動で英訳する手間を省けます。</p>
+      </details>
+      <details>
+        <summary>このツールはオフラインで動作しますか？</summary>
+        <p>初回はAIモデルのダウンロード（約30MB）にインターネット接続が必要ですが、モデルがブラウザにキャッシュされた後はオフラインでも使用可能です。翻訳処理はすべてブラウザ内で完結します。</p>
+      </details>
     </article>
 
     <!-- Related Tools -->
