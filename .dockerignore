@@ -1,0 +1,12 @@
+.git
+.gitignore
+.dockerignore
+.claude
+.clinerules
+.DS_Store
+__pycache__
+server.py
+HANDOVER.md
+README.md
+CNAME
+txconv
