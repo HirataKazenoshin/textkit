@@ -543,3 +543,27 @@
   .tools-grid { grid-template-columns: 1fr; }
   .related-grid { grid-template-columns: 1fr 1fr; }
 }
+
+/* ---------- English tool articles: lists and FAQ (scoped so Japanese pages are unchanged) ---------- */
+html[lang="en"] .tool-article ul,
+html[lang="en"] .tool-article ol {
+  margin: 0 0 var(--sp-md);
+  padding-left: 1.4em;
+  color: var(--color-text-muted);
+}
+html[lang="en"] .tool-article ul { list-style: disc; }
+html[lang="en"] .tool-article ol { list-style: decimal; }
+html[lang="en"] .tool-article li { margin-bottom: var(--sp-xs, 4px); }
+html[lang="en"] .tool-article h2:not(:first-child) { margin-top: var(--sp-xl); }
+html[lang="en"] .tool-article details {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md, 8px);
+  padding: 0 var(--sp-md);
+  margin-bottom: var(--sp-sm);
+}
+html[lang="en"] .tool-article summary {
+  cursor: pointer;
+  font-weight: 600;
+  padding: var(--sp-sm) 0;
+}
+html[lang="en"] .tool-article details[open] summary { margin-bottom: var(--sp-xs, 4px); }
